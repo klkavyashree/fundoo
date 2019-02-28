@@ -1,31 +1,76 @@
 <div fxLayout="row" fxLayoutAlign="space-around start">
 
-<button id="Remaind" matTooltip="Remaind me" mat-icon-button [matMenuTriggerFor]="menu4">
-    <mat-icon>notification_important</mat-icon>
+  <button id="Remaind" matTooltip="Remaind me" mat-icon-button [matMenuTriggerFor]="menu4">
+    <img id="img" src="../../../assets/images/remind me.svg" />
   </button>
   <mat-menu #menu4="matMenu" class="matmenu">
     <button class="arrow" mat-stroked-button>
       <mat-icon matTooltip="go back"> arrow_back</mat-icon>
     </button>
     <p>Remainder:</p>
-    <p>Later Today     20:00</p>
-    <p>Tommorow        08:00</p>
-    <p>Pick date & time</p>
+    <p>Later Today 20:00</p>
+    <p>Tommorow 08:00</p>
+    <p>Tommorow 08:00</p>
+    <div *ngIf="flag==true" (click)="remind()">
+      <p>set date and time</p>
+    </div>
+    <mat-divider></mat-divider>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-menu>
+  <button mat-button><img id="img" src="../../../assets/images/addnote.svg" /></button>
+
+  <!-- 
+<button id="Remaind" matTooltip="add color" mat-icon-button [matMenuTriggerFor]="menu4">
+  <img id="img" src="../../../assets/images/addnote.svg" />
+</button>
+<mat-menu #menu4="matMenu" class="matmenu">
+  <button class="arrow" mat-stroked-button>
+    <mat-icon matTooltip="go back">check_circle</mat-icon>
+  </button>
+  <p>Remainder:</p>
+  <p>Later Today     20:00</p>
+  <p>Tommorow        08:00</p>
+  <p>Pick date & time</p>
 <mat-divider></mat-divider>
 
 <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
-</mat-menu>
-
-<button mat-button> <img id="img" src="../../../assets/images/addnote.svg" /></button>
-<button mat-button><img id="img" src="../../../assets/images/color.svg" /></button>
-<button mat-button><img id="img" src="../../../assets/images/img.svg" /></button>
-<button mat-button><img id="img" src="../../../assets/images/archieve.svg" /></button>
-<button mat-button><img id="img" src="../../../assets/images/more_vert.svg" /></button>
+</mat-menu> -->
 
 
 
+
+
+  <button mat-button matTooltip="add color" [matMenuTriggerFor]="menu">
+    <img id="img" src="../../../assets/images/color.svg" />
+  </button>
+  <!-- <div class="mat" fxFlex="4%"> -->
+      <mat-menu  #menu5="matMenu" [overlapTrigger]="false">
+          <ng-template matMenuContent >
+            <div class="buttons">
+                <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" 
+                    *ngFor='let colors of colorArray'>
+                        <div *ngFor='let color of colors'>
+                            <button class="colors" [ngStyle]="{'background-color': color.color }" 
+                                (click)='colorsEdit(color.color,card)' matTooltip="{{color.name}}"
+                                    mat-mini-fab></button>
+                        </div>
+                </div>
+            </div>
+            </ng-template>
+  </mat-menu> 
+<!-- </div> -->
+
+  <button mat-button matTooltip="img"><img id="img" src="../../../assets/images/img.svg" /></button>
+  <button mat-button><img id="img" src="../../../assets/images/archieve.svg" /></button>
+  <button mat-button><img id="img" src="../../../assets/images/more_vert.svg" /></button>
+  
 </div>

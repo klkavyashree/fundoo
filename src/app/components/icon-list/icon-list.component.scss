@@ -1,3 +1,14 @@
 .matmenu{
-    width: 40%
+    width: 80%
 }
+.btn{
+    border-radius:50%;
+    
+}
+// .color{
+//     width: 100px;
+// }
+
+ ::ng-deep .cdk-overlay-pane{
+     max-width: 30%;
+ }
