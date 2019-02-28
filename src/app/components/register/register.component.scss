@@ -1,0 +1,91 @@
+// .fundoo{
+//     font-family: sans-serif;
+//     font-size: 100%;
+//     margin-top: 8%
+// }
+
+
+.F{
+    color:rgb(22, 22, 202);
+}
+.u{
+    color:rgb(255, 30, 0);
+}
+.n{
+    color:rgb(28, 108, 173);
+}
+.d{
+    color:rgb(90, 112, 29);
+}
+.o{
+    color:rgb(0, 17, 255);
+}
+.o1{
+    color:rgb(13, 97, 69);
+}
+p{
+    color: black;
+    font-weight: 650;
+    font-family: 'Times New Roman', Times, serif;
+}
+.btn
+{
+    background: rgb(37, 66, 161);
+    color: white;
+    width: 20%;
+    float: right;  
+     
+}
+.reg
+{
+    background: white;
+    color: rgb(37, 66, 161);
+    width: 35%;
+    float: left; 
+     
+}
+.help-block{
+    font-size: 0.8em;
+    color: red;
+    // text-align: center;
+}
+.main{
+    height: 100vh;
+}
+.err{
+    font-size: 0.8em;
+    color: red;
+}
+.fname mat-form-field{
+    width:98%;
+}
+.lname mat-form-field{
+    width: 98%;
+}
+.password mat-form-field{
+    width: 90%;
+}
+.confirmpassword mat-form-field{
+    width: 90%
+}
+.email mat-form-field{
+    width:87%;
+}
+// @media screen and (max-width:599px){
+//     #password mat-form-field{
+//         width: 70%
+//         }
+  
+//     #email mat-form-field{
+//             width: 10%
+//          }
+//     #confirmpassword mat-form-field{
+//             width: 70%
+//             }
+//     #fname mat-form-field{
+//                 width: 70%
+//                 }
+//                 #lname mat-form-field{
+//                     width: 70%
+//                     }
+//   }

@@ -1,0 +1,91 @@
+<div class="main" fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
+    <mat-card class="matcard" fxFlex="40" fxFlex.xs='80'>
+        <div class="fundoo" fxLayout="row" fxLayoutAlign="start">
+            <h1>
+                <span class="F">F</span>
+                <span class="u">u</span>
+                <span class="n">n</span>
+                <span class="d">d</span>
+                <span class="o">o</span>
+                <span class="o1">o</span>
+            </h1>
+        </div>
+        <h4 class="line" fxLayoutAlign="start">Create your Fundoo account</h4>
+        <form [formGroup]="registerForm">
+            <div class="name"  fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='3%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
+                <div class="fname" [ngClass]="{'has-error':registerForm.get('firstName').errors && (registerForm.get('firstName').touched || registerForm.get('firstName').dirty)}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First name</mat-label>
+                        <input matInput formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                    </mat-form-field>
+                    <span *ngIf="registerForm.get('firstName').errors && (registerForm.get('firstName').touched || registerForm.get('firstName').dirty)"
+                        class="help-block">
+                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </span>
+                </div>
+                <div class="lname" [ngClass]="{'has-error':registerForm.get('lastName').errors && (registerForm.get('lastName').touched || registerForm.get('lastName').dirty)}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last name</mat-label>
+                        <input matInput formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    </mat-form-field>
+                    <div *ngIf="registerForm.get('lastName').errors && (registerForm.get('lastName').touched || registerForm.get('lastName').dirty)"
+                        class="help-block">
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="email" [ngClass]="{'has-error':registerForm.get('email').errors && (registerForm.get('email').touched || registerForm.get('email').dirty)}">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                </mat-form-field>
+                <div *ngIf="registerForm.get('email').errors && (registerForm.get('email').touched || registerForm.get('email').dirty)"
+                    class="help-block">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+            <div class="pwd" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='0.7%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
+                <div class="password" [ngClass]="{'has-error':registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)}">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Password</mat-label>
+                        <input matInput formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                            [type]="hide ? 'password' : 'text'" />
+                        <!-- <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon> -->
+                    </mat-form-field>
+                    <div *ngIf="registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)"
+                        class="help-block">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="confirmpassword" [ngClass]="{'has-error':registerForm.get('confirmpassword').errors && (registerForm.get('confirmpassword').touched || registerForm.get('confirmpassword').dirty)}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput formControlName="confirmpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }"
+                            [type]="hide ? 'password' : 'text'" />
+                        <!-- <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon> -->
+                    </mat-form-field>
+                    <div *ngIf="registerForm.get('confirmpassword').errors && (registerForm.get('confirmpassword').touched || registerForm.get('confirmpassword').dirty)"
+                        class="help-block">
+                        <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
+                        <div *ngIf="f.confirmpassword.errors.minlength">Password must be at least 6 characters</div>
+                        
+                        <mat-error class="err">{{message}}</mat-error><!-- <div *ngIf="f.confirmpassword.pristine || f.coinfirmpassword.errors?.Matchpassword">Password does not match</div> -->
+                    </div>
+                    <mat-error class="err">{{message}}</mat-error>
+                </div>
+                <div class="iocn" fxLayoutAlign="end start">
+                <mat-icon matSuffix (click)="hide=!hide" fxLayoutAlign="end centre">{{hide ? 'visibility':'visibility-off'}}</mat-icon>
+                </div>
+            </div><br><br>
+            <div>
+                <span><button class="btn" mat-button (click)="register()" fxLayoutAlign="center">next</button></span>
+                <span><button class="reg" mat-button (click)="login()" fxLayoutAlign="start">sign in instead</button></span>
+
+            </div>
+
+        </form>
+
+    </mat-card>
+</div>

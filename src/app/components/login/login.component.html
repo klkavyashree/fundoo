@@ -1,0 +1,54 @@
+<div class="main" fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
+  <mat-card class='matcard' fxFlex="40" fxFlex.xs='100'>
+    <div class="fundoo" fxLayout="row" fxLayoutAlign="center center">
+      <h1>
+        <span class="F">F</span>
+        <span class="u">u</span>
+        <span class="n">n</span>
+        <span class="d">d</span>
+        <span class="o">o</span>
+        <span class="o1">o</span>
+      </h1>
+    </div>
+    <div>
+      <h2 fxLayoutAlign="center center">Sign in</h2>
+      <h4 fxLayoutAlign="center center"> with your Fundoo Account</h4>
+      <div class="msg">{{message}}</div>
+    </div>
+    <form [formGroup]="loginForm">
+      <div class="email" fxLayout="row"   fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)}">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        </mat-form-field>
+      </div>
+        <span class="help-block" *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)"  fxLayoutAlign="center center">
+          <span *ngIf="f.email.errors.required">Email is required</span>
+          <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
+        </span><br>
+      
+      <div class="password"  fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)}">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+            [type]="hide ? 'password' : 'text'" >
+          <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon>
+        </mat-form-field>
+      </div>
+      <span class="help-block" *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)"  fxLayoutAlign="center center">
+        <span *ngIf="f.password.errors.required">Password is required</span><br>
+        <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span>
+       
+      </span><br>
+
+      <div>
+        <span><button class="btn btn-primary" mat-button (click)="login()" fxLayoutAlign="center">next</button></span>
+        <div><button mat-button (click)="register()" class="reg" fxLayoutAlign="center">create account</button></div><br><br><br>
+  
+        <div><button mat-button (click)="forgotpassword()" class="forgot" fxLayoutAlign="center">Forgot Password</button></div>
+      </div>
+    </form>
+
+  </mat-card>
+
+</div>

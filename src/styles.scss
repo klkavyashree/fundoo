@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+// @import '~@angular/material/theming';//loads the angular material theming variables and functions that enable 
+// // you to customize and interact with the material theme
+// @import url('//fonts.googleapis.com/icon?family=Material+Icons');//the second one will add the material icons from the Google CDN.
+
+
+// @include mat-core();//execute the “mat-core” function, and it adds the default styling for the material 
+// // components, like colors, padding, overlays and so on.
+
+// $primary: mat-palette($mat-lime, 500);//The first lines define the colors to use in your theme
+// $accent:  mat-palette($mat-lime, 500, A200, A400);
+// $warn:    mat-palette($mat-red, 500);
+
+// $config: mat-typography-config();
+
+
+// $theme: mat-light-theme($primary, $accent, $warn);
+
+// @include angular-material-theme($theme);
+
+// body {
+//   font-family: mat-font-family($config);
+//   font-weight: normal;
+// }
+
+// h1, h2, h3, h4 {
+//   font-weight: normal;
+// }
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
