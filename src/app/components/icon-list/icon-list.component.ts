@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon-list',
@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IconListComponent implements OnInit {
 flag=false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+  @Input() card:any;
 colorarray=[[{ 'color': '#FFFFFF', 'name': 'White' },
 { 'color': '#E53935', 'name': 'Red' },
 { 'color': '#EF6C00', 'name': 'Orange' },
@@ -23,12 +29,10 @@ colorarray=[[{ 'color': '#FFFFFF', 'name': 'White' },
 { 'color': '#E0E0E0', 'name': 'gray' }
 
 ]]
-  constructor() { }
-
-  ngOnInit() {
-  }
   remind($event:any){
     this.flag=true;
   }
- 
+ colorsEdit(){
+
+ }
 }

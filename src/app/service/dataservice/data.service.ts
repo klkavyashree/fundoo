@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs';
+
+
 
 
 @Injectable({
@@ -11,7 +13,7 @@ export class DataService {
   currentmessage=this.messageSource.asObservable();//variable handles the data stream as an observable
 
   constructor() { }
-  changemessage(message:string){
+  changecolor(message:string){
     this.messageSource.next(message)
   }
 }

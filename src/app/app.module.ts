@@ -24,9 +24,6 @@ import { CardComponent } from './components/card/card.component';
 import { IconListComponent } from './components/icon-list/icon-list.component'
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

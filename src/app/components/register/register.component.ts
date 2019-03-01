@@ -12,7 +12,6 @@ import { HttpserviceService } from '../../service/httpservice.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  submitted = false;
   hide = true;
   model: any;
   response: any;
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   register() {
-    this.submitted = true;
     try {
       this.model = {
         "firstName": this.registerForm.get('firstName').value,

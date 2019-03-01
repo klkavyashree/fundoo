@@ -4,13 +4,13 @@
       <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <div fxFlex="10" fxLayout.gt-xs="row" fxFlex.gt="500px" fxHide.xs>
+      <div fxFlex="10" fxLayout="row" fxFlex.gt="500px" [style.fontSize.px]="1" >
           <img id="img1" src="../../../assets/images/keep_48dp.png" />
-        <h3 class="example-app-name">Keep</h3>
+        <h3 class="example-app-name" fxLayoutAlign='center center'>Fundo</h3>
       </div>
     </div>
     <div fxFlex="50">
-      <mat-form-field appearance="outline" [style.fontSize.px]="2" class="search">
+      <mat-form-field appearance="outline" fxHide.xs [style.fontSize.px]="2" class="search">
         <button mat-icon-button>
           <mat-icon>search</mat-icon>
         </button>
@@ -39,7 +39,7 @@
         </mat-menu>
 
       </div>
-      <button mat-icon-button color="basic" fxHide.xs matTooltip="Notification">
+      <button mat-icon-button color="basic" fxHide.xs fxHide.sm matTooltip="Notification">
         <mat-icon>notification_important </mat-icon>
       </button>
 
@@ -47,7 +47,7 @@
     </div>
 
 
-    <button mat-icon-button color="basic" matTooltip="Apps">
+    <button mat-icon-button color="basic" fxHide.sm fxHide.xs matTooltip="Apps">
       <mat-icon>apps</mat-icon>
     </button>
 
@@ -85,7 +85,7 @@
     
               <mat-list-item role="listitem" id="rem">
                 <img id="img2" src="../../../assets/images/remainder.svg" />
-                Remainder</mat-list-item>
+                Reminder</mat-list-item>
     
               <mat-divider></mat-divider>
               <p id="para">labels</p>
