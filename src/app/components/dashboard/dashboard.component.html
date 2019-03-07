@@ -79,9 +79,10 @@
             <mat-list role="List">
     
     
-              <mat-list-item role="listitem" id="note">
+              <mat-list-item role="listitem" id="note" (click)="note()">
                 <img id="img1" src="../../../assets/images/note.svg" />
                 Note</mat-list-item>
+                
     
               <mat-list-item role="listitem" id="rem">
                 <img id="img2" src="../../../assets/images/remainder.svg" />
@@ -108,10 +109,7 @@
         </mat-sidenav>
         <mat-sidenav-content>
     <router-outlet></router-outlet>
-
-    <!-- <app-maincard (messageEvent)="recieveMessage($event)"></app-maincard> -->
-    <!-- <app-content></app-content> -->
-    <!-- <app-note></app-note> -->
   </mat-sidenav-content>
+ 
 </mat-sidenav-container>
  

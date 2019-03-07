@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpserviceService } from '../../service/httpservice.service';
+import { environment } from '../../../environments/environment'
 
 
 @Component({
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      this.httpService.postRequest('user/login', this.model).subscribe(data => {
+      this.httpService.postRequest(environment.userlogin, this.model).subscribe(data => {
         console.log("data", data);
         this.response = data;
         localStorage.setItem('token', this.response.id);

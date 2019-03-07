@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { DataService } from '../../service/dataservice/data.service'
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-icon-list',
@@ -6,14 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./icon-list.component.scss']
 })
 export class IconListComponent implements OnInit {
-flag=false;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-  @Input() card:any;
-colorarray=[[{ 'color': '#FFFFFF', 'name': 'White' },
+  @Output() messageEvent=new EventEmitter();
+  flag=false;
+  card:any;
+  /**
+   * taking the colors as two dimensional array
+   */
+  colorArray=[[{ 'color': '#FFFFFF', 'name': 'White' },
 { 'color': '#E53935', 'name': 'Red' },
 { 'color': '#EF6C00', 'name': 'Orange' },
 { 'color': '#FFEB3B', 'name': 'Yellow' }],
@@ -29,10 +30,18 @@ colorarray=[[{ 'color': '#FFFFFF', 'name': 'White' },
 { 'color': '#E0E0E0', 'name': 'gray' }
 
 ]]
-  remind($event:any){
-    this.flag=true;
-  }
- colorsEdit(){
+  constructor(private data:DataService) { }
 
+  ngOnInit() {
+   
+  }
+  /**
+   * 
+   * @param color will take input from the template to emit the event
+   */
+ colorsEdit(color){
+   this.messageEvent.emit(color);
  }
+
+
 }

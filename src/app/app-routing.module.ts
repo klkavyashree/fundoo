@@ -5,7 +5,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
-import { NoteComponent } from './components/note/note.component';
+import { MainNoteComponent } from './components/main-note/main-note.component'
+import { UpdatenoteComponent } from './components/updatenote/updatenote.component'
 import { EditLabelComponent } from './components/edit-label/edit-label.component'
 
 
@@ -30,10 +31,11 @@ const routes: Routes = [
       },
       {
         path:'note',
-        component:NoteComponent
+        component:MainNoteComponent
       }
     ]
   },
+  {path:'updatenote', component : UpdatenoteComponent},
   {
     path:'register',
     component : RegisterComponent

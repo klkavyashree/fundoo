@@ -10,10 +10,10 @@ import { BehaviorSubject } from 'rxjs';
 export class DataService {
   private messageSource = new BehaviorSubject('');//it will always return the current value on subscription no need of callnext 
   //and ensure that it will always recieve recent data
-  currentmessage=this.messageSource.asObservable();//variable handles the data stream as an observable
+  currentMessage=this.messageSource.asObservable();//variable handles the data stream as an observable
 
   constructor() { }
-  changecolor(message:string){
+  changeMessage(message:any){
     this.messageSource.next(message)
   }
 }

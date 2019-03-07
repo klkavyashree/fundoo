@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
+import { MainNoteComponent } from './components/main-note/main-note.component'
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -20,8 +21,9 @@ import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassw
 import { HttpClientModule } from '@angular/common/http';
 import { EditLabelComponent } from './components/edit-label/edit-label.component';
 import { NoteComponent } from './components/note/note.component';
-import { CardComponent } from './components/card/card.component';
-import { IconListComponent } from './components/icon-list/icon-list.component'
+import { IconListComponent } from './components/icon-list/icon-list.component';
+import { DisplayComponentComponent } from './components/display-component/display-component.component';
+import { UpdatenoteComponent } from './components/updatenote/updatenote.component'
 
 
 @NgModule({
@@ -34,8 +36,10 @@ import { IconListComponent } from './components/icon-list/icon-list.component'
     ForgotpasswordComponent,
     EditLabelComponent,
     NoteComponent,
-    CardComponent,
+    MainNoteComponent,
     IconListComponent,
+    DisplayComponentComponent,
+    UpdatenoteComponent,
  
     
   ],

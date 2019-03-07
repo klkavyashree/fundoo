@@ -42,11 +42,8 @@ export class DashboardComponent implements OnInit {
   signout() {
     this.router.navigate(['login']);
   }
-  archieve() {
-
-  }
-  openLabel() {
-
-  }
+ note(){
+   this.router.navigate(['dashboard/note']);
+ }
 
 }
