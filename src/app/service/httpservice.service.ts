@@ -6,19 +6,22 @@ import { environment } from '../../environments/environment'
   providedIn: 'root'
 })
 export class HttpserviceService {
+  baseUrl = environment.baseUrl;
+  static postRequest: any;
+  constructor(private http: HttpClient) { }
+
+
 
   postJSON(url: string, body: any): any {
-    this.baseUrl + url;
+    url=this.baseUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
-        'const-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
       })
     }
     return this.http.post(url, body, httpOptions)
   }
-  baseUrl = environment.baseUrl;
-  static postRequest: any;
-  constructor(private http: HttpClient) { }
 
   encode(data) {
     const formBody = [];
@@ -42,6 +45,7 @@ export class HttpserviceService {
     }
     return this.http.post(url, this.encode(data), httpOptions);
   }
+
  
 
   postRequest(url, data) {

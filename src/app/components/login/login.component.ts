@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     }
 
     // stop here if form is invalid
+    try{
     if (this.loginForm.invalid) {
       return;
     }
@@ -50,9 +51,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
       }, err => {
         this.message = 'user not found';
-        alert('somthing happen')
+        // alert('somthing happen')
       });
 
+    }}catch(err){
+      console.log('error found')
     }
 
   }

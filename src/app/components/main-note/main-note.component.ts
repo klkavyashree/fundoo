@@ -16,6 +16,7 @@ export class MainNoteComponent implements OnInit {
   }
   getAllCards(){
     this.note.getNote().subscribe(data=>{
+      console.log(data)
         this.pinnedcard = data['data']['data'];
         console.log(this.pinnedcard,"pinnedcard")
     },

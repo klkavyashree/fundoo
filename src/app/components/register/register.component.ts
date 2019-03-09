@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpserviceService } from '../../service/httpservice.service';
+import { environment } from '../../../environments/environment'
 
 
 
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
         "firstName": this.registerForm.get('firstName').value,
         "lastName": this.registerForm.get('lastName').value,
         "imageUrl":"",
-        "service": "basic",
+        "service": "advance",
         "createdDate": "",
         "modifiedDate": "",
         "email": this.registerForm.get('email').value,
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
    }
 
       else {
-        this.httpService.postRequest('user/userSignUp', this.model).subscribe(data => {
+        this.httpService.postRequest(environment.userregister, this.model).subscribe(data => {
           this.response = data;
           console.log(data)
           this.message = this.response.message

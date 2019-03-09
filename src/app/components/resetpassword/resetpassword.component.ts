@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpserviceService } from '../../service/httpservice.service';
+import { environment } from '../../../environments/environment'
 
 
 @Component({
@@ -30,11 +31,6 @@ export class ResetpasswordComponent implements OnInit {
   get f() { return this.resetpasswordForm.controls; }
 
   onSubmit() {
-    var payload=new FormData;
-    var token=localStorage.getItem('token');
-    console.log("token =",token)
-    
-    // stop here if form is invalid
     if (this.resetpasswordForm.invalid) {
         return;
     }
@@ -44,17 +40,16 @@ export class ResetpasswordComponent implements OnInit {
     }
     else{
       this.model={
-        "password":payload.append('password',this.resetpasswordForm.get("password").value),
-        "token":payload.append('token',token)
+       newPassword:this.resetpasswordForm.get('password').value
       }
       console.log(this.model,'model')
-      this.httpService.postRequest('user/reset-password' ,this.model).subscribe(data =>{
+      this.httpService.encodedPostForm(environment.resetpassword,this.model).subscribe(data =>{
         console.log('data ',data)
-        console.log(this.model,'model')
         this.router.navigate(['login']);
       },
       err =>{
         alert('something wrong happen');
+        console.log(err)
       })
     }
 }

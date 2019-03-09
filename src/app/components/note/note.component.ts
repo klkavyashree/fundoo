@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpserviceService } from '../../service/httpservice.service';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from '../../service/dataservice/data.service'
@@ -14,7 +13,7 @@ import { NoteService } from '../../service/noteservice/note.service'
 export class NoteComponent implements OnInit {
   pinnedcard:any;
   card: any;
-  bgcolor: any="#FFFFF";
+  bgcolor: any="#FFFFFF";
   flag = true;
   flag1 = true;
   noteTitle = new FormControl('', [Validators.required, Validators.required]);
@@ -32,7 +31,7 @@ export class NoteComponent implements OnInit {
  * @output to emit the event
  */
   
-  @Output() messageEvent = new EventEmitter();
+  @Output() addingNote = new EventEmitter();
   /**
    * addNote() to send all the details into the server
    */
@@ -57,7 +56,7 @@ export class NoteComponent implements OnInit {
           this.response = data;
           this.noteTitle.reset();
           this.noteContent.reset();
-          this.messageEvent.emit(this.model)
+          this.addingNote.emit(this.model)
         },
         err =>
         {
@@ -73,9 +72,9 @@ export class NoteComponent implements OnInit {
   }
 /**
  * 
- * @param $event to take event from the user
+ * @param $event to take reverse the flag
  */
-  reverseFlag($event) {
+  reverseFlag() {
     this.flag = !this.flag;
   }
   /**

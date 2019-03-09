@@ -119,7 +119,7 @@
       <div class="buttons">
         <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
           <div *ngFor='let color of colors'>
-            <button class="colors" [ngStyle]="{'background-color': color.color }" (click)='colorsEdit(color.color)'
+            <button class="colors" [ngStyle]="{'background-color': color.color }" (click)='colorsEdit(color.color,card)'
               matTooltip="{{color.name}}" mat-mini-fab></button>
           </div>
         </div>
@@ -129,11 +129,21 @@
 
   <button mat-icon-button matTooltip="add img"><img id="img" src="../../../assets/images/img.svg" /></button>
   <button mat-icon-button matTooltip="Archive"><img id="img" src="../../../assets/images/archieve.svg" /></button>
-  <button mat-icon-button matTooltip="more"><img id="img" src="../../../assets/images/more_vert.svg" /></button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>add label</button>
-    <button mat-menu-item>add drawing</button>
-    <button mat-menu-item>show stick boxes</button>
-  </mat-menu>
+  <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
+  <img id="img" src="../../../assets/images/more_vert.svg" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <!-- <button mat-menu-item>add label</button>
+          <button mat-menu-item>add drawing</button>
+          <button mat-menu-item>show stick boxes</button> -->
+          <button mat-menu-item (click)="deleteNote(card)">Delete Note</button>
+          <button mat-menu-item>add label</button>
+          <button mat-menu-item>add drawing</button>
+          <button mat-menu-item>make a copy</button>
+          <button mat-menu-item>show stick boxes</button>
+          <button mat-menu-item>copy to google docs</button>
+        </mat-menu>
+
+    
 
 </div>
