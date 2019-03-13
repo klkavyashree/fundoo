@@ -17,7 +17,22 @@ export class NoteService {
    return this.http.postJSON('notes/changesColorNotes',data)
  }
  deleteNote(data){
+   return this.http.postJSON('notes/trashNotes',data)
+ }
+ deleteForever(data){
    return this.http.postJSON('notes/deleteForeverNotes',data)
  }
+ getTrashNotes()
+ {
+   return this.http.getHttp('notes/getTrashNotesList')
+ }
+ archiveNote(data)
+ {
+   return this.http.postJSON('notes/archiveNotes',data)
+ }
+ getArchiveNotes(){
+   return this.http.getHttp('notes/getArchiveNotesList') 
+ }
+
 
 }

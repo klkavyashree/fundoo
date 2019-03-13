@@ -1,0 +1,34 @@
+<!-- <div fxLayoutAlign='space-around center' fxFlex='100' >
+<div *ngFor="let array of deletedcards" fxLayout="row wrap">
+  <mat-card fxLayout="column" class="matcard" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100'  [style.backgroundColor]='array.color'>
+    <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center" (click)="openDialog(array)">
+  
+  
+      <div fxLayout="column"> 
+        <div><mat-card-title >{{array.title}} </mat-card-title></div>
+       <div> <mat-card-subtitle >{{array.description}}</mat-card-subtitle></div>
+      </div>
+    </div>
+    <div>
+      <div fxFlex='100'>
+        <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+          <img id="img" src="../../../assets/images/more_vert.svg" />
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="deleteNote(array)">Delete Note</button>
+                  <button mat-menu-item (click)="restore(array)">Restore</button>
+  
+  
+      </div>
+  
+    </div>
+  
+  </mat-card>
+  </div>
+  </div>
+   -->
+  <div fxLayoutAlign='center start' fxLayout='row'>
+   <h3>Notes in the Recycle Bin are deleted after 7 days</h3>
+     <button class="btn" fxLayoutAlign='end center'  mat-button [style.BackgroundColor]='white'>Empty Bin</button>
+     </div>
+   <app-display-component fxLayout='column'  fxLayout="row wrap" [card]=deletedcards [cond]='trash'></app-display-component>

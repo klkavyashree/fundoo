@@ -23,7 +23,11 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
 import { NoteComponent } from './components/note/note.component';
 import { IconListComponent } from './components/icon-list/icon-list.component';
 import { DisplayComponentComponent } from './components/display-component/display-component.component';
-import { UpdatenoteComponent } from './components/updatenote/updatenote.component'
+import { UpdatenoteComponent } from './components/updatenote/updatenote.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { SearchPipe } from './pipe/search.pipe';
+import { SearchComponent } from './components/search/search.component'
 
 
 @NgModule({
@@ -40,6 +44,10 @@ import { UpdatenoteComponent } from './components/updatenote/updatenote.componen
     IconListComponent,
     DisplayComponentComponent,
     UpdatenoteComponent,
+    TrashComponent,
+    ArchiveComponent,
+    SearchPipe,
+    SearchComponent,
  
     
   ],

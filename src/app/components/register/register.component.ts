@@ -37,10 +37,10 @@ export class RegisterComponent implements OnInit {
       this.model = {
         "firstName": this.registerForm.get('firstName').value,
         "lastName": this.registerForm.get('lastName').value,
-        "imageUrl":"",
+        // "imageUrl":"",
         "service": "advance",
-        "createdDate": "",
-        "modifiedDate": "",
+        // "createdDate": "",
+        // "modifiedDate": "",
         "email": this.registerForm.get('email').value,
         "password": this.registerForm.get('password').value,
         "confirmpassword": this.registerForm.get('confirmpassword').value,

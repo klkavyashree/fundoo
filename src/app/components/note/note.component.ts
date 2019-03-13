@@ -3,7 +3,6 @@ import { HttpserviceService } from '../../service/httpservice.service';
 import { Router } from '@angular/router';
 import { Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { DataService } from '../../service/dataservice/data.service'
 import { NoteService } from '../../service/noteservice/note.service'
 @Component({
   selector: 'app-note',
@@ -12,19 +11,16 @@ import { NoteService } from '../../service/noteservice/note.service'
 })
 export class NoteComponent implements OnInit {
   pinnedcard:any;
-  card: any;
-  bgcolor: any="#FFFFFF";
+  bgcolor:any="#FFFFFF";
   flag = true;
   flag1 = true;
   noteTitle = new FormControl('', [Validators.required, Validators.required]);
   noteContent = new FormControl('', [Validators.required, Validators.required]);
   model: any;
   response: any;
-  constructor(private httpService: HttpserviceService, private router: Router, private data: DataService, private note:NoteService) { }
+  constructor(private httpService: HttpserviceService, private router: Router, private note:NoteService) { }
 
   ngOnInit() {
-    this.data.currentMessage.subscribe(message => this.card = message)
-    console.log(this.card, "card..")
  
   }
 /**
@@ -52,11 +48,12 @@ export class NoteComponent implements OnInit {
 
           console.log("model data",this.model)
          this.httpService.encodedPostForm('notes/addNotes',this.model).subscribe(data =>{
-          console.log("addNotes data..",data);
+          console.log("response while adding..",data);
           this.response = data;
           this.noteTitle.reset();
           this.noteContent.reset();
-          this.addingNote.emit(this.model)
+          this.bgcolor='#FFFFFF';
+          this.addingNote.emit(this.response['status']['details'])
         },
         err =>
         {

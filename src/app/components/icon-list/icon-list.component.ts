@@ -11,9 +11,16 @@ import { EventEmitter } from '@angular/core';
 export class IconListComponent implements OnInit {
   @Output() messageEvent = new EventEmitter();
   @Input() card: any;
+  @Input() more;
+  @Input() doarchive:boolean;
+  @Output() deletecard = new EventEmitter();
+  @Output() archivedCard = new EventEmitter();
+  @Output() unarchiveCard = new EventEmitter();
+  @Input() type;
   model: any;
   flag = false;
   display=false;
+  allcards:any;
   /**
    * taking the colors as two dimensional array
    */
@@ -33,7 +40,7 @@ export class IconListComponent implements OnInit {
   { 'color': '#E0E0E0', 'name': 'gray' }
 
   ]]
-  constructor(private data: DataService, private note: NoteService) { }
+  constructor(private dataService: DataService, private note: NoteService) { }
   ngOnInit() {
   }
   /**
@@ -68,10 +75,48 @@ export class IconListComponent implements OnInit {
   }
   deleteNote(card){
     this.note.deleteNote({
-        "isdeleted":true,
+        "isDeleted":true,
         "noteIdList":[card.id]
     }).subscribe(data=>{
-      console.log(data)
+      console.log(data,"response when delete");
+      this.cardDelete(card)
     },err=>console.log(err))
+    
   }
+  cardDelete(card){
+    this.deletecard.emit(card)
+  }
+  // doArchive(card){
+  //   this.doarchive=!this.doarchive
+  //   this.archive(card)
+  // }
+  doArchive(card){
+      this.note.archiveNote({
+        "isArchived":true,
+        "noteIdList":[card.id]
+      }).subscribe(data=>{
+        this.cardArchive(card)
+      }),err=>console.log(err)
+  }
+  doUnArchive(card){
+      this.note.archiveNote({
+        "isArchived":false,
+        "noteIdList":[card.id]
+      }).subscribe(data=>{
+        this.notArchive(card)
+      }),err=>console.log(err)
+  
+   
+    }
+    cardArchive(card){
+      this.archivedCard.emit(card)
+    }
+    notArchive(card){
+      this.unarchiveCard.emit(card)
+    }
+
+
+ 
+
 }
+

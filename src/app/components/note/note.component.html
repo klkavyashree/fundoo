@@ -1,5 +1,5 @@
 <div *ngIf="flag===true" (click)="reverseFlag()" fxLayout="row" fxLayoutAlign="space-around start" fxFlex="100">
-    <mat-card fxFlex="45" fxFlex.xs='100' class="matcard" fxLayoutAlign="space-between center">
+    <mat-card fxFlex="45" fxFlex.xs='100' class="matcard" fxLayoutAlign="space-between center"style="padding-bottom:0px;padding-top:0px">
 
       <div data-text="Take a note.." class="Border" id="noteTitle" fxLayout="column" contenteditable="true" class="maincard">
       </div>
@@ -47,7 +47,7 @@
       </div><br>
       <div>
         <div fxFlex='90'>
-          <app-icon-list (messageEvent)="recievemessage($event)"> </app-icon-list>
+          <app-icon-list (messageEvent)="recievemessage($event)" [type]=note [more]=note> </app-icon-list>
 
         </div>
         <div fxFlex='10' fxLayoutAlign="end end">

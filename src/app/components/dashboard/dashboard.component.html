@@ -4,17 +4,17 @@
       <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <div fxFlex="10" fxLayout="row" fxFlex.gt="500px" [style.fontSize.px]="1" >
-          <img id="img1" src="../../../assets/images/keep_48dp.png" />
-        <h3 class="example-app-name" fxLayoutAlign='center center'>Fundo</h3>
+      <div fxFlex="10" fxLayout="row" fxFlex.gt="500px" [style.fontSize.px]="1">
+        <img id="img1" src="../../../assets/images/keep_48dp.png" />
+        <h3 class="example-app-name" fxLayoutAlign='center center'>Fundoo</h3>
       </div>
     </div>
-    <div fxFlex="50">
-      <mat-form-field appearance="outline" fxHide.xs [style.fontSize.px]="2" class="search">
+    <div fxFlex="50"  fxLayoutAlign="end center">
+      <mat-form-field appearance="outline" fxFlex='50' fxHide.xs fxLayoutAlign="end center" [style.fontSize.px]="2" class="search">
         <button mat-icon-button>
           <mat-icon>search</mat-icon>
         </button>
-        <input fxFlex="90" [(ngModel)]="value" (keyup)="onKeyUp($event)" matInput placeholder="search"
+        <input fxFlex="90" [(ngModel)]="Search" (keyup)="lookfor()" (click)="goSearch()" matInput placeholder="search"
           [style.fontSize.px]="18" class="searchText" autocomplete="off">
 
       </mat-form-field>
@@ -25,8 +25,10 @@
       </button>
 
       <button mat-icon-button color="basic" id="grid" fxHide.xs matTooltip="grid">
-        <mat-icon>border_all</mat-icon>
+        <!-- <img *ngIf="isClicked==false" src="../../../assets/images/outline-view_agenda-24px.svg" /> -->
+        <img  src="../../../assets/images/outline-border_all-24px(1).svg" />
       </button>
+      
       <div class="settings">
         <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="settings">
           <mat-icon>settings</mat-icon>
@@ -72,44 +74,43 @@
 
 
 
-    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-          fixedTopGap="56">
-          <mat-nav-list>
-            <mat-list role="List">
-    
-    
-              <mat-list-item role="listitem" id="note" (click)="note()">
-                <img id="img1" src="../../../assets/images/note.svg" />
-                Note</mat-list-item>
-                
-    
-              <mat-list-item role="listitem" id="rem">
-                <img id="img2" src="../../../assets/images/remainder.svg" />
-                Reminder</mat-list-item>
-    
-              <mat-divider></mat-divider>
-              <p id="para">labels</p>
-              <mat-list-item role="listitem" (click)="openLabel()" id="lable">
-                <mat-icon id="edit">edit</mat-icon>
-                Edit label
-              </mat-list-item>
-    
-              <mat-divider></mat-divider>
-              <mat-list-item role="listitem" id="arch" (click)="archieve()">
-                <img id="img4" src="../../../assets/images/archieve.svg" />
-                Archive</mat-list-item>
-    
-              <mat-list-item role="listitem" id="bin"   (click)="openTrash()">
-                <img id="img5" src="../../../assets/images/bin.svg" />
-                Trash</mat-list-item>
-    
-            </mat-list>
-          </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
- 
-</mat-sidenav-container>
- 
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <mat-list role="List">
+
+
+          <mat-list-item role="listitem" id="note" (click)="note()">
+            <img id="img1" src="../../../assets/images/note.svg" />
+            Note</mat-list-item>
+
+
+          <mat-list-item role="listitem" id="rem">
+            <img id="img2" src="../../../assets/images/remainder.svg" />
+            Reminder</mat-list-item>
+
+          <mat-divider></mat-divider>
+          <p id="para">labels</p>
+          <mat-list-item role="listitem" (click)="openLabel()" id="lable">
+            <mat-icon id="edit">edit</mat-icon>
+            Edit label
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem" id="arch" (click)="archieve()">
+            <img id="img4" src="../../../assets/images/archieve.svg" />
+            Archive</mat-list-item>
+
+          <mat-list-item role="listitem" id="bin" (click)="openTrash()">
+            <img id="img5" src="../../../assets/images/bin.svg" />
+            Trash</mat-list-item>
+
+        </mat-list>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>

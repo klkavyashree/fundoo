@@ -8,45 +8,44 @@ import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassw
 import { MainNoteComponent } from './components/main-note/main-note.component'
 import { UpdatenoteComponent } from './components/updatenote/updatenote.component'
 import { EditLabelComponent } from './components/edit-label/edit-label.component'
+import { TrashComponent } from './components/trash/trash.component'
+import { SearchComponent } from './components/search/search.component'
+import { ArchiveComponent } from './components/archive/archive.component'
 
 
 const routes: Routes = [
   {
-    path : '',
-    redirectTo : 'login',
-    pathMatch:'full'
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
-    path : 'login',
-    component : LoginComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path:'dashboard',
-    component : DashboardComponent,
-    children:[
-      {
-        path:'',
-        redirectTo:'note',
-        pathMatch:'full'
-      },
-      {
-        path:'note',
-        component:MainNoteComponent
-      }
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'note', pathMatch: 'full'},
+      { path: 'note', component: MainNoteComponent}, 
+      { path: 'trash', component: TrashComponent },
+      { path:'search', component: SearchComponent },
+      { path:'archive', component:ArchiveComponent }
     ]
   },
-  {path:'updatenote', component : UpdatenoteComponent},
+  { path: 'updatenote', component: UpdatenoteComponent },
   {
-    path:'register',
-    component : RegisterComponent
+    path: 'register',
+    component: RegisterComponent
   },
   {
-    path:'forgotpassword',
-    component : ForgotpasswordComponent
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent
   },
   {
-    path:'resetpassword/:token',
-    component : ResetpasswordComponent
+    path: 'resetpassword/:token',
+    component: ResetpasswordComponent
   },
 
 ];

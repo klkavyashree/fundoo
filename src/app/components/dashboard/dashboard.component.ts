@@ -1,9 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Inject, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-
+import { DataService } from '../../service/dataservice/data.service'
 import { MatSnackBar } from '@angular/material'
 export interface DialogData {
   data: "kavyashree"
@@ -18,9 +17,10 @@ export class DashboardComponent implements OnInit {
   mobileQuery: MediaQueryList;
   message: any;
   content: any;
+  Search:string;
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,
+  constructor(private data: DataService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,
     public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -45,5 +45,18 @@ export class DashboardComponent implements OnInit {
  note(){
    this.router.navigate(['dashboard/note']);
  }
+ openTrash(){
+   this.router.navigate(['dashboard/trash'])
+ }
+ goSearch() {
+  this.router.navigate(['dashboard/search']);
+}
 
+lookFor() {
+  this.data.changeMessage(this.Search)
+}
+
+archieve(){
+  this.router.navigate(['dashboard/archive'])
+ }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../../components/updatenote/updatenote.component';
 import { NoteService } from '../../service/noteservice/note.service';
+import { DataService } from '../../service/dataservice/data.service'
 
 export interface DialogData {
   array: [];
@@ -17,12 +18,18 @@ export class DisplayComponentComponent implements OnInit {
   array: [];
   bgcolor: any;
   data: any;
-  cardid:any;
+  cardid: any;
+  allcards: any;
+
   /**
    * it will take input from the othe component
    */
-  @Input() card = [];
-  constructor(public dialog: MatDialog, private note: NoteService) { }
+  @Input() card;
+  @Input() Search;
+  @Input() arrayCards;
+  @Input() type;
+  @Input() cond;
+  constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -38,7 +45,8 @@ export class DisplayComponentComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        console.log(result['array'].id);
+        console.log('result when dialog close',result)
+        console.log(result['array'].id,'result get from dialog box');
 
         this.model = {
           noteId: result['array'].id,
@@ -58,5 +66,33 @@ export class DisplayComponentComponent implements OnInit {
       console.log('error occurs ')
     }
   }
+  delete($event) {
+    let ind = this.card.indexOf($event);
+    this.card.splice(ind, 1);
+  }
+  
+  unarchive($event){
+    this.card.push($event)
+  }
+  archive($event){
+    let ind=this.card.indexOf($event)
+    this.card.splice(ind,1);
+  }
 
+  unarchived($event){
+    let ind=this.card.indexOf($event)
+    this.card.splice(ind,1);
+  }
+  restore(card){
+    this.note.deleteNote({
+      "isDeleted":false,
+      "noteIdList":[card.id]
+  }).subscribe(data=>{
+    console.log(data,"response when delete");
+    let ind=this.card.indexOf(card)
+    this.card.splice(ind,1);
+    // this.cardRestore(card)
+  },err=>console.log(err))
+  }
+  
 }
