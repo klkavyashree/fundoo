@@ -1,6 +1,6 @@
-<div fxLayoutAlign="space-between end" fxLayout='row' fxFlex='90' >
+<div fxLayoutAlign="space-around end" fxLayout='row' fxFlex='100' >
 
-  <button id="Remaind" matTooltip="Remind me" mat-icon-button [matMenuTriggerFor]="menu4">
+  <button id="Remaind" matTooltip="Remind me" mat-icon-button [matMenuTriggerFor]="menu4" style='padding-left: 16px;padding-right: 16px'>
     <mat-icon> <img src="../../../assets/images/baseline-notification_important-24px.svg" /></mat-icon>
   </button>
   <mat-menu #menu4="matMenu" class="matmenu">
@@ -130,7 +130,7 @@
   <button mat-icon-button matTooltip="add img"><img id="img" src="../../../assets/images/img.svg" /></button>
   <div>
   <button *ngIf='type==note' mat-icon-button matTooltip="Archive"><img  src="../../../assets/images/archieve.svg" (click)="doArchive(card)"/></button>
-  <button *ngIf='type==archive' mat-icon-button matTooltip="Archive"><img  src="../../../assets/images/baseline-unarchive-24px.svg" (click)="doUnArchive(card)"/></button>
+  <button *ngIf='type==archive' mat-icon-button matTooltip="unarchive"><img  src="../../../assets/images/baseline-unarchive-24px.svg" (click)="doUnArchive(card)"/></button>
 </div>
    <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
   <img id="img" src="../../../assets/images/more_vert.svg" />

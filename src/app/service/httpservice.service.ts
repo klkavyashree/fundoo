@@ -45,6 +45,16 @@ export class HttpserviceService {
     }
     return this.http.post(url, this.encode(data), httpOptions);
   }
+  encodedPostFormDelete(url: any) {
+    url = this.baseUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('token')
+      })
+    }
+    return this.http.delete(url, httpOptions);
+  }
 
  
 

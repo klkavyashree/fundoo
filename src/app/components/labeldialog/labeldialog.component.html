@@ -1,0 +1,27 @@
+<div fxFlex='100' fxLayout='column'>
+  <p fxLayoutAlign='start start'>Edit Labels</p>
+  <div fxLayout='row'>
+    <div *ngIf='flag==false'>
+      <button mat-icon-button matTooltip="add img" (click)="reverseFlag()"><img id="img" src="../../../assets/images/wrong_mark.svg" /></button>
+    </div>
+    <div *ngIf='flag==true'>
+      <button mat-icon-button matTooltip="add img" (click)="reverseFlag()"><img id="img" src="../../../assets/images/add_mark.svg" /></button>
+    </div>
+    <div fxLayout='center center'><mat-form-field><input matInput [(ngModel)]="label" placeholder="Create new Label" (keydown)="call($event,label)" (click)="reverseFlag()"></mat-form-field></div>
+    <div *ngIf='flag==false'>
+      <button mat-icon-button matTooltip="add img"><img id="img" src="../../../assets/images/right_mark.svg" (click)="addLabel(label)" /></button>
+    </div>
+  </div>
+  <div *ngFor="let array of labelList">
+    <div fxLayout='row'  >
+      <div> <button mat-icon-button matTooltip="delete" (click)="reverseFlag()"><img id="img" src="../../../assets/images/bin.svg" (click)="deleteLabel(array.id)"/></button></div>
+      <div fxLayout='center center'><input matInput [(ngModel)]=array.label placeholder="Create new Label" (click)="reverseFlag()" (click)="reverse()"></div>
+      <button *ngIf='flag1==true' mat-icon-button matTooltip="edit label" (click)="reverseFlag()"><img id="img" src="../../../assets/images/write.svg" (click)="reverse()" /></button>
+      <button *ngIf='flag1==false' mat-icon-button matTooltip="update label"><img id="img" src="../../../assets/images/right_mark.svg" (click)="updateLabel(label)" /></button>
+    </div>
+  </div>
+  <br><br>
+  <div mat-dialog-actions fxLayoutAlign='end'>
+    <button mat-button [mat-dialog-close]="label" cdkFocusInitial>Done</button>
+  </div>
+</div>

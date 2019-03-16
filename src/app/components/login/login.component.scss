@@ -1,23 +1,24 @@
+@import "../../../app/components/scss/color.scss";
 .F{
-    color:rgb(22, 22, 202);
+    color:$blue;
 }
 .u{
-    color:rgb(255, 30, 0);
+    color:$red;
 }
 .n{
-    color:rgb(28, 108, 173);
+    color:$lightblue
 }
 .d{
-    color:rgb(90, 112, 29);
+    color:$green
 }
 .o{
-    color:rgb(0, 17, 255);
+    color:$bluebtn;
 }
 .o1{
-    color:rgb(13, 97, 69);
+    color:$mixblue
 }
 h2{
-    color: rgb(20, 20, 20);
+    color: $black;
     font-weight: 500;
     margin:-1%;
 }
@@ -27,28 +28,24 @@ h4{
 }
 
 .btn{
-    background: rgb(37, 66, 161);
-    color: white;
-    padding: 1.5%;
+    background: $bluebtn;
+    color:$white;
+
     width: 10%;
     float:right;
     text-align: center
       
 }
 .reg{
-    background:white ;
-    color: rgb(37, 66, 161);
+    background:$white ;
+    color: $bluebtn;
     width: 25%;
     float:left;
     text-align: center
       
 }
 .forgot{
-    background: white;
-    color: rgb(37, 66, 161);
-    width:25%;
-    float: left;
-    text-align: center
+    @extend .reg
       
 }
 .help-block{

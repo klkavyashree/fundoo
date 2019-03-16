@@ -27,7 +27,9 @@ import { UpdatenoteComponent } from './components/updatenote/updatenote.componen
 import { TrashComponent } from './components/trash/trash.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { SearchPipe } from './pipe/search.pipe';
-import { SearchComponent } from './components/search/search.component'
+import { SearchComponent } from './components/search/search.component';
+import { DeleteForeverComponent } from './components/delete-forever/delete-forever.component';
+import { LabeldialogComponent } from './components/labeldialog/labeldialog.component'
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { SearchComponent } from './components/search/search.component'
     ArchiveComponent,
     SearchPipe,
     SearchComponent,
+    DeleteForeverComponent,
+    LabeldialogComponent,
  
     
   ],

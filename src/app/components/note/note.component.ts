@@ -47,7 +47,7 @@ export class NoteComponent implements OnInit {
             }
 
           console.log("model data",this.model)
-         this.httpService.encodedPostForm('notes/addNotes',this.model).subscribe(data =>{
+         this.note.addNote(this.model).subscribe(data =>{
           console.log("response while adding..",data);
           this.response = data;
           this.noteTitle.reset();

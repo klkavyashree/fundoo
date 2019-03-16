@@ -7,6 +7,9 @@ import { HttpserviceService } from '../../service/httpservice.service'
 export class NoteService {
 
   constructor(private http:HttpserviceService) { }
+  addNote(data){
+    return this.http.encodedPostForm('notes/addNotes',data)
+  }
   getNote(){
    return  this.http.getHttp('notes/getNotesList')
   }
@@ -33,6 +36,14 @@ export class NoteService {
  getArchiveNotes(){
    return this.http.getHttp('notes/getArchiveNotesList') 
  }
-
+postlabels(data){
+  return this.http.postJSON('noteLabels',data)
+}
+getLabelList(){
+  return this.http.getHttp('noteLabels/getNoteLabelList')
+}
+deleteLabel(data){
+  return this.http.encodedPostFormDelete('noteLabels/'+data+'/deleteNoteLabel')
+}
 
 }

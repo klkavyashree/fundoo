@@ -45,5 +45,5 @@ trash='trash'
       this.deletedcards.splice(index,1);
     }),err=>console.log(err)
   }
-
+  
 }

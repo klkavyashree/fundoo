@@ -1,27 +1,43 @@
-<div *ngFor="let array of card | search:Search; let i=index" fxLayout="row wrap">
+<div *ngFor="let array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='row'>
   <mat-card fxLayout="column" class="matcard" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>
-    <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center" (click)="openDialog(array)">
-      <div fxLayout="column">
-        <div>
-          <mat-card-title>{{array.title}} </mat-card-title>
+    <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center" (click)="openDialog(array,cond)">
+      <div fxLayout="column" fxFlex='100'>
+
+        <div fxLayout='row'  fxLayoutAlign="space-between start" fxFlex='100'>
+          <div>
+            <mat-card-title>{{array.title}} </mat-card-title>
+          </div>
+          <div *ngIf="cond!='trash'">
+            <button mat-icon-button color="basic" (click)="ispinned()">
+              <div class="barpin" *ngIf="flag1==true">
+
+                <img src="../../../assets/images/pin_bar.svg" />
+
+              </div>
+              <div class="barpin" *ngIf="flag1==false">
+
+                <img src="../../../assets/images/unpin_bar.svg" />
+              </div>
+            </button>
+          </div>
         </div>
         <div>
           <mat-card-subtitle>{{array.description}}</mat-card-subtitle>
         </div>
       </div>
     </div>
-      <div fxFlex='100' *ngIf="cond=='trash'">
-        <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
-          <img id="img" src="../../../assets/images/more_vert.svg" />
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>Delete Forever</button>
-          <button mat-menu-item (click)='restore(array)' >Restore</button>
-        </mat-menu>
-      </div>
-      <div fxFlex='100' *ngIf="cond!='trash'">
-        <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
-          (deletecard)="delete($event)" [type]=type> </app-icon-list>
-      </div>
+    <div fxFlex='100' *ngIf="cond=='trash'">
+      <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+        <img id="img" src="../../../assets/images/more_vert.svg" />
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)=deleteForever(array)>Delete Forever</button>
+        <button mat-menu-item (click)='restore(array)'>Restore</button>
+      </mat-menu>
+    </div>
+    <div fxFlex='100' *ngIf="cond!='trash'">
+      <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
+        (deletecard)="delete($event)" [type]=type> </app-icon-list>
+    </div>
   </mat-card>
 </div>

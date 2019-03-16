@@ -1,4 +1,123 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<mat-toolbar class="dashboardToolBar">
+  <div class="iconAndTitle">
+
+    <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Main Menu">
+      <mat-icon class="mat-18">menu</mat-icon>
+    </button>
+    <img class="fundooIcon" src="../../../assets/images/keep_48dp.png">
+
+    <div class="dashboardTitle">{{headerName}}</div>
+
+  </div>
+
+  <div class="searchToolBar">
+
+    <button mat-icon-button>
+      <mat-icon class="mat-18">search</mat-icon>
+    </button>
+    <input fxHide.xs [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()' class="searchInputBar"
+      type="text" placeholder="search">
+  </div>
+
+  <div >
+    <button fxHide.xs fxHide.sm mat-icon-button matTooltip="Refresh">
+      <mat-icon class="refresh">refresh</mat-icon>
+    </button>
+    <button fxHide.xs   mat-icon-button matTooltip="List view">
+      <mat-icon class="view_list">view_list</mat-icon>
+    </button>
+    <button  mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings">
+      <mat-icon class="settings">settings</mat-icon>
+    </button>
+  </div>
+  <div>
+    <button fxHide.xs fxHide.sm  mat-icon-button matTooltip="Google Apps">
+      <mat-icon class="mat-18">apps</mat-icon>
+    </button>
+    <button mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
+
+      <mat-icon class="account_circle">account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-menu #settingsForHeader="matMenu">
+
+  <button mat-menu-item (click)="settings()">Settings</button>
+  <button mat-menu-item (click)="sendFeedback()">Send FeedBack</button>
+  <button mat-menu-item (click)="help()">Help</button>
+  <button mat-menu-item (click)="appDownload()">App Download</button>
+  <button mat-menu-item (click)="keyboardShortcuts()">Keyboard Shortcut</button>
+
+</mat-menu>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-fab disabled id="imagebutton">
+  </button>
+  <p>Kavyashree K L</p>
+
+  <button mat-menu-item></button>
+  <mat-divider></mat-divider>
+  <div>
+    <button mat-flat-button (click)="addAccount()">Add account</button>
+    <button mat-flat-button (click)="signout()">Sign out</button>
+  </div>
+</mat-menu>
+<mat-divider></mat-divider>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer #sidenav mode="side" opened="true">
+    <div>
+
+      <button mat-button (click)="note()" (click)="headerName= 'Fundoo Notes'" [ngClass]="{'sideNavListItems': headerName!='Fundoo Notes', 'sideNavlistItemsColored': headerName=='Fundoo Notes'}">
+        <mat-icon>lightbulb_outline</mat-icon> Notes
+
+      </button>
+
+    </div>
+    <div>
+      <button mat-button [routerLink]="['remainder']"  (click)="headerName= 'Remainders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+        <mat-icon>notifications_none</mat-icon> Remainders
+      </button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <p class="textSize">LABELS</p>
+
+    <button class="sideNavListItems" mat-button (click)="openLabel()">
+
+      <mat-icon>edit</mat-icon> Edit Labels
+    </button>
+    <mat-divider></mat-divider>
+    <div>
+
+      <button mat-button (click)="archieve()" (click)="headerName= 'Archive'" [ngClass]="{'sideNavListItems': headerName!='Archive', 'sideNavlistItemsColored': headerName=='Archive'}">
+        <mat-icon>archive</mat-icon> Archive
+      </button>
+    </div>
+
+    <div>
+      <button mat-button (click)="openTrash()" (click)="headerName= 'Trash'" [ngClass]="{'sideNavListItems': headerName!='Trash', 'sideNavlistItemsColored': headerName=='Trash'}">
+        <mat-icon>delete</mat-icon> Trash
+      </button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+<!-- <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar class="example-toolbar">
     <div fxFlex="5">
       <button mat-icon-button matTooltip="menu-bar" (click)="snav.toggle()">
@@ -9,12 +128,12 @@
         <h3 class="example-app-name" fxLayoutAlign='center center'>Fundoo</h3>
       </div>
     </div>
-    <div fxFlex="50"  fxLayoutAlign="end center">
-      <mat-form-field appearance="outline" fxFlex='50' fxHide.xs fxLayoutAlign="end center" [style.fontSize.px]="2" class="search">
+    <div fxFlex="50" >
+      <mat-form-field  appearance="outline" fxFlex='100' fxHide.xs  fxLayoutAlign="end center" [style.fontSize.px]="2" class="search">
         <button mat-icon-button>
-          <mat-icon>search</mat-icon>
+          <mat-icon (keyup)="lookfor()" (click)="goSearch()">search</mat-icon>
         </button>
-        <input fxFlex="90" [(ngModel)]="Search" (keyup)="lookfor()" (click)="goSearch()" matInput placeholder="search"
+        <input fxFlex="90" [(ngModel)]="Search"  (keyup)="lookfor()" (click)="goSearch()" matInput placeholder="search"
           [style.fontSize.px]="18" class="searchText" autocomplete="off">
 
       </mat-form-field>
@@ -24,9 +143,16 @@
         <mat-icon>refresh</mat-icon>
       </button>
 
-      <button mat-icon-button color="basic" id="grid" fxHide.xs matTooltip="grid">
-        <!-- <img *ngIf="isClicked==false" src="../../../assets/images/outline-view_agenda-24px.svg" /> -->
-        <img  src="../../../assets/images/outline-border_all-24px(1).svg" />
+      <button mat-icon-button color="basic" id="grid" fxHide.xs matTooltip="grid"> -->
+
+
+
+<!-- <img *ngIf="isClicked==false" src="../../../assets/images/outline-view_agenda-24px.svg" /> -->
+
+
+
+
+<!-- <img  src="../../../assets/images/outline-border_all-24px(1).svg" />
       </button>
       
       <div class="settings">
@@ -44,11 +170,7 @@
       <button mat-icon-button color="basic" fxHide.xs fxHide.sm matTooltip="Notification">
         <mat-icon>notification_important </mat-icon>
       </button>
-
-
     </div>
-
-
     <button mat-icon-button color="basic" fxHide.sm fxHide.xs matTooltip="Apps">
       <mat-icon>apps</mat-icon>
     </button>
@@ -58,9 +180,7 @@
     </button>
     <mat-menu #menu1="matMenu">
       <button mat-fab disabled id="imagebutton">
-
       </button>
-
       <p>Kavyashree K L</p>
 
       <button mat-menu-item></button>
@@ -71,7 +191,6 @@
       </div>
     </mat-menu>
   </mat-toolbar>
-
 
 
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
@@ -113,4 +232,4 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
 
-  </mat-sidenav-container>
+  </mat-sidenav-container> -->

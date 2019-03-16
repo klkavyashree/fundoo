@@ -6,6 +6,7 @@ import { DataService } from '../../service/dataservice/data.service'
 
 export interface DialogData {
   array: [];
+  cond:any;
 }
 @Component({
   selector: 'app-display-component',
@@ -20,6 +21,7 @@ export class DisplayComponentComponent implements OnInit {
   data: any;
   cardid: any;
   allcards: any;
+  flag1=true;
 
   /**
    * it will take input from the othe component
@@ -37,10 +39,10 @@ export class DisplayComponentComponent implements OnInit {
    * keeps the track of the currently opened dialog
    */
 
-  openDialog(array) {
+  openDialog(array,cond) {
     try {
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
-        data: { array },
+        data: { array,cond },
         width: '600px'
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -54,7 +56,8 @@ export class DisplayComponentComponent implements OnInit {
           description: result['array'].description,
         }
         console.log(this.model, "modelll of update")
-        this.note.updatenote(this.model).subscribe(message => {
+        this.note.updatenote(
+          this.model).subscribe(message => {
           console.log(message)
         })
 
@@ -67,23 +70,39 @@ export class DisplayComponentComponent implements OnInit {
     }
   }
   delete($event) {
+    try{
     let ind = this.card.indexOf($event);
     this.card.splice(ind, 1);
+    }catch(err){
+      console.log(err)
+    }
   }
   
   unarchive($event){
-    this.card.push($event)
+    try{
+    this.card.splice(0,0,$event)
+    }catch(err){
+      console.log(err)
+    }
   }
   archive($event){
+    try{
     let ind=this.card.indexOf($event)
-    this.card.splice(ind,1);
+    this.card.splice(ind,1);}
+    catch(err){
+      console.log(err)}
   }
 
   unarchived($event){
+    try{
     let ind=this.card.indexOf($event)
     this.card.splice(ind,1);
+    }catch(err){
+      console.log(err)
+    }
   }
   restore(card){
+    try{
     this.note.deleteNote({
       "isDeleted":false,
       "noteIdList":[card.id]
@@ -93,6 +112,20 @@ export class DisplayComponentComponent implements OnInit {
     this.card.splice(ind,1);
     // this.cardRestore(card)
   },err=>console.log(err))
+}catch(err){
+  console.log(err)
+}
+  }
+  deleteForever(array){
+    this.note.deleteForever({
+      "isDeleted":false,
+      "noteIdList":[array.id]
+    }).subscribe(data=>{
+      console.log(data,"response when delete");
+      let ind=this.card.indexOf(array)
+      this.card.splice(ind,1);
+      // this.cardRestore(card)
+    },err=>console.log(err))
   }
   
 }

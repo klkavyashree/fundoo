@@ -8,7 +8,7 @@ import { DialogData } from '../../components/display-component/display-component
   styleUrls: ['./updatenote.component.scss']
 })
 export class UpdatenoteComponent implements OnInit {
-
+flag1=true
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData)
      {console.log(data['array'],"in dialog") }

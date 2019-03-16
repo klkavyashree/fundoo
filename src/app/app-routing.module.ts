@@ -11,6 +11,8 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
 import { TrashComponent } from './components/trash/trash.component'
 import { SearchComponent } from './components/search/search.component'
 import { ArchiveComponent } from './components/archive/archive.component'
+import { DeleteForeverComponent } from './components/delete-forever/delete-forever.component'
+import { LabeldialogComponent } from './components/labeldialog/labeldialog.component'
 
 
 const routes: Routes = [
@@ -31,10 +33,13 @@ const routes: Routes = [
       { path: 'note', component: MainNoteComponent}, 
       { path: 'trash', component: TrashComponent },
       { path:'search', component: SearchComponent },
-      { path:'archive', component:ArchiveComponent }
+      { path:'archive', component:ArchiveComponent },
+      { path:'labels',component:EditLabelComponent }
     ]
   },
   { path: 'updatenote', component: UpdatenoteComponent },
+  { path:'delete', component: DeleteForeverComponent },
+  { path:'labeldialog', component:LabeldialogComponent },
   {
     path: 'register',
     component: RegisterComponent

@@ -1,16 +1,39 @@
-<div [style.backgroundColor]=data.array.color fxFlex='100'>
-  <div style="margin:20px" > 
-  <mat-form-field class="title" > 
-    <input class='tit' matInput [(ngModel)]="data.array.title">
-  </mat-form-field>
+<div [style.backgroundColor]=data.array.color fxFlex='100' class="main">
+  <div style="margin:20px">
+    <div fxFlex='100' fxLayoutAlign='space-between start' fxLayout='row'>
+      <input class='tit' matInput [(ngModel)]="data.array.title">
+      <div *ngIf="data.cond!='trash'">
+        <div class="barpin" *ngIf="flag1==true">
+
+          <img src="../../../assets/images/pin_bar.svg" />
+
+        </div>
+        <div class="barpin" *ngIf="flag1==false">
+
+          <img src="../../../assets/images/unpin_bar.svg" />
+        </div>
+      </div>
+    </div>
   </div>
   <div style="margin:20px">
-  <mat-form-field>
+
     <input class='desc' matInput [(ngModel)]="data.array.description">
-  </mat-form-field>
-  </div>
+
+  </div><br><br>
   <div fxLayoutAlign='space-between end'>
-    <app-icon-list [card]="data.array"></app-icon-list>
-      <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
+      <div fxFlex='100' *ngIf="data.cond=='trash'">
+          <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+            <img id="img" src="../../../assets/images/more_vert.svg" />
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)=deleteForever(array)>Delete Forever</button>
+            <button mat-menu-item (click)='restore(array)'>Restore</button>
+          </mat-menu>
+        </div>
+        <div fxFlex='100' *ngIf="data.cond!='trash'">
+          <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
+            (deletecard)="delete($event)" [type]=type> </app-icon-list>
+        </div>
+    <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
   </div>
 </div>

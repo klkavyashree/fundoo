@@ -35,7 +35,7 @@ export class MainNoteComponent implements OnInit {
   recievemessage($event) {
     this.addnote = $event;
     console.log(this.addnote,"......addnote")
-    this.allcards.push(this.addnote)
+    this.allcards.splice(0,0,this.addnote)
   }
 
  
