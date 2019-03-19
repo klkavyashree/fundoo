@@ -69,24 +69,27 @@
   <mat-drawer #sidenav mode="side" opened="true">
     <div>
 
-      <button mat-button (click)="note()" (click)="headerName= 'Fundoo Notes'" [ngClass]="{'sideNavListItems': headerName!='Fundoo Notes', 'sideNavlistItemsColored': headerName=='Fundoo Notes'}">
+      <button mat-button (click)="note()" (click)="headerName= 'Notes'" [ngClass]="{'sideNavListItems': headerName!='Fundoo Notes', 'sideNavlistItemsColored': headerName=='Fundoo Notes'}">
         <mat-icon>lightbulb_outline</mat-icon> Notes
 
       </button>
 
     </div>
     <div>
-      <button mat-button [routerLink]="['remainder']"  (click)="headerName= 'Remainders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
-        <mat-icon>notifications_none</mat-icon> Remainders
+      <button mat-button (click)='reminder()'  (click)="headerName= 'Reminders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+        <mat-icon>notifications_none</mat-icon> Reminders
       </button>
     </div>
 
     <mat-divider></mat-divider>
 
     <p class="textSize">LABELS</p>
-
+    <div *ngFor='let array of labelList'  > 
+      <button mat-button  (click)="sendLabel(array)" (click)="editlabel()" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+        <mat-icon>label_outline</mat-icon> {{array.label}}
+      </button>
+    </div>
     <button class="sideNavListItems" mat-button (click)="openLabel()">
-
       <mat-icon>edit</mat-icon> Edit Labels
     </button>
     <mat-divider></mat-divider>

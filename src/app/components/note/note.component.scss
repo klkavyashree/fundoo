@@ -73,6 +73,22 @@ element.style {
   outline: none;
   user-select: none;
 }
+.check{
+opacity: 0.3;
+&:hover{
+  opacity: 1
+}
+}
+.brush{
+  opacity: 0.3;
+  &:hover{
+    opacity: 1
+  }
+
+}
+.insert{
+  @extend .brush
+}
 
 
   

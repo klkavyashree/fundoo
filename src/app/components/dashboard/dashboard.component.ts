@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
@@ -18,20 +18,19 @@ export interface DialogData {
 export class DashboardComponent implements OnInit {
   mobileQuery: MediaQueryList;
   message: any;
-  content: any;
-  Search:string;
-  label:any;
-  model:any;
+  Search: string;
+  labelList: any;
   private _mobileQueryListener: () => void;
 
   constructor(private data: DataService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,
-    public dialog: MatDialog, private snackBar: MatSnackBar, private notes:NoteService) {
+    public dialog: MatDialog, private snackBar: MatSnackBar, private notes: NoteService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnInit() {
+    this.getLabels()
   }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -46,53 +45,66 @@ export class DashboardComponent implements OnInit {
   signout() {
     this.router.navigate(['login']);
   }
- note(){
-   this.router.navigate(['dashboard/note']);
- }
- openTrash(){
-   this.router.navigate(['dashboard/trash'])
- }
- goSearch() {
-  this.router.navigate(['dashboard/search']);
-}
+  note() {
+    this.router.navigate(['dashboard/note']);
+  }
+  openTrash() {
+    this.router.navigate(['dashboard/trash'])
+  }
+  goSearch() {
+    this.router.navigate(['dashboard/search']);
+  }
 
-lookfor() {
-  this.data.changeMessage(this.Search)
-}
+  lookfor() {
+    this.data.changeMessage(this.Search)
+  }
 
-archieve(){
-  this.router.navigate(['dashboard/archive'])
- }
- openLabel(){
-   {
-    try {
-      const dialogRef = this.dialog.open(LabeldialogComponent, {
-        data: {  },
-        width:'auto'
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        console.log('result when dialog close',result)
-        console.log(result['array'].id,'result get from dialog box');
-
-        this.model = {
-          noteId: result['array'].id,
-          title: result['array'].title,
-          description: result['array'].description,
-        }
-        console.log(this.model, "modelll of update")
-        this.notes.postlabels (
-          this.model).subscribe(message => {
-          console.log(message)
+  archieve() {
+    this.router.navigate(['dashboard/archive'])
+  }
+  editlabel(){
+    this.router.navigate(['dashboard/labels'])
+  }
+  reminder(){
+    this.router.navigate(['dashboard/reminders'])
+  }
+  openLabel() {
+    {
+      try {
+        const dialogRef = this.dialog.open(LabeldialogComponent, {
+          data: {},
+          width: 'auto'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log('result when dialog close', result);
+          var userId=localStorage.getItem('userid')
+          this.notes.postlabels(
+            {
+              "label": result,
+              "isDeleted": false,
+              "userId": userId
+            }).subscribe(data =>
+              this.labelList.splice(0, 0, data)
+            ), err => {
+              console.log(err)
+            }
         })
-
-
-      });
-
-    }
-    catch (err) {
-      console.log('error occurs ')
+      } catch (err) {
+        console.log('error occurs ')
+      }
     }
   }
- }
+
+  getLabels() {
+    this.notes.getLabelList().subscribe(data => {
+      this.labelList = data['data']['details'];
+      this.labelList = this.labelList.reverse();
+      console.log(data, 'resp getlabel')
+    })
+  }
+  sendLabel(label){
+      this.data.sendLabel(label);
+  }
+
 }

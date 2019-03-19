@@ -3,11 +3,12 @@
     <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center" (click)="openDialog(array,cond)">
       <div fxLayout="column" fxFlex='100'>
 
-        <div fxLayout='row'  fxLayoutAlign="space-between start" fxFlex='100'>
+        <div fxLayout='row' fxLayoutAlign="space-between start" fxFlex='100'>
           <div>
-            <mat-card-title>{{array.title}} </mat-card-title>
+            <mat-card-title fxLayout="row wrap">{{array.title}}
+            </mat-card-title>
           </div>
-          <div *ngIf="cond!='trash'">
+          <div *ngIf="cond!='trash'" class="pin">
             <button mat-icon-button color="basic" (click)="ispinned()">
               <div class="barpin" *ngIf="flag1==true">
 
@@ -22,10 +23,46 @@
           </div>
         </div>
         <div>
-          <mat-card-subtitle>{{array.description}}</mat-card-subtitle>
+          <div *ngIf='show==true' fxLayout='center center'>
+             <mat-checkbox> <mat-card-title fxLayout="row wrap">{{array.description}}</mat-card-title></mat-checkbox>
+          </div> -->
+          <div *ngIf='show==false'>
+              <mat-card-title fxLayout="row wrap">{{array.description}}</mat-card-title>
+          </div>
         </div>
       </div>
     </div>
+    <div fxLayout='row'>
+      <div *ngFor='let item of array.reminder'>
+        <mat-chip-list>
+          <div *ngIf='(todaydate|date:shortDate)==(item|date:shortdate)'>
+            <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">Today{{item|date:'shortTime'}}
+              <mat-icon (click)="removeReminder(array,item)">close</mat-icon>
+            </mat-chip>
+          </div>
+          <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortdate)'>
+              <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">Tom{{item|date:'shortTime'}}
+                  <mat-icon (click)="removeReminder(array,item)">close</mat-icon>
+                </mat-chip>
+          </div>
+          <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
+              <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'medium'}}
+                  <mat-icon (click)="removeReminder(array,item)">close</mat-icon>
+                </mat-chip>
+          </div>
+        </mat-chip-list>
+      </div>
+      <div *ngFor='let labels of array.noteLabels'>
+        <div>
+          <mat-chip-list selected>
+          <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px" class="btn">{{labels.label}}<img
+              src='../../../assets/images/wrong_mark.svg' class="delete" (click)="removeLabel(array,labels)"></mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </div>
+
+
     <div fxFlex='100' *ngIf="cond=='trash'">
       <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
         <img id="img" src="../../../assets/images/more_vert.svg" />
@@ -36,8 +73,9 @@
       </mat-menu>
     </div>
     <div fxFlex='100' *ngIf="cond!='trash'">
-      <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
-        (deletecard)="delete($event)" [type]=type> </app-icon-list>
+      <app-icon-list class="icon" [card]=array (archivedCard)="archive($event)" (sendLabel)='addlabel($event)' [more]=display
+        (unarchiveCard)='unarchived($event)' (deletecard)="delete($event)" [type]=type (showtick)='showTickBox($event)'>
+      </app-icon-list>
     </div>
   </mat-card>
 </div>

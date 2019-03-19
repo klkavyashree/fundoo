@@ -23,6 +23,10 @@ export class HttpserviceService {
     return this.http.post(url, body, httpOptions)
   }
 
+
+
+
+
   encode(data) {
     const formBody = [];
     for (const property in data) {
@@ -55,8 +59,6 @@ export class HttpserviceService {
     }
     return this.http.delete(url, httpOptions);
   }
-
- 
 
   postRequest(url, data) {
     console.log(data);

@@ -20,6 +20,7 @@ export class MainNoteComponent implements OnInit {
     this.note.getNote().subscribe(data=>{
       console.log(data,'getall cards')
         this.card = data['data']['data'];
+        this.card=this.card.reverse();
         for(let index=0;index<this.card.length;index++){
           if(this.card[index].isDeleted==false && this.card[index].isArchived==false){
             this.allcards.push(this.card[index])

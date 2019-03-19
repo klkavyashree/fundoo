@@ -1,0 +1,31 @@
+@import '../../components/scss/color.scss';
+.add{
+    opacity: 0.4;
+    &:hover{
+        opacity: 1
+    }
+}
+.write{
+    @extend .add
+}
+.bin{
+    opacity: 0.4;
+    &:hover{
+        opacity: 1
+    } 
+}
+.right{
+    @extend .bin
+}
+.update{
+    opacity: 0.4;
+    &:hover{
+        opacity: 1
+    } 
+}
+.btn{
+    background-color: $background-color
+}
+.btn:hover{
+    background-color: #ddd
+}

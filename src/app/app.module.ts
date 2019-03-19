@@ -29,7 +29,10 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { DeleteForeverComponent } from './components/delete-forever/delete-forever.component';
-import { LabeldialogComponent } from './components/labeldialog/labeldialog.component'
+import { LabeldialogComponent } from './components/labeldialog/labeldialog.component';
+import { LabelsearchPipe } from './pipe/label/labelsearch.pipe';
+import { RemainderComponent } from './components/remainder/remainder.component';
+
 
 
 @NgModule({
@@ -52,6 +55,8 @@ import { LabeldialogComponent } from './components/labeldialog/labeldialog.compo
     SearchComponent,
     DeleteForeverComponent,
     LabeldialogComponent,
+    LabelsearchPipe,
+    RemainderComponent,
  
     
   ],

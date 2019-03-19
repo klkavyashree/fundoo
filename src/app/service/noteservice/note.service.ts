@@ -45,5 +45,32 @@ getLabelList(){
 deleteLabel(data){
   return this.http.encodedPostFormDelete('noteLabels/'+data+'/deleteNoteLabel')
 }
-
+updateLabel(dataid,data){
+  return this.http.postJSON('noteLabels/'+dataid+'/updateNoteLabel',data)
+}
+addLabeltoNote(card,array){
+  return this.http.postJSON('notes/'+card+'/addLabelToNotes/'+array+'/add','')
+}
+removeLabel(cardid,arrayid){
+  return this.http.postJSON('notes/'+cardid+'/addLabelToNotes/'+arrayid+'/remove','')
+}
+getNotesOfLabel(label){
+  return this.http.postJSON('notes/getNotesListByLabel/'+label,"")
+}
+addRemainder(data){
+  console.log(data)
+  return  this.http.postJSON('notes/addUpdateReminderNotes',data)
+}
+getRemainderList(){
+  return this.http.getHttp('notes/getReminderNotesList')
+}
+removeRemainder(data){
+  return this.http.postJSON('notes/removeReminderNotes',data)
+}
+addCheckList(noteid){
+  return this.http.postJSON('notes/'+noteid+'/checklist/add','')
+}
+getCheckList(noteid){
+  return this.http.getHttp('notes/'+noteid+'/noteCheckLists')
+}
 }

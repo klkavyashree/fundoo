@@ -19,7 +19,8 @@ trash='trash'
   getAllCards(){
     this.note.getTrashNotes().subscribe(data=>{
       console.log(data,'getdeleted cards')
-        this.deletedcards = data['data']['data'];      
+        this.deletedcards = data['data']['data'];  
+        this.deletedcards=this.deletedcards.reverse();    
     },
     err=>{
           console.log("error occur while getting cards ",err)

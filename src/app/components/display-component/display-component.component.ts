@@ -22,6 +22,10 @@ export class DisplayComponentComponent implements OnInit {
   cardid: any;
   allcards: any;
   flag1=true;
+  labelname:string;
+  todaydate=new Date();
+  tomorrow = new Date(this.todaydate.getFullYear(),this.todaydate.getMonth(),(this.todaydate.getDate()+1))
+  show:false;
 
   /**
    * it will take input from the othe component
@@ -34,7 +38,9 @@ export class DisplayComponentComponent implements OnInit {
   constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
 
   ngOnInit() {
+   
   }
+
   /**
    * keeps the track of the currently opened dialog
    */
@@ -101,6 +107,11 @@ export class DisplayComponentComponent implements OnInit {
       console.log(err)
     }
   }
+
+  addlabel($event){
+    this.labelname=$event.label
+  }
+
   restore(card){
     try{
     this.note.deleteNote({
@@ -127,5 +138,24 @@ export class DisplayComponentComponent implements OnInit {
       // this.cardRestore(card)
     },err=>console.log(err))
   }
+  removeLabel(array,label){
+    this.note.removeLabel(array.id,label.id).subscribe(data=>{
+      console.log(data)
+      let ind=array.noteLabels.indexOf(label)
+    array.noteLabels.splice(ind,1);
+    }),err=>{
+      console.log(err,"err")
+    }
+  }
+  removeReminder(array,rem){
+    this.note.removeRemainder({"noteIdList":[array.id]}).subscribe(data=>{
+      console.log(data)
+    array.reminder.splice(0,1)})
+  }
+  showTickBox($event){
+  this.show=$event
+  }
+
+  
   
 }

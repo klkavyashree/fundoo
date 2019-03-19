@@ -13,6 +13,7 @@ import { SearchComponent } from './components/search/search.component'
 import { ArchiveComponent } from './components/archive/archive.component'
 import { DeleteForeverComponent } from './components/delete-forever/delete-forever.component'
 import { LabeldialogComponent } from './components/labeldialog/labeldialog.component'
+import { RemainderComponent } from './components/remainder/remainder.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'trash', component: TrashComponent },
       { path:'search', component: SearchComponent },
       { path:'archive', component:ArchiveComponent },
-      { path:'labels',component:EditLabelComponent }
+      { path:'labels',component:EditLabelComponent },
+      { path:'reminders', component:RemainderComponent}
     ]
   },
   { path: 'updatenote', component: UpdatenoteComponent },
