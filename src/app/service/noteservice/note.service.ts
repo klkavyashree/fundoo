@@ -67,10 +67,28 @@ getRemainderList(){
 removeRemainder(data){
   return this.http.postJSON('notes/removeReminderNotes',data)
 }
-addCheckList(noteid){
-  return this.http.postJSON('notes/'+noteid+'/checklist/add','')
+addCheckList(checklist,noteid){
+  return this.http.postJSON('notes/'+noteid+'/checklist/add',checklist)
 }
 getCheckList(noteid){
   return this.http.getHttp('notes/'+noteid+'/noteCheckLists')
+}
+removeChecklist(noteid,checklistid){
+  return this.http.postJSON( 'notes/'+noteid+'/checklist/'+checklistid+'/remove','')
+}
+updateCheckList(noteid,checklistid,data){
+  return this.http.postJSON('notes/'+noteid+'/checklist/'+checklistid+'/update',data)
+}
+doPin(data){
+return this.http.postJSON('notes/pinUnpinNotes',data)
+}
+doUnpin(data){
+  return this.http.postJSON('notes/pinUnpinNotes',data)
+}
+addcollaborator(data,noteid){
+  return this.http.postJSON('notes/'+noteid+'/AddcollaboratorsNotes',data)
+}
+removeColaborator(cardid,userid){
+  return this.http.encodedPostFormDelete('notes/'+cardid+'/removeCollaboratorsNotes/'+userid)
 }
 }

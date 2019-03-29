@@ -11,23 +11,26 @@ export class ArchiveComponent implements OnInit {
 card=[];
 archivedCard=[];
 archived=[];
-
+archive="archive"
 
   constructor(private note:NoteService) { }
 
   ngOnInit() {
     this.getArchiveCards()
   }
+  /**
+   * this function will get all the cards from the card array
+   */
   getArchiveCards(){
     try{
     this.note.getArchiveNotes().subscribe(data=>{
-      console.log(data,'getall cards')
         this.archivedCard = data['data']['data']; 
         for(let index=0;index<this.archivedCard.length;index++){
           if(this.archivedCard[index].isDeleted==false){
-            this.archived.splice(0,0,this.archivedCard[index])
+            this.archived.push(this.archivedCard[index])
           }
-        }      
+        } 
+        this.archived=this.archived.reverse();     
     },
     err=>{
           console.log("error occur while getting cards ",err)
@@ -36,6 +39,10 @@ archived=[];
     console.log('something wrong happen')
   }
 }
+/**
+ * 
+ * @param $event will get the delteted list details and delte it from the list of checklists
+ */
   delete($event) {
     try{
     let ind = this.archived.indexOf($event);

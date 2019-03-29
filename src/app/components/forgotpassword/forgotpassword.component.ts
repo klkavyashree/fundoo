@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpserviceService } from '../../service/httpservice.service';
+import { UserService } from '../../service/userService/user.service';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -14,7 +14,7 @@ export class ForgotpasswordComponent implements OnInit {
     response:any;
     message='';
     
-  constructor(private formBuilder: FormBuilder, private httpService: HttpserviceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.forgotpasswordForm = this.formBuilder.group({
@@ -36,7 +36,7 @@ export class ForgotpasswordComponent implements OnInit {
     }
     
     else{
-      this.httpService.postRequest('user/reset', this.model).subscribe(data => {
+      this.userService.forgot(this.model).subscribe(data => {
         this.response = data;
         console.log(data)
         this.message = this.response.message

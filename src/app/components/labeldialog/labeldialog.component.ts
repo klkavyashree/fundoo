@@ -31,7 +31,7 @@ reverseFlag(){
 getLabelIdList(){
   try{
 this.note.getLabelList().subscribe(data=>{
-  console.log(data['data']['details'],'label data')
+  console.log(data,'label data')
   this.labelList=data['data']['details'];
   this.labelList=this.labelList.reverse()
 }

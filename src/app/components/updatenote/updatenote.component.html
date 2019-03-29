@@ -1,47 +1,73 @@
 <div [style.backgroundColor]=data.array.color fxFlex='100' class="main">
   <div style="margin:20px">
     <div fxFlex='100' fxLayoutAlign='space-between start' fxLayout='row'>
-      <div *ngIf="data.cond!='trash'"><input  matInput [(ngModel)]="data.array.title" placeholder="add title here"></div>
+      <div *ngIf="data.cond!='trash'"><input matInput [(ngModel)]="data.array.title" placeholder="add title here"></div>
       <div *ngIf="data.cond=='trash'" (click)='openSnackBar()'>{{data.array.title}}</div>
       <div *ngIf="data.cond!='trash'">
-        <div class="barpin" *ngIf="flag1==true">
+        <div class="barpin" *ngIf=data.array.isPined>
 
-          <img src="../../../assets/images/pin_bar.svg" />
+          <img src="../../../assets/images/pin_bar.svg"  (click)='doUnPin(data.array)'/>
 
         </div>
-        <div class="barpin" *ngIf="flag1==false">
+        <div class="barpin" *ngIf= !data.array.isPined>
 
-          <img src="../../../assets/images/unpin_bar.svg" />
+          <img src="../../../assets/images/unpin_bar.svg" (click)='doPin(data.array)' />
         </div>
       </div>
     </div>
   </div>
   <div style="margin:20px">
-    <div *ngIf='show==true'>
-      <div *ngIf="data.cond!='trash'"><input class='desc' matInput [(ngModel)]="data.array.description" placeholder="add description here"></div>
-      <div *ngIf="data.cond=='trash'" (click)='openSnackBar()'>{{data.array.description}}</div>
-    </div>
+    <!-- -------------------------------------------description------------------------------------------------------------- -->
+    <div *ngIf="data.cond!='trash'"><input class='desc' matInput [(ngModel)]="data.array.description" placeholder="add description here"></div>
+    <div *ngIf="data.cond=='trash'" (click)='openSnackBar()'>{{data.array.description}}</div>
+    <!-- ---------------------------------------------checklist---------------------------------------------------------- -->
     <div *ngIf='show==false'>
-      <div>
-        <mat-checkbox><input class='desc' matInput [(ngModel)]="data.array.description" placeholder="add description here"></mat-checkbox>
-        <img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]='data.array.noteCheckLists' (keydown)="enter()" >
+      <div *ngFor='let list of checkLists'>
+        <div fxLayout='row' *ngIf='!list.isDeleted'>
+          <input matInput [(ngModel)]=list.itemName>
+        </div>
       </div>
     </div>
-  </div><br><br>
-  <div fxLayoutAlign='space-between end'>
-    <div fxFlex='100' *ngIf="data.cond=='trash'">
-      <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
-        <img id="img" src="../../../assets/images/more_vert.svg" />
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)=deleteForever(array)>Delete Forever</button>
-        <button mat-menu-item (click)='restore(array)'>Restore</button>
-      </mat-menu>
+    <div *ngIf='show==true'>
+      <div *ngFor='let list of unDeletedList'>
+          <div fxLayoutAlign='space-between center'>
+            <mat-checkbox (click)="update(list,'close')"><input matInput [(ngModel)]=list.itemName></mat-checkbox>
+            <div (click)='delete(list,"open")'>
+              <img src='../../../assets/images/wrong_mark.svg'>
+            </div>
+          </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div  fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List"
+          (keydown)='enter($event,list)'></div>
+      <mat-divider></mat-divider>
+      <div *ngFor='let list of deletedLists'>
+          <div fxLayoutAlign='space-between center'>
+            <img src='../../../assets/images/right_box.svg' class='decorate' (click)="update(list,'open')"><input matInput style="text-decoration:line-through;" [(ngModel)]=list.itemName>
+            <div (click)='delete(list,"close")'>
+              <img src='../../../assets/images/wrong_mark.svg'>
+            </div>
+          </div>
+      </div>
+    </div><br><br>
+    <!-- ----------------------------------------------------------checklist end---------------------------------------- -->
+    <div fxLayoutAlign='space-between end'>
+      <div fxFlex='100' *ngIf="data.cond=='trash'">
+        <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+          <img id="img" src="../../../assets/images/more_vert.svg" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)=deleteForever(array)>Delete Forever</button>
+          <button mat-menu-item (click)='restore(array)'>Restore</button>
+        </mat-menu>
+      </div>
+      <div fxFlex='100' *ngIf="data.cond!='trash'">
+        <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
+          (deletecard)="delete($event)" [type]=type (showtick)="addList($event)" (showtickUpdate)=showCheckBox($event)>
+        </app-icon-list>
+      </div>
+      <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
     </div>
-    <div fxFlex='100' *ngIf="data.cond!='trash'">
-      <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
-        (deletecard)="delete($event)" [type]=type (showtick)="addList($event)"> </app-icon-list>
-    </div>
-    <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial>close</button>
   </div>
+
 </div>

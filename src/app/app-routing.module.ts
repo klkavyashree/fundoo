@@ -14,7 +14,9 @@ import { ArchiveComponent } from './components/archive/archive.component'
 import { DeleteForeverComponent } from './components/delete-forever/delete-forever.component'
 import { LabeldialogComponent } from './components/labeldialog/labeldialog.component'
 import { RemainderComponent } from './components/remainder/remainder.component';
-
+import { AuthGuard } from './service/authguard/auth.guard';
+import { ColaboratorComponent } from './components/colaborator/colaborator.component';
+ 
 
 const routes: Routes = [
   {
@@ -28,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardComponent,canActivate:[AuthGuard],
     children: [
       { path: '', redirectTo: 'note', pathMatch: 'full'},
       { path: 'note', component: MainNoteComponent}, 
@@ -42,6 +44,7 @@ const routes: Routes = [
   { path: 'updatenote', component: UpdatenoteComponent },
   { path:'delete', component: DeleteForeverComponent },
   { path:'labeldialog', component:LabeldialogComponent },
+  { path:'colaborator', component:ColaboratorComponent},
   {
     path: 'register',
     component: RegisterComponent

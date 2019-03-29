@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   message: any;
   Search: string;
   labelList: any;
+  flag=true
+  name=''
   private _mobileQueryListener: () => void;
 
   constructor(private data: DataService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getLabels()
+    this.name=localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')
   }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -43,6 +46,7 @@ export class DashboardComponent implements OnInit {
     return false;
   }
   signout() {
+    localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
   note() {
@@ -106,5 +110,5 @@ export class DashboardComponent implements OnInit {
   sendLabel(label){
       this.data.sendLabel(label);
   }
-
+  
 }

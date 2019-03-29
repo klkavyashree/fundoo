@@ -14,10 +14,16 @@ export class RemainderComponent implements OnInit {
   ngOnInit() {
     this.getReminder()
   }
-
+/**
+ * this will get the remainder list of the cards
+ */
   getReminder() {
+    try{
     this.note.getRemainderList().subscribe(data => {
       this.card = data['data']['data']
     })
+  }catch(err){
+    console.log(err)
+  }
   }
 }

@@ -1,0 +1,30 @@
+@mixin border {
+    border:none;
+    outline: none
+}
+@mixin over {
+    overflow: hidden
+}
+@mixin font {
+    font-family: 'Times New Roman', Times, serif;
+}
+@mixin btn {
+        background:$white ;
+        color: $bluebtn;
+        width: 25%;
+        float:left;
+        
+        text-align: center
+}
+@mixin opacityIcon {
+    opacity: 0.4;
+    &:hover{
+        opacity: 1
+    } 
+}
+@mixin opacity0 {
+    opacity: 0;
+    &:hover{
+        opacity: 1
+    } 
+}

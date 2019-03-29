@@ -1,3 +1,5 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/color.scss';
 .matmenu{
     width: 80%
 }
@@ -65,9 +67,4 @@ margin-left: 8px;
 
 margin-left: 8px;
 }
-.icon{
-    opacity: 0;
-    &:hover{
-        opacity: 1
-    }
-    }
+

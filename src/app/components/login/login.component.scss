@@ -1,9 +1,10 @@
 @import "../../../scss/color.scss";
+@import "../../../scss/mixins.scss";
 .F{
     color:$blue;
 }
 .u{
-    color:$red;
+    color:red;
 }
 .n{
     color:$lightblue
@@ -37,15 +38,10 @@ h4{
       
 }
 .reg{
-    background:$white ;
-    color: $bluebtn;
-    width: 25%;
-    float:left;
-    text-align: center
-      
+      @include btn();
 }
 .forgot{
-    @extend .reg
+   @include btn();
       
 }
 .help-block{

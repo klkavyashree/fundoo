@@ -51,22 +51,19 @@
 
 </mat-menu>
 
-<mat-menu #accountMenu="matMenu">
-  <button mat-fab disabled id="imagebutton">
+<mat-menu #accountMenu="matMenu" >
+  <button mat-fab disabled id="imagebutton" (click)='addPhoto()'>
   </button>
-  <p>Kavyashree K L</p>
-
-  <button mat-menu-item></button>
+  <p>{{name}}</p>
   <mat-divider></mat-divider>
   <div>
-    <button mat-flat-button (click)="addAccount()">Add account</button>
     <button mat-flat-button (click)="signout()">Sign out</button>
   </div>
 </mat-menu>
 <mat-divider></mat-divider>
 
-<mat-drawer-container class="example-container">
-  <mat-drawer #sidenav mode="side" opened="true">
+<mat-drawer-container class="example-container" >
+  <mat-drawer #sidenav mode="side" opened="false">
     <div>
 
       <button mat-button (click)="note()" (click)="headerName= 'Notes'" [ngClass]="{'sideNavListItems': headerName!='Fundoo Notes', 'sideNavlistItemsColored': headerName=='Fundoo Notes'}">

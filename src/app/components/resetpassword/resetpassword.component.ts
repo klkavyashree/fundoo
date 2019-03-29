@@ -43,7 +43,7 @@ export class ResetpasswordComponent implements OnInit {
        newPassword:this.resetpasswordForm.get('password').value
       }
       console.log(this.model,'model')
-      this.httpService.encodedPostForm(environment.resetpassword,this.model).subscribe(data =>{
+      this.httpService.encodedPostForm('user/reset-password',this.model).subscribe(data =>{
         console.log('data ',data)
         this.router.navigate(['login']);
       },

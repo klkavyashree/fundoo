@@ -32,7 +32,9 @@ import { DeleteForeverComponent } from './components/delete-forever/delete-forev
 import { LabeldialogComponent } from './components/labeldialog/labeldialog.component';
 import { LabelsearchPipe } from './pipe/label/labelsearch.pipe';
 import { RemainderComponent } from './components/remainder/remainder.component';
-
+import { AuthGuard } from './service/authguard/auth.guard';
+import { ColaboratorComponent } from './components/colaborator/colaborator.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { RemainderComponent } from './components/remainder/remainder.component';
     LabeldialogComponent,
     LabelsearchPipe,
     RemainderComponent,
+    ColaboratorComponent,
+    
  
     
   ],
@@ -69,12 +73,13 @@ import { RemainderComponent } from './components/remainder/remainder.component';
     ReactiveFormsModule,
     FormsModule,
     AppMaterial,
-    HttpClientModule
+    HttpClientModule,
+    NgxEditorModule
    
     
    
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

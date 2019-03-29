@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
     this.getNotes();
   }
   getNotes() {
+    try{
    this.noteService.getNote()
    .pipe(takeUntil(this.destroy$))  
     .subscribe(data => {
@@ -35,7 +36,11 @@ export class SearchComponent implements OnInit {
       }, error => {
         console.log(error);
       })
+    }catch(err){
+    console.log(err)
     }
+  }
+
 
     ngOnDestroy() {
       this.destroy$.next(true);

@@ -1,27 +1,19 @@
-@import '../../components/scss/color.scss';
+@import '../../../scss/color.scss';
+@import '../../../scss//mixins.scss';
 .add{
-    opacity: 0.4;
-    &:hover{
-        opacity: 1
-    }
+    @include opacityIcon()
 }
 .write{
-    @extend .add
+    @include opacityIcon()
 }
 .bin{
-    opacity: 0.4;
-    &:hover{
-        opacity: 1
-    } 
+    @include opacityIcon()
 }
 .right{
-    @extend .bin
+   @include opacityIcon()
 }
 .update{
-    opacity: 0.4;
-    &:hover{
-        opacity: 1
-    } 
+   @include opacityIcon()
 }
 .btn{
     background-color: $background-color

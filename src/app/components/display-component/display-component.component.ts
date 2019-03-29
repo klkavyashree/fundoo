@@ -1,12 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../../components/updatenote/updatenote.component';
+import { ColaboratorComponent } from '../../components/colaborator/colaborator.component'
 import { NoteService } from '../../service/noteservice/note.service';
 import { DataService } from '../../service/dataservice/data.service'
-
+import { EventEmitter } from '@angular/core';
 export interface DialogData {
   array: [];
-  cond:any;
+  cardid: any;
+  cond: any;
 }
 @Component({
   selector: 'app-display-component',
@@ -15,17 +17,19 @@ export interface DialogData {
 })
 export class DisplayComponentComponent implements OnInit {
   model: any;
+  show=true;
   message: string;
   array: [];
   bgcolor: any;
   data: any;
   cardid: any;
   allcards: any;
-  flag1=true;
-  labelname:string;
-  todaydate=new Date();
-  tomorrow = new Date(this.todaydate.getFullYear(),this.todaydate.getMonth(),(this.todaydate.getDate()+1))
-  show:false;
+  flag1 = true;
+  labelname: string;
+  todaydate = new Date();
+  tomorrow = new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this.todaydate.getDate() + 1))
+  messages='display';
+  
 
   /**
    * it will take input from the othe component
@@ -35,27 +39,56 @@ export class DisplayComponentComponent implements OnInit {
   @Input() arrayCards;
   @Input() type;
   @Input() cond;
+  @Input() pin;
+  @Output() emitPinnedCard = new EventEmitter();
+  @Output() emitUnPinnedCard = new EventEmitter();
+  @Output() dialogResult = new EventEmitter();
+
+  
   constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
 
   ngOnInit() {
-   
+
   }
 
+  doPinned(card){
+    this.note.doPin({
+      "isPined": true,
+      "noteIdList": [card.id]
+    }).subscribe(data=>{
+      console.log(card.isPined=true,'cardddddddddddd')
+      this.emitPinnedCard.emit(card)
+      console.log(data,"resp dopin")},err=>
+      console.log(err)) 
+  }
+  doUnPinned(card){
+  this.note.doPin({
+    "isPined": false,
+    "noteIdList": [card.id]
+  }).subscribe(data=>{
+    console.log(card.isPined=false,'do unpin cardddddddddddd')
+    this.emitUnPinnedCard.emit(card)},err=>
+    console.log(err))
+   
+}
   /**
    * keeps the track of the currently opened dialog
    */
 
-  openDialog(array,cond) {
+  openDialog(array, cond, cardid) {
     try {
+      var isArchived=array.isArchived;
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
-        data: { array,cond },
+        data: { array, cond, cardid },
         width: '600px'
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        console.log('result when dialog close',result)
-        console.log(result['array'].id,'result get from dialog box');
-
+        console.log('result when dialog close', result)
+        console.log(result['array'], 'result get from dialog box');
+        if(isArchived!=result['array'].isArchived){
+        this.dialogResult.emit(result['array']);
+        }
         this.model = {
           noteId: result['array'].id,
           title: result['array'].title,
@@ -64,8 +97,8 @@ export class DisplayComponentComponent implements OnInit {
         console.log(this.model, "modelll of update")
         this.note.updatenote(
           this.model).subscribe(message => {
-          console.log(message)
-        })
+            console.log(message)
+          })
 
 
       });
@@ -76,86 +109,175 @@ export class DisplayComponentComponent implements OnInit {
     }
   }
   delete($event) {
-    try{
-    let ind = this.card.indexOf($event);
-    this.card.splice(ind, 1);
-    }catch(err){
+    try {
+      let ind = this.card.indexOf($event);
+      this.card.splice(ind, 1);
+    } catch (err) {
       console.log(err)
     }
   }
-  
-  unarchive($event){
-    try{
-    this.card.splice(0,0,$event)
-    }catch(err){
+  /**
+   * 
+   * @param $event will get the archived card details and splicing the card in that array
+   */
+  unarchive($event) {
+    try {
+      this.card.splice(0, 0, $event)
+    } catch (err) {
       console.log(err)
     }
   }
-  archive($event){
-    try{
-    let ind=this.card.indexOf($event)
-    this.card.splice(ind,1);}
-    catch(err){
-      console.log(err)}
-  }
-
-  unarchived($event){
-    try{
-    let ind=this.card.indexOf($event)
-    this.card.splice(ind,1);
-    }catch(err){
+  /**
+   * 
+   * @param $event contain unarchived card event 
+   */
+  archive($event) {
+    try {
+      let ind = this.card.indexOf($event)
+      this.card.splice(ind, 1);
+    }
+    catch (err) {
       console.log(err)
     }
   }
-
-  addlabel($event){
-    this.labelname=$event.label
+  /**
+   * 
+   * @param $event get card details from the user and adding it to the card
+   */
+  unarchived($event) {
+    try {
+      let ind = this.card.indexOf($event)
+      this.card.splice(ind, 1);
+    } catch (err) {
+      console.log(err)
+    }
   }
-
-  restore(card){
-    try{
-    this.note.deleteNote({
-      "isDeleted":false,
-      "noteIdList":[card.id]
-  }).subscribe(data=>{
-    console.log(data,"response when delete");
-    let ind=this.card.indexOf(card)
-    this.card.splice(ind,1);
-    // this.cardRestore(card)
-  },err=>console.log(err))
-}catch(err){
-  console.log(err)
-}
+  /**
+   * 
+   * @param $event adding label to the card
+   */
+  addlabel($event) {
+    this.labelname = $event.label
   }
-  deleteForever(array){
+  /**
+   * function will restore the card and move the card from trash to note
+   * @param card contain the details of the card
+   */
+  restore(card,cond) {
+    try {
+      this.note.deleteNote({
+        "isDeleted": false,
+        "noteIdList": [card.id]
+      }).subscribe(data => {
+        console.log(data, "response when delete");
+        let ind = this.card.indexOf(card)
+        this.card.splice(ind, 1);
+      }, err => console.log(err))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  /**
+   * this function will remove the card permanently
+   * @param array array contains the card details
+   */
+  deleteForever(array) {
     this.note.deleteForever({
-      "isDeleted":false,
-      "noteIdList":[array.id]
-    }).subscribe(data=>{
-      console.log(data,"response when delete");
-      let ind=this.card.indexOf(array)
-      this.card.splice(ind,1);
+      "isDeleted": false,
+      "noteIdList": [array.id]
+    }).subscribe(data => {
+      console.log(data, "response when delete");
+      let ind = this.card.indexOf(array)
+      this.card.splice(ind, 1);
       // this.cardRestore(card)
-    },err=>console.log(err))
+    }, err => console.log(err))
   }
-  removeLabel(array,label){
-    this.note.removeLabel(array.id,label.id).subscribe(data=>{
-      console.log(data)
-      let ind=array.noteLabels.indexOf(label)
-    array.noteLabels.splice(ind,1);
-    }),err=>{
-      console.log(err,"err")
+  /**
+   * 
+   * @param array it contain the details of the card
+   * @param label label contains the details of the label
+   */
+  removeLabel(array, label) {
+    try {
+      this.note.removeLabel(array.id, label.id).subscribe(data => {
+        console.log(data)
+        let ind = array.noteLabels.indexOf(label)
+        array.noteLabels.splice(ind, 1);
+      }), err => {
+        console.log(err, "err")
+      }
+    }
+    catch (err) {
+      console.log(err)
     }
   }
-  removeReminder(array,rem){
-    this.note.removeRemainder({"noteIdList":[array.id]}).subscribe(data=>{
-      console.log(data)
-    array.reminder.splice(0,1)})
+  /**
+   * 
+   * @param array array contains the details of the card
+   * @param rem 
+   */
+  removeReminder(array, rem) {
+    try {
+      this.note.removeRemainder({ "noteIdList": [array.id] }).subscribe(data => {
+        console.log(data)
+        array.reminder.splice(0, 1)
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
-  showTickBox($event){
-  this.show=$event
+  showTickBox($event) {
+    this.show = $event
   }
 
-  
-  
+  addCheckList(list){
+    try{
+      var model={
+        "isDeleted": false,
+        "itemName": list.itemName,
+        "status":"open"
+      }
+    this.note.updateCheckList(list.notesId,list.id,model).subscribe(data=>{
+   console.log(data)
+    })
+  }catch(err){
+        console.log(err,"error occur while adding checklist")
+  }
+  }
+
+  /**
+   * @param itemname will get itm name to remove that item from checklist
+  //  */
+  removeCheckList(list){
+    try{
+      var model={
+        "isDeleted": false,
+        "itemName": list.itemName,
+        "status":"close"
+      }
+    this.note.updateCheckList(list.notesId,list.id,model).subscribe(data=>{console.log(data)
+      console.log(data)
+    })
+  }
+  catch(err){
+    console.log(err)
+  }
+  }
+  cardCollaborator($event){
+    console.log($event,'eventtttt')
+    let ind=this.card.indexOf($event)
+    if (ind !== -1){
+      this.card[ind]=$event
+    }
+  }
+  // opendialog(array){
+  //   const dialogRef = this.dialog.open(ColaboratorComponent, {
+  //     data: {array},
+  //     width: '600px'
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     console.log('result when dialog close', result)
+  //   });
+  // }
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpserviceService } from '../../service/httpservice.service';
-import { environment } from '../../../environments/environment'
+import { UserService } from '../../service/userService/user.service'
 
 
 
@@ -18,7 +17,7 @@ export class RegisterComponent implements OnInit {
   response: any;
   message = '';
 
-  constructor(private formBuilder: FormBuilder, private httpService: HttpserviceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -31,7 +30,9 @@ export class RegisterComponent implements OnInit {
     );
   }
   get f() { return this.registerForm.controls; }
-
+/**
+ * function is used to register the user
+ */
   register() {
     try {
       this.model = {
@@ -56,7 +57,7 @@ export class RegisterComponent implements OnInit {
    }
 
       else {
-        this.httpService.postRequest(environment.userregister, this.model).subscribe(data => {
+        this.userService.register(this.model).subscribe(data => {
           this.response = data;
           console.log(data)
           this.message = this.response.message
@@ -72,6 +73,10 @@ export class RegisterComponent implements OnInit {
     }
   }
   login(){
+    try{
     this.router.navigate(['login']);
+  }catch(err){
+    console.log(err)
   }
+}
 }

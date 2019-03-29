@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpserviceService } from '../../service/httpservice.service';
-import { environment } from '../../../environments/environment'
+import { UserService } from '../../service/userService/user.service'
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   response: any;
   message = '';
 
-  constructor(private formBuilder: FormBuilder, private httpService: HttpserviceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private snackbar:MatSnackBar) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({//creating instance of formbuilder class
@@ -42,17 +42,25 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      this.httpService.postRequest(environment.userlogin, this.model).subscribe(data => {
+      this.userService.login(this.model).subscribe(data => {
         console.log("data", data);
         this.response = data;
         localStorage.setItem('token', this.response.id);
         localStorage.setItem('userid',this.response.userId)
+        localStorage.setItem('firstname',this.response.firstName)
+        localStorage.setItem('lastname',this.response.lastName)
+        localStorage.setItem('email',this.response.email)
         var token = localStorage.getItem('token')
         console.log('token:',token)
         this.router.navigate(['dashboard']);
+        this.snackbar.open('login successful','close',{
+          duration:1500
+        })
       }, err => {
-        this.message = 'user not found';
-        // alert('somthing happen')
+        console.log(err)
+        this.snackbar.open('user not found','close',{
+          duration:1500
+        })
       });
 
     }}catch(err){
@@ -61,10 +69,20 @@ export class LoginComponent implements OnInit {
 
   }
   register(){
+    try{
     this.router.navigate(['register']);
+    }
+    catch(err){
+      console.log(err)
+    }
   }
   forgotpassword(){
+    try{
     this.router.navigate(['forgotpassword']);
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
 }
