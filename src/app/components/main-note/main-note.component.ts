@@ -96,4 +96,10 @@ export class MainNoteComponent implements OnInit {
       this.unpinned.splice(0, 0, $event)
     }
   }
+  getcards($event){
+    let ind =this.card.indexOf($event)
+    if(ind != -1){
+      this.card[ind]=$event
+    }
+  }
 }

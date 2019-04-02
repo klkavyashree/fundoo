@@ -14,7 +14,7 @@
       </div>
       <div>{{email}}</div>
     </div>
-  </div>
+  </div><br>
 <!-- -----------------------------------------------------display--------------------------------------------- -->
   <div  *ngFor='let array of data.card.collaborators' fxLayout='row'>
     <div fxFlex='10'>
@@ -27,7 +27,7 @@
         <div>{{array.email}}</div>
       </div>
       <img src='../../../assets/images/wrong_mark.svg' (click)='removeColaborator(data.card.id,array)'>
-  </div>
+  </div><br>
 
  <!-- --------------------------------------------------------------addcolaborator--------------------------------- -->
   <div fxLayout='row'>

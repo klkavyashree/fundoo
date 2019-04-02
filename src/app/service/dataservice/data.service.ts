@@ -12,6 +12,12 @@ export class DataService {
   currentMessage = this.messageSource.asObservable();//variable handles the data stream as an observable
   getLabel = this.labelMsg.asObservable();
 
+  private image = new Subject<boolean>();
+  currentImage = this.image.asObservable();
+
+  private viewMsg = new Subject<boolean>();
+  MessageView = this.viewMsg.asObservable();
+
   constructor() { }
   changeMessage(message: string) {
     console.log(message, "message")
@@ -21,4 +27,12 @@ export class DataService {
     console.log(message,"in dataservice")
     this.labelMsg.next(message);
   }
+
+  changeImage(message:boolean){
+    this.image.next(message)
+  }
+  changeView(message:boolean){
+    this.viewMsg.next(message)
+  }
+
 }

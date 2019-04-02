@@ -10,6 +10,7 @@ import { NoteService } from '../../service/noteservice/note.service'
   styleUrls: ['./updatenote.component.scss']
 })
 export class UpdatenoteComponent implements OnInit {
+Update='update'
 flag1=true
 show=true;
 checkLists =[];
@@ -17,10 +18,17 @@ cardid:string;
 list:string;
 deletedLists=[];
 unDeletedList=[]
+flag:boolean=false;
+todaydate=new Date()
+tomorrow=new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this.todaydate.getDate() + 1))
 
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private snackBar: MatSnackBar, public noteService:NoteService )
-     {console.log(this.cardid=data['cardid'],"in dialog") }
+     {console.log(this.cardid=data['cardid'],"in dialog")
+    
+    console.log(this.flag=data['flag']);
+    
+    }
   ngOnInit() {
     this.getCheckList(this.cardid)
   }
@@ -99,6 +107,7 @@ unDeletedList=[]
       "itemName": checklist.itemName,
       "status":status
     }
+    console.log("updating..............")
     this.noteService.updateCheckList(checklist.notesId,checklist.id,model).subscribe(data=>{console.log(data,"checklist update resp data")
     if(status=='close'){
     let ind = this.unDeletedList.indexOf(checklist)

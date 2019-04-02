@@ -9,35 +9,72 @@
     <div class="dashboardTitle">{{headerName}}</div>
 
   </div>
-
+<!-- -----------------------------------------------search bar----------------------------------------------------------- -->
   <div class="searchToolBar">
-
     <button mat-icon-button>
-      <mat-icon class="mat-18">search</mat-icon>
+        <!-- hide at below above 600 -->
+      <!-- <mat-icon fxHide.md fxHide.sm class="mat-18" (click)='SearchBar()'>search</mat-icon> -->
+      <mat-icon  class="mat-18">search</mat-icon><!-- hide at below 600-->
     </button>
+    <!-- <input *ngIf='flag2==true' [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()'
+      class="searchInputBar" type="text" placeholder="search"> -->
     <input fxHide.xs [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()' class="searchInputBar"
       type="text" placeholder="search">
   </div>
-
-  <div >
+<!-- -----------------------------------------------refresh--------------------------------------------- -->
+  <div>
     <button fxHide.xs fxHide.sm mat-icon-button matTooltip="Refresh">
-      <mat-icon class="refresh">refresh</mat-icon>
+      <mat-icon class="refresh" (click)='refresh()'>refresh</mat-icon>
     </button>
-    <button fxHide.xs   mat-icon-button matTooltip="List view">
+    <!-- ---------------------------------------------grid and list---------------------------------------- -->
+    <button fxHide.xs mat-icon-button matTooltip="List view" *ngIf='flag3==true' (click)='grid_list()'>
       <mat-icon class="view_list">view_list</mat-icon>
     </button>
-    <button  mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings">
+    <button (click)='grid_list()'fxHide.xs mat-icon-button matTooltip="grid view" *ngIf='flag3==false' >
+      <mat-icon >grid_view</mat-icon>
+    </button>
+    <!-- ----------------------------------------------settings--------------------------------------------- -->
+    <button mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings">
       <mat-icon class="settings">settings</mat-icon>
     </button>
   </div>
   <div>
-    <button fxHide.xs fxHide.sm  mat-icon-button matTooltip="Google Apps">
+    <!-- -----------------------------------------image cropping---------------------------------------------------------- -->
+    <button fxHide.xs fxHide.sm mat-icon-button matTooltip="Google Apps">
       <mat-icon class="mat-18">apps</mat-icon>
     </button>
-    <button mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
-
-      <mat-icon class="account_circle">account_circle</mat-icon>
+    <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+     mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
+      
     </button>
+    <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+    mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
+     
+   </button>
+    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
+      <div fxLayout='row'>
+          <div fxFlex='25'>  
+              <button  (click) = "$event.stopPropagation()"
+                        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                        (click)="imageSelectFile.click()" matTooltip="fundoo Account"
+                        mat-mini-fab class="imageSelect" >
+          <div mat-raised-button class="change">change</div>
+          </button>
+          
+          <input (click) = "$event.stopPropagation()" fxHide class="image" type="file" (change)="fileUpload($event)" #imageSelectFile>
+          
+          </div>
+        <div fxLayout='column' fxFlex='70'>
+        <div>{{name}}</div>
+        <div>{{email}}</div>
+      </div>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- -------------------------------------------------signout--------------------------------------------- -->
+      <div fxLayoutAlign='end end'>
+        <button mat-flat-button (click)="signout()" class="signout">Sign out</button>
+      </div>
+    </mat-menu>
   </div>
 </mat-toolbar>
 
@@ -51,18 +88,10 @@
 
 </mat-menu>
 
-<mat-menu #accountMenu="matMenu" >
-  <button mat-fab disabled id="imagebutton" (click)='addPhoto()'>
-  </button>
-  <p>{{name}}</p>
-  <mat-divider></mat-divider>
-  <div>
-    <button mat-flat-button (click)="signout()">Sign out</button>
-  </div>
-</mat-menu>
+<!-- ----------------------------------------------mat-nav--------------------------------------------- -->
 <mat-divider></mat-divider>
 
-<mat-drawer-container class="example-container" >
+<mat-drawer-container class="example-container">
   <mat-drawer #sidenav mode="side" opened="false">
     <div>
 
@@ -73,7 +102,7 @@
 
     </div>
     <div>
-      <button mat-button (click)='reminder()'  (click)="headerName= 'Reminders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+      <button mat-button (click)='reminder()' (click)="headerName= 'Reminders'" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
         <mat-icon>notifications_none</mat-icon> Reminders
       </button>
     </div>
@@ -81,8 +110,8 @@
     <mat-divider></mat-divider>
 
     <p class="textSize">LABELS</p>
-    <div *ngFor='let array of labelList'  > 
-      <button mat-button  (click)="sendLabel(array)" (click)="editlabel()" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
+    <div *ngFor='let array of labelList'>
+      <button mat-button (click)="sendLabel(array)" (click)="editlabel()" [ngClass]="{'sideNavListItems': headerName!='Remainders', 'sideNavlistItemsColored': headerName=='Remainders'}">
         <mat-icon>label_outline</mat-icon> {{array.label}}
       </button>
     </div>

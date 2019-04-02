@@ -1,11 +1,11 @@
 <div *ngFor="let array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='column'>
-  <mat-card fxLayout="column" class="matcard" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>
+  <mat-card fxLayout="column" [ngClass]="{'matcard':displaymode===true,  'notecard':displaymode===false}" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>
     <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center">
       <div fxLayout="column" fxFlex='100'>
 
         <div fxLayout='row' fxLayoutAlign="space-between start" fxFlex='100'>
           <div fxFlex='85' fxLayout='row wrap' (click)="openDialog(array,cond,array.id)">
-            <mat-card-title>{{array.title}}
+            <mat-card-title matTextareaAutosize>{{array.title}}
             </mat-card-title>
           </div>
           <div *ngIf="cond!='trash'" class="pin" fxFlex='15'>
@@ -24,7 +24,7 @@
         </div>
         <div>
           <div fxLayout='center center' (click)="openDialog(array,cond,array.id)">
-            <mat-card-title fxLayout="row wrap">{{array.description}}</mat-card-title>
+            <mat-card-title matTextareaAutosize fxLayout="row wrap">{{array.description}}</mat-card-title>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
-            <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'medium'}}
+            <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'short'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
@@ -99,7 +99,7 @@
     <div fxFlex='100' *ngIf="cond!='trash'">
       <app-icon-list class="icon" [card]=array (archivedCard)="archive($event)" [message]='messages' (sendLabel)='addlabel($event)' [more]=display
         (unarchiveCard)='unarchived($event)' (deletecard)="delete($event)"  [type]=type (showtickUpdate)='showTickBox($event)'
-        (emitCardCollaborator)='cardCollaborator($event)'>
+        (emitCardCollaborator)='cardCollaborator($event)' (emitReminder)='getReminder($event)'>
       </app-icon-list>
     </div>
   </mat-card>

@@ -70,6 +70,15 @@ export class HttpserviceService {
     }
     return this.http.get(this.baseUrl+url,httpTocken);
     }
+
+    postImage(url,body){
+      var http={
+        headers:new HttpHeaders({
+          'Authorization':localStorage.getItem('token')
+        })
+      };
+      return this.http.post(this.baseUrl+url,body,http)
+    }
 }
 
 

@@ -35,6 +35,11 @@ import { RemainderComponent } from './components/remainder/remainder.component';
 import { AuthGuard } from './service/authguard/auth.guard';
 import { ColaboratorComponent } from './components/colaborator/colaborator.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { AskQuestionComponent } from './components/ask-question/ask-question.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 
 
 @NgModule({
@@ -60,6 +65,9 @@ import { NgxEditorModule } from 'ngx-editor';
     LabelsearchPipe,
     RemainderComponent,
     ColaboratorComponent,
+    ImagecropComponent,
+    AskQuestionComponent,
+    
     
  
     
@@ -74,7 +82,10 @@ import { NgxEditorModule } from 'ngx-editor';
     FormsModule,
     AppMaterial,
     HttpClientModule,
-    NgxEditorModule
+    NgxEditorModule,
+    ImageCropperModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
    
     
    

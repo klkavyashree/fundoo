@@ -2,14 +2,14 @@
   <p fxLayoutAlign='start start'>Edit Labels</p>
   <div fxLayout='row'>
     <div *ngIf='flag==false'>
-      <button class="wrong" mat-icon-button matTooltip="add img" (click)="reverseFlag()"><img id="img" src="../../../assets/images/wrong_mark.svg" /></button>
+      <button class="wrong" mat-icon-button matTooltip="clear" (click)="reverseFlag()"><img id="img" src="../../../assets/images/wrong_mark.svg" /></button>
     </div>
     <div *ngIf='flag==true'>
-      <button class="add" mat-icon-button matTooltip="add img" (click)="reverseFlag()"><img id="img" src="../../../assets/images/add_mark.svg" /></button>
+      <button class="add" mat-icon-button matTooltip="add label" (click)="reverseFlag()"><img id="img" src="../../../assets/images/add_mark.svg" /></button>
     </div>
     <div fxLayout='center center'><mat-form-field><input matInput [(ngModel)]="label" placeholder="Create new Label" (keydown)="call($event,label)" (click)="reverseFlag()"></mat-form-field></div>
     <div *ngIf='flag==false'>
-      <button class="right" mat-icon-button matTooltip="add img"><img id="img" src="../../../assets/images/right_mark.svg" (click)="addLabel(label)" /></button>
+      <button class="right" mat-icon-button matTooltip="add label"><img id="img" src="../../../assets/images/right_mark.svg" (click)="addLabel(label)" /></button>
     </div>
   </div>
   <div *ngFor="let array of labelList">

@@ -9,6 +9,7 @@ export interface DialogData {
   array: [];
   cardid: any;
   cond: any;
+  flag:boolean;
 }
 @Component({
   selector: 'app-display-component',
@@ -29,6 +30,8 @@ export class DisplayComponentComponent implements OnInit {
   todaydate = new Date();
   tomorrow = new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this.todaydate.getDate() + 1))
   messages='display';
+  displaymode:boolean=true
+  
   
 
   /**
@@ -43,12 +46,16 @@ export class DisplayComponentComponent implements OnInit {
   @Output() emitPinnedCard = new EventEmitter();
   @Output() emitUnPinnedCard = new EventEmitter();
   @Output() dialogResult = new EventEmitter();
+  @Output() emitMainNote = new EventEmitter();
 
   
   constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
 
   ngOnInit() {
-
+  this.dataService.MessageView.subscribe(response=>{
+      this.displaymode=response;
+      console.log(this.displaymode,"displaymode")
+  })
   }
 
   doPinned(card){
@@ -77,16 +84,18 @@ export class DisplayComponentComponent implements OnInit {
 
   openDialog(array, cond, cardid) {
     try {
-      var isArchived=array.isArchived;
+      var isPined=array.isPined;
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
-        data: { array, cond, cardid },
+        data: { array, cond, cardid},
         width: '600px'
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         console.log('result when dialog close', result)
         console.log(result['array'], 'result get from dialog box');
-        if(isArchived!=result['array'].isArchived){
+        
+        this.emitMainNote.emit(result['array']);
+        if(isPined!=result['array'].isPined){
         this.dialogResult.emit(result['array']);
         }
         this.model = {
@@ -267,6 +276,12 @@ export class DisplayComponentComponent implements OnInit {
     console.log($event,'eventtttt')
     let ind=this.card.indexOf($event)
     if (ind !== -1){
+      this.card[ind]=$event
+    }
+  }
+  getReminder($event){
+    let ind=this.card.indexOf($event)
+    if(ind != -1){
       this.card[ind]=$event
     }
   }

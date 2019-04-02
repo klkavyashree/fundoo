@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('firstname',this.response.firstName)
         localStorage.setItem('lastname',this.response.lastName)
         localStorage.setItem('email',this.response.email)
+        localStorage.setItem('imageurl',this.response.imageUrl)
         var token = localStorage.getItem('token')
         console.log('token:',token)
         this.router.navigate(['dashboard']);

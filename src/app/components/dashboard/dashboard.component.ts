@@ -6,8 +6,10 @@ import { DataService } from '../../service/dataservice/data.service'
 import { NoteService } from '../../service/noteservice/note.service'
 import { MatSnackBar } from '@angular/material'
 import { LabeldialogComponent } from '../labeldialog/labeldialog.component'
+import { ImagecropComponent } from '../../components/imagecrop/imagecrop.component'
+import { environment } from '../../../environments/environment'
 export interface DialogData {
-  data: "kavyashree"
+  data:any
 }
 
 @Component({
@@ -22,6 +24,11 @@ export class DashboardComponent implements OnInit {
   labelList: any;
   flag=true
   name=''
+  email=''
+  flag2=false;
+  flag3=true;
+  profilePic:boolean;
+  imageprofile:string;
   private _mobileQueryListener: () => void;
 
   constructor(private data: DataService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,
@@ -34,10 +41,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getLabels()
     this.name=localStorage.getItem('firstname')+" "+localStorage.getItem('lastname')
+    this.email=localStorage.getItem('email')
   }
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
+ 
   recieveMessage($event) {
     this.message = $event;
     console.log("event data..", this.message);
@@ -45,8 +51,51 @@ export class DashboardComponent implements OnInit {
   isclick() {
     return false;
   }
+refresh(){
+  location.reload();
+}
+grid_list(){
+  this.flag3 = !this.flag3;
+  this.data.changeView(this.flag3)
+}
+
+  imageFile=null;
+  public imageNew =localStorage.getItem('imageurl')
+  img = environment.profileUrl+this.imageNew;
+
+  
+  fileUpload($event){
+    console.log($event,"......")
+    console.log($event.path[0].files[0],"upload file ")
+      this.imageFile=$event.path[0].files[0]
+      const uploadImage=new FormData();
+      uploadImage.append('file',this.imageFile,this.imageFile.name);
+      this.ChangePic($event)
+  }
+
+  ChangePic(data){
+    {
+      try {
+        const dialogRef = this.dialog.open(ImagecropComponent, {
+          data: data,
+          width: '600px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.data.currentImage.subscribe(response=>this.profilePic=response)
+          if(this.profilePic==true){
+            this.imageprofile=localStorage.getItem('imageurl')
+            this.img=environment.profileUrl+this.imageprofile;
+            
+          }
+
+        })
+      } catch (err) {
+        console.log('error occurs ',err)
+      }
+    }
+  }
   signout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.router.navigate(['login']);
   }
   note() {
@@ -71,6 +120,9 @@ export class DashboardComponent implements OnInit {
   }
   reminder(){
     this.router.navigate(['dashboard/reminders'])
+  }
+  SearchBar(){
+    this.flag2= !this.flag2;
   }
   openLabel() {
     {
@@ -109,6 +161,9 @@ export class DashboardComponent implements OnInit {
   }
   sendLabel(label){
       this.data.sendLabel(label);
+  }
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   
 }

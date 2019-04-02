@@ -44,7 +44,7 @@
 
                   <mat-list-item (click)='$event.stopPropagation()'> 
                     <mat-form-field class="example-full-width">
-                      <input matInput [matDatepicker]="picker" placeholder="Choose a date" (click)='remindDate(card,picker)'>
+                      <input matInput [matDatepicker]="picker" [(ngModel)]='date' placeholder="Choose a date"  >
                       <mat-datepicker-toggle matSuffix [for]="picker" >
                         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                       </mat-datepicker-toggle>
@@ -52,22 +52,24 @@
                     </mat-form-field>
                   </mat-list-item>
 
-                  <button mat-menu-item [matMenuTriggerFor]="menu9">Pick date and Time </button>
+                  <button mat-menu-item [matMenuTriggerFor]="menu9" (click)='$event.stopPropagation()'>Pick Time </button>
                   <mat-menu #menu9="matMenu">
-                    <button mat-menu-item>
-                      <span>Morning<span class="time8"> 8:00AM</span></span>
+                    <button mat-menu-item (click)='time(8)' (click)='$event.stopPropagation()'>
+                      <span>Morning  8:00AM</span>
+                    </button> 
+                    <button mat-menu-item (click)='time(13)' (click)='$event.stopPropagation()'>
+                      <span>Afternoon 1:00PM </span>
                     </button>
-                    <button mat-menu-item>
-                      <span>Afternoon 1:00PM</span>
-                    </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)='time(18)' (click)='$event.stopPropagation()'>
                       <span>Evening 6:00PM</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)='time(20)' (click)='$event.stopPropagation()'>
                       <span>Night 8:00PM</span>
                     </button>
-                    <button mat-menu-item>
-                      <span>Custom</span>
+                    <button mat-menu-item (click)='$event.stopPropagation()'>
+                        <span>Custom</span>
+                      <input matInput [(ngModel)]='setTime' placeholder=" enter time" >
+                    
                     </button>
                   </mat-menu>
                   <mat-list-item>
@@ -93,9 +95,11 @@
                         <span>Custom</span>
                       </button>
                     </mat-menu>
-
+                     
                   </mat-list-item>
-
+                  <div  fxLayoutAlign="end end">
+                  <button mat-button (click)='Reminder(card)' [ngStyle]="{'background-color':'gray'}">save</button>
+                </div>
                 </mat-list>
               </mat-nav-list>
 
@@ -156,6 +160,9 @@
       </div>
       <div *ngIf='flag4==false'>
         <button mat-menu-item  (click)='HideTick()'>Hide tick boxes</button>
+      </div>
+      <div>
+          <button mat-menu-item (click)='question()'>Ask Question</button>
       </div>
     </div>
   </mat-menu>

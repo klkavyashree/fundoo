@@ -29,7 +29,11 @@ export class NoteComponent implements OnInit {
   show = true;
   list: string = ''
   checklistOpen = [];
-  checklistclose=[];
+  checkArray={};
+  uncheckArray={};
+  reminder=[];
+  todaydate=new Date()
+  tomorrow=new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this.todaydate.getDate() + 1))
   constructor(private httpService: HttpserviceService, private router: Router, private note: NoteService) { }
 
   ngOnInit() {
@@ -51,11 +55,11 @@ export class NoteComponent implements OnInit {
           title: this.noteTitle.value,
           description: this.noteContent.value,
           labelIdList: JSON.stringify(this.id),
-          checklist: this.checklistOpen,
+          checklist: JSON.stringify(this.checklistOpen),
           isPined: this.isPined,
           isArchived: this.isArchive,
           color: this.bgcolor,
-          reminder: '',
+          reminder: this.reminder,
           collaberators: JSON.stringify(this.colaborator),
         }
 
@@ -74,6 +78,7 @@ export class NoteComponent implements OnInit {
           this.label = [];
           this.isPined = false;
           this.checklistOpen=[];
+          this.list=''
         },
           err => {
             console.log("error occur while adding", err);
@@ -100,13 +105,40 @@ export class NoteComponent implements OnInit {
   enter(event: any, list) {
     if (event.keyCode == 13) {
       this.addCheckList(list)
+      this.list=''
     }
     // console.log(this.checklist, "checklist")
   }
   addCheckList(list){
-        this.checklistOpen.push(list)
+    this.checkArray={
+      "itemName":list,
+      "status":"open"
+    }
+        this.checklistOpen.push(this.checkArray)
         console.log(this.checklistOpen,"checklist open")
-        this.list=''
+  }
+  update(list,status){
+    if(status=='open'){
+      this.uncheckArray={
+        "itemName":list.itemName,
+        "status":"open" 
+      }
+    }
+    else{
+      this.uncheckArray={
+        "itemName":list.itemName,
+        "status":"close" 
+      }
+    }
+    
+    let ind =this.checklistOpen.indexOf(list)
+    this.checklistOpen.splice(ind,1)
+
+    this.checklistOpen.push(this.uncheckArray)
+  }
+  delete(list){
+    let ind = this.checklistOpen.indexOf(list)
+    this.checklistOpen.splice(ind, 1)
   }
   /**
    * 
@@ -144,6 +176,15 @@ export class NoteComponent implements OnInit {
   }
   archiveEvent(event) {
     this.isArchive = event;
+  }
+  getReminder($event){
+      if(this.reminder[0] != undefined){
+        this.reminder=[];
+        this.reminder.push($event)
+      }
+      else{
+        this.reminder.push($event)
+      }
   }
 
 }

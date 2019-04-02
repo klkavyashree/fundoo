@@ -15,18 +15,28 @@
     min-width: 255px;
     width:auto;
 }
-.pin{
-visibility: hidden
+.notecard{
+    margin-left: 50%;
+    border-radius: 5px;
+    box-shadow: 0px,2px,4px;
+    margin-top: 8%;
+    min-width: 650px;
+    width:auto;
 }
-.matcard:hover .pin{
-    visibility: visible
+
+.pin{
+    opacity: 0;
+    &:hover{
+        opacity: 1.4;
+    }
 }
 .icon{
-    visibility: hidden
+        opacity: 0;
+        &:hover{
+            opacity: 1.4;
+        }
 }
-.matcard:hover .icon{
-    visibility: visible
-}
+
 .title{
     width: auto;
     min-width: 240px;

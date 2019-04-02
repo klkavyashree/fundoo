@@ -21,4 +21,7 @@ export class UserService {
   searchUserList(body:any){
     return this.http.postJSON('user/searchUserList',body)
   }
+  uploadImg(data){
+    return this.http.postImage('user/uploadProfileImage',data)
+  }
 }

@@ -16,7 +16,8 @@ import { LabeldialogComponent } from './components/labeldialog/labeldialog.compo
 import { RemainderComponent } from './components/remainder/remainder.component';
 import { AuthGuard } from './service/authguard/auth.guard';
 import { ColaboratorComponent } from './components/colaborator/colaborator.component';
- 
+import { ImagecropComponent } from './components/imagecrop/imagecrop.component'
+import { AskQuestionComponent } from './components/ask-question/ask-question.component'
 
 const routes: Routes = [
   {
@@ -45,6 +46,9 @@ const routes: Routes = [
   { path:'delete', component: DeleteForeverComponent },
   { path:'labeldialog', component:LabeldialogComponent },
   { path:'colaborator', component:ColaboratorComponent},
+  { path:'imagecroper', component:ImagecropComponent},
+  { path:'askquestion', component:AskQuestionComponent},
+  
   {
     path: 'register',
     component: RegisterComponent
