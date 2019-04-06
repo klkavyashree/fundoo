@@ -9,7 +9,8 @@ export interface DialogData {
   array: [];
   cardid: any;
   cond: any;
-  flag:boolean;
+  type:string
+  
 }
 @Component({
   selector: 'app-display-component',
@@ -47,6 +48,7 @@ export class DisplayComponentComponent implements OnInit {
   @Output() emitUnPinnedCard = new EventEmitter();
   @Output() dialogResult = new EventEmitter();
   @Output() emitMainNote = new EventEmitter();
+  
 
   
   constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
@@ -82,11 +84,14 @@ export class DisplayComponentComponent implements OnInit {
    * keeps the track of the currently opened dialog
    */
 
-  openDialog(array, cond, cardid) {
+  openDialog(array, cond, cardid,type) {
     try {
       var isPined=array.isPined;
+      var isArchived = array.isArchived;
+      var isDeleted = array.isDeleted
+
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
-        data: { array, cond, cardid},
+        data: { array, cond, cardid,type},
         width: '600px'
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -94,10 +99,18 @@ export class DisplayComponentComponent implements OnInit {
         console.log('result when dialog close', result)
         console.log(result['array'], 'result get from dialog box');
         
-        this.emitMainNote.emit(result['array']);
+       if(isArchived != result['array'].isArchived || isDeleted != result['array'].isDeleted){
+         let ind = this.card.indexOf(result['array'])
+         if(ind != -1){
+          this.card.splice(ind,1)
+         }
+         
+       }
+
         if(isPined!=result['array'].isPined){
         this.dialogResult.emit(result['array']);
         }
+       
         this.model = {
           noteId: result['array'].id,
           title: result['array'].title,
@@ -143,6 +156,7 @@ export class DisplayComponentComponent implements OnInit {
   archive($event) {
     try {
       let ind = this.card.indexOf($event)
+      console.log(ind,"index......")
       this.card.splice(ind, 1);
     }
     catch (err) {

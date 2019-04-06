@@ -22,6 +22,7 @@ export class MainNoteComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCards()
+    console.log(localStorage.getItem('token'))
   }
   /**
     *this function will get all the cards list
@@ -61,14 +62,13 @@ export class MainNoteComponent implements OnInit {
     try {
       this.addnote = $event;
       console.log(this.addnote, "......addnote")
-      if($event.isPined)
-      {
+      if ($event.isPined) {
         this.allcards.splice(0, 0, this.addnote)
       }
-      else{
+      else {
         this.unpinned.splice(0, 0, this.addnote)
       }
-      
+
     }
     catch (err) {
       console.log(err)
@@ -96,10 +96,21 @@ export class MainNoteComponent implements OnInit {
       this.unpinned.splice(0, 0, $event)
     }
   }
-  getcards($event){
-    let ind =this.card.indexOf($event)
-    if(ind != -1){
-      this.card[ind]=$event
+  getcards($event) {
+    let ind = this.card.indexOf($event)
+    if (ind != -1) {
+      this.card[ind] = $event
     }
   }
+  // archivecard($event) {
+  //   console.log("enterrr.........")
+  //   let ind = this.allcards.indexOf($event)
+  //   if (ind != -1) {
+  //     let ind = this.unpinned.indexOf($event)
+  //     this.unpinned.splice(ind, 1)
+  //   }
+  //   else {
+  //       this.allcards.splice(ind,1)
+  //   }
+  // }
 }

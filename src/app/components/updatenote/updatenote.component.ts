@@ -22,6 +22,7 @@ flag:boolean=false;
 todaydate=new Date()
 tomorrow=new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this.todaydate.getDate() + 1))
 
+
   constructor(public dialogRef: MatDialogRef<UpdatenoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private snackBar: MatSnackBar, public noteService:NoteService )
      {console.log(this.cardid=data['cardid'],"in dialog")
@@ -163,4 +164,5 @@ doUnPin(card){
       console.log(err))
      
 }
+
 }

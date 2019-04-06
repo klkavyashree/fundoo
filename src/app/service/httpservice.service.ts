@@ -62,6 +62,7 @@ export class HttpserviceService {
   }
   
   getHttp(url){
+    console.log(url,"url")
     const httpTocken={
     headers:new HttpHeaders({
     'content-Type':'application/json',

@@ -39,7 +39,8 @@ const routes: Routes = [
       { path:'search', component: SearchComponent },
       { path:'archive', component:ArchiveComponent },
       { path:'labels',component:EditLabelComponent },
-      { path:'reminders', component:RemainderComponent}
+      { path:'reminders', component:RemainderComponent},
+      { path:'askquestion', component:AskQuestionComponent},
     ]
   },
   { path: 'updatenote', component: UpdatenoteComponent },
@@ -47,7 +48,7 @@ const routes: Routes = [
   { path:'labeldialog', component:LabeldialogComponent },
   { path:'colaborator', component:ColaboratorComponent},
   { path:'imagecroper', component:ImagecropComponent},
-  { path:'askquestion', component:AskQuestionComponent},
+  
   
   {
     path: 'register',

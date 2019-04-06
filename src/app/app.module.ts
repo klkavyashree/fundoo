@@ -39,8 +39,7 @@ import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-
-
+// import * as $ from "jquery";
 
 @NgModule({
   declarations: [

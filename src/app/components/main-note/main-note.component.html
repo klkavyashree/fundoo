@@ -1,7 +1,14 @@
 <app-note (addingNote)="recievemessage($event)"></app-note><br><br>
+
+
 <div class='pinned'>pinned</div>
-<app-display-component [card]="allcards" fxLayout='column'  fxLayout="row wrap" (dialogResult)='dialogResult($event)' (emitMainNote)='getcards($event)' (emitUnPinnedCard)='getUnpinCard($event)'  [type]=note></app-display-component>
+<app-display-component [card]="allcards" fxLayoutGap='0.1%'  fxLayout='column'  fxLayout="row wrap" (dialogResult)='dialogResult($event)'
+ (emitMainNote)='getcards($event)' (emitUnPinnedCard)='getUnpinCard($event)'  [type]=note></app-display-component><br><br>
+
+
+
 <div class="others">others</div>
-<app-display-component [card]="unpinned" fxLayout='column'  fxLayout="row wrap" [type]=note (dialogResult)='dialogResult($event)' (emitMainNote)='getcards($event)' (emitPinnedCard)='getPinCard($event)'></app-display-component>
+<app-display-component [card]="unpinned" fxLayout='column'  fxLayout="row wrap" [type]=note (dialogResult)='dialogResult($event)' 
+ (emitMainNote)='getcards($event)' (emitPinnedCard)='getPinCard($event)'></app-display-component>
 
                                                     

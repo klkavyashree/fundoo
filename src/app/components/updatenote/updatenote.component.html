@@ -1,7 +1,7 @@
 <div [style.backgroundColor]=data.array.color fxFlex='100' class="main">
-  <div style="margin:20px">
-    <div fxFlex='100' fxLayoutAlign='space-between start' fxLayout='row'>
-      <div *ngIf="data.cond!='trash'"><input matInput [(ngModel)]="data.array.title" placeholder="add title here"></div>
+  <div>
+    <div fxFlex='100' fxLayoutAlign='space-between start' fxLayout='row' class="Border">
+      <div *ngIf="data.cond!='trash'"><textarea class='textarea' [(ngModel)]="data.array.title" contenteditable="true" placeholder="add title here"></textarea></div>
       <div *ngIf="data.cond=='trash'" (click)='openSnackBar()'>{{data.array.title}}</div>
       <div *ngIf="data.cond!='trash'">
         <div class="barpin" *ngIf=data.array.isPined>
@@ -16,9 +16,9 @@
       </div>
     </div>
   </div>
-  <div style="margin:20px">
+  <div >
     <!-- -------------------------------------------description------------------------------------------------------------- -->
-    <div *ngIf="data.cond!='trash'"><input class='desc' matInput [(ngModel)]="data.array.description" placeholder="add description here"></div>
+    <div *ngIf="data.cond!='trash'"><textarea class='textarea'  contenteditable="true" [(ngModel)]="data.array.description" placeholder="add description here"></textarea></div>
     <div *ngIf="data.cond=='trash'" (click)='openSnackBar()'>{{data.array.description}}</div>
    
     <!-- ---------------------------------------------checklist---------------------------------------------------------- -->
@@ -101,12 +101,12 @@
           <button mat-menu-item (click)='restore(array)'>Restore</button>
         </mat-menu>
       </div>
-      <div fxFlex='100' *ngIf="data.cond!='trash'">
-        <app-icon-list [card]=array (archivedCard)="archive($event)" [more]=display (unarchiveCard)='unarchived($event)'
-          (deletecard)="delete($event)" [type]=type (showtick)="addList($event)" [update]='Update' (showtickUpdate)=showCheckBox($event)>
+      <div fxFlex='100' *ngIf="data.cond!='trash'" fxLayout='row' fxLayoutAlign='space-between end'>
+        <app-icon-list (showtick)="addList($event)" [update]='Update' [card]='data.array'  (showtickUpdate)=showCheckBox($event) [type]='data.type' >
         </app-icon-list>
-      </div>
-      <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial >close</button>
+        <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial >close</button>
+      </div >
+     
     </div>
   </div>
 

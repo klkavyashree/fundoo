@@ -129,17 +129,17 @@
       </div>
     </div>
     <!-- --------------------------------------------------icon----------------------------------------------- -->
-    <div>
-      <div fxFlex='90'>
+    <div fxFlex='90' fxLayoutAlign='space-between end' fxLayout='row'>
+      
         <app-icon-list (messageEvent)="recievemessage($event)" [type]='notes' [more]=note [message]="message"
           (showtickUpdate)='showTick($event)' (emitLabelToNote)="getLabel($event)" (emitColabToNote)='getColab($event)'
           (emitArchiveEvent)='archiveEvent($event)' (emitReminderNote)='getReminder($event)'>
         </app-icon-list>
 
-      </div>
-      <div fxFlex='10' fxLayoutAlign="end end">
+    
+      
         <button fxLayoutAlign='end end' class="addnote" mat-button (click)="addNote()">close</button>
-      </div>
+      
     </div>
 
   </mat-card>

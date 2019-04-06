@@ -51,11 +51,11 @@
     mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
      
    </button>
-    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
+    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" class="menu" style="width:300px">
       <div fxLayout='row'>
-          <div fxFlex='25'>  
+          <div fxFlex='32'>  
               <button  (click) = "$event.stopPropagation()"
-                        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover','width':'65px','height':'65px'}"
                         (click)="imageSelectFile.click()" matTooltip="fundoo Account"
                         mat-mini-fab class="imageSelect" >
           <div mat-raised-button class="change">change</div>
@@ -64,7 +64,7 @@
           <input (click) = "$event.stopPropagation()" fxHide class="image" type="file" (change)="fileUpload($event)" #imageSelectFile>
           
           </div>
-        <div fxLayout='column' fxFlex='70'>
+        <div fxLayout='column' fxFlex='60'>
         <div>{{name}}</div>
         <div>{{email}}</div>
       </div>

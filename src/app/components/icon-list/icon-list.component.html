@@ -161,9 +161,13 @@
       <div *ngIf='flag4==false'>
         <button mat-menu-item  (click)='HideTick()'>Hide tick boxes</button>
       </div>
-      <div>
-          <button mat-menu-item (click)='question()'>Ask Question</button>
+      <div *ngIf="card.questionAndAnswerNotes.length == 0" >
+          <button mat-menu-item (click)='question(card)'>Ask Question</button>
       </div>
+      <div *ngIf="card.questionAndAnswerNotes.length > 0" >
+          <button mat-menu-item (click)='question(card)'>Show Question</button>
+      </div>
+
     </div>
   </mat-menu>
   <!-- -----------------------------------------------------------mat menu of label---------------------------------------------- -->

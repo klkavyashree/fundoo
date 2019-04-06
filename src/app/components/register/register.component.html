@@ -45,7 +45,7 @@
                     <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                 </div>
             </div>
-            <div class="pwd" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='0.7%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
+            <div class="pwd" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='0%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
                 <div class="password" [ngClass]="{'has-error':registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)}">
                     <mat-form-field appearance="outline" >
                         <mat-label>Password</mat-label>

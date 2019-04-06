@@ -5,7 +5,7 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { ColaboratorComponent } from '../../components/colaborator/colaborator.component'
-import { Router, Route } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
@@ -149,6 +149,7 @@ export class IconListComponent implements OnInit, OnDestroy {
    */
   cardDelete(card) {
     try {
+      console.log(card.isDeleted=true)
       this.deletecard.emit(card)
     }
     catch (err) {
@@ -183,9 +184,11 @@ export class IconListComponent implements OnInit, OnDestroy {
 
   }
   cardArchive(card) {
+    console.log(card.isArchived=true,"in archive icon")
     this.archivedCard.emit(card)
   }
   notArchive(card) {
+   card.isArchived=false; 
     this.unarchiveCard.emit(card)
   }
 
@@ -403,8 +406,9 @@ export class IconListComponent implements OnInit, OnDestroy {
       console.log('error occurs ')
     }
   }
-  question(){
-      this.router.navigate(['askquestion'])
+  question(note){
+    localStorage.setItem('noteId',note.id)
+      this.router.navigate(['dashboard/askquestion'])
   }
   ngOnDestroy() {
     this.destroy$.next(true);

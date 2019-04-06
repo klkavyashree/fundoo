@@ -91,4 +91,5 @@ addcollaborator(data,noteid){
 removeColaborator(cardid,userid){
   return this.http.encodedPostFormDelete('notes/'+cardid+'/removeCollaboratorsNotes/'+userid)
 }
+
 }
