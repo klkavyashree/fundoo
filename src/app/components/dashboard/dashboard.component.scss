@@ -168,10 +168,14 @@
   .search{
     min-width: 700px;
   }
-  .mat-menu-panel.menu{
-    min-width: 250px
+ 
+  .menu{
+    min-width: 250px;
+    overflow-y: hidden
   }
-  
+ ::ng-deep .mat-menu-panel{
+   width:240px
+ }
 
 
 

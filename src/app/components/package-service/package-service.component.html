@@ -1,0 +1,54 @@
+<div fxFlex='100'>
+  <mat-toolbar class="toolbar" fxLayoutAlign='start center'>FundooNotes</mat-toolbar><br><br>
+  <div class="text" fxLayoutAlign="center start">Which fundooNotes service package do you want?</div>
+
+
+
+  <div fxLayout='row' fxLayoutAlign='center center' fxLayout.xs='column'>
+    <div   style="margin-left:50px"   class="advance" (click)='opendialog(advance)'>
+      <div fxLayout='column' class="relative">
+        <div class="absolute">
+          <div class="rate">
+            <div style="margin-left:20px;margin-top: 10px">
+              <font size="5">Price : ${{advance.price}} per month </font>
+            </div>
+           
+            <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
+            <div>
+              <ul>
+                <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
+                <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+              
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="color:white" fxLayoutAlign='center end'>ADD TO CART</div>
+      </div>
+    </div>
+
+    <div style="margin-left:50px"    class="basic"  (click)='opendialog(basic)'>
+      <div fxLayout='column' class="relative">
+        <div class="absolute">
+          <div class="rate">
+            <div style="margin-left:20px;margin-top: 10px">
+              <font size="5">Price : ${{basic.price}} per month</font>
+            </div>
+          
+            <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
+            <div>
+              <ul>
+                <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
+                <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
+              
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="color:white" fxLayoutAlign='center end'>ADD TO CART</div>
+      </div>
+    </div>
+
+  </div><br><br>
+  <div fxLayoutAlign='center center' style="color:blue" (click)='login()'><button mat-button> sign in instead</button></div>
+  </div>

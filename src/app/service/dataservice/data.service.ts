@@ -29,6 +29,7 @@ export class DataService {
   }
 
   changeImage(message:boolean){
+    console.log(message,"in data")
     this.image.next(message)
   }
   changeView(message:boolean){

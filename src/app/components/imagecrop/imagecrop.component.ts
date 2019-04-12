@@ -33,7 +33,7 @@ imagecroped:any;
     const uploadData=new FormData();
     uploadData.append('file',this.imagecroped);
     this.user.uploadImg(uploadData).subscribe(data=>{
-      console.log(data,"resp when cropping img")
+      console.log(data,"resp when setting img")
       localStorage.setItem('imageurl',data['status'].imageUrl);
       this.dialogRef.close();
       this.dataservice.changeImage(true);

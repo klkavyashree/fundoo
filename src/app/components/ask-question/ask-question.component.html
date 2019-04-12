@@ -9,100 +9,211 @@
   </div><br>
   <!-- -----------------------------------------------------------------------description end---------------------------------------- -->
   <!-- ---------------------------------------------------------------div For Question------------------------------- -->
-  <mat-divider></mat-divider><br>
-<div *ngIf="questionn ==''">
-  <div class="ask">Ask a Question</div>
-  <div   [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
-
-  <div fxLayoutAlign='end end'>
-    <button  class="btn" mat-button (click)='ask()'>ask</button>
-  </div><br>
-
   <mat-divider></mat-divider>
-</div>
-<!-- ----------------------------------------------------------------------question div end-------------------------------------------- -->
-<!-- ----------------------------------------------------------------------Answer part------------------------------------------------------ -->
+  <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
+  <br>
+  <div *ngIf="questionn ==''">
+    <div class="ask">Ask a Question</div>
+    <div [froalaEditor] [(froalaModel)]='questions' ></div><br>
 
-<div *ngIf="questionn !=''">
-  <div class="text">Question Asked</div>
-  <div class="question"  [innerHtml]='questionn'></div>
+    <div fxLayoutAlign='end end'>
+      <button class="btn" mat-button (click)='ask()'>ask</button>
+    </div><br>
 
-  <mat-divider></mat-divider><br>
-  
-  <div fxLayout='row' >
-    
-    <div >
-      <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-        mat-icon-button class="accountButton">
-      </button>
+    <mat-divider></mat-divider>
+  </div>
+  <!-- ----------------------------------------------------------------------question div end-------------------------------------------- -->
+  <!-- ----------------------------------------------------------------------Answer part------------------------------------------------------ -->
 
-      <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-        mat-icon-button class="accountButton">
-      </button>
-    </div>
-    <div fxLayout.xs='column' fxLayout='row'>
-    <div fxLayout='row' fxLayout='column' >
-      <div fxLayout='row'>
-        <div style="width:80px">{{name}}</div>
-        <div >{{date | date:'medium' }}</div>
+  <div *ngIf="questionn !=''">
+    <div class="text">Question Asked</div>
+    <div class="question" [innerHtml]='questionn'></div>
+
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <br>
+
+    <div fxLayout='row'>
+
+      <div>
+        <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+          mat-icon-button class="accountButton">
+        </button>
+
+        <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+          mat-icon-button class="accountButton">
+        </button>
       </div>
-     
-    </div>
-    <div  fxLayout='row'>
-     <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg'  (click)='revFlag()'></div>
-     <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg"></div>
-    </div>
-  </div>
-  </div>
-  <div>
-    <div class="qtn"  [innerHtml]='questionn'></div>
-  </div>
-<div *ngIf='hide==false' fxLayoutAlign='end' (click)='index=questionArray.id' (click)='showHideReply()' ><img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div>
-<mat-divider></mat-divider>
-  <div *ngIf='flag==false'  [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
-  <button *ngIf="flag1==false" class="btn" mat-button (click)='sendAns(questionArray.id)'>Reply</button>
-  
-</div>
-
-<div *ngFor='let array of combineArray' >
-<!-- ---------------------------------------------------------------answer div-------------------------------------------------------------------------- -->
-  <div *ngIf='array.parentId==index'>
-      <div fxLayout='row' >
-    
-          <div >
-            <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-              mat-icon-button class="accountButton">
-            </button>
-      
-            <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-              mat-icon-button class="accountButton">
-            </button>
+      <div fxLayout.xs='column' fxLayout='row'>
+        <div fxLayout='row' fxLayout='column'>
+          <div fxLayout='row'>
+            <div style="width:80px">{{name}}</div>
+            <div>{{date | date:'medium' }}</div>
           </div>
-          <div fxLayout.xs='column' fxLayout='row'>
-          <div fxLayout='row' fxLayout='column' >
+
+        </div>
+        <div fxLayout='row'>
+          <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=questionArray.id'></div>
+          <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(questionArray.id)'>{{questionArray.like.length}}Likes</div>
+          <app-rating   [array]='questionArray' [rates]='rate'></app-rating>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="qtn" [innerHtml]='questionn'></div>
+    </div>
+    <div *ngIf='hide==false' fxLayoutAlign='end' (click)='index=questionArray.id' (click)='showHideReply()'>
+      <img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div>
+    <mat-divider></mat-divider>
+    <div *ngIf='questionArray.id==reply'>
+      <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
+      <div fxLayoutAlign='space-between end'>
+        <button class="btn" mat-button (click)='sendAns(questionArray.id)'>Reply</button>
+        <button (click)='reply=""' class="btn" mat-button>close</button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div *ngFor='let array of combineArray'>
+    <!-- ---------------------------------------------------------------answer div-------------------------------------------------------------------------- -->
+    <div *ngIf='array.parentId==index'>
+      <div fxLayout='row'>
+
+        <div>
+          <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+            mat-icon-button class="accountButton">
+          </button>
+
+          <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+            mat-icon-button class="accountButton">
+          </button>
+        </div>
+        <div fxLayout.xs='column' fxLayout='row'>
+          <div fxLayout='row' fxLayout='column'>
             <div fxLayout='row'>
               <div style="width:80px">{{array.user.firstName}}</div>
-              <div >{{array.createdDate | date:'medium' }}</div>
+              <div>{{array.createdDate | date:'medium' }}</div>
             </div>
-           
+
           </div>
-          <div  fxLayout='row'>
-           <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg'  (click)='flagRev()'></div>
-           <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg"></div>
+          <div fxLayout='row'>
+            <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=array.id'></div>
+            <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(array.id)'>{{array.like.length}}Likes</div>
+            <app-rating [array]='array' ></app-rating>
+            
           </div>
         </div>
+      </div>
+      <div class="msg" *ngIf='array.isApproved==true' [innerHtml]=array.message> </div>
+      <!-- <div fxLayoutAlign='end' *ngIf='flag==true' (click)='showAnsHide()' (click)='childindex=array.id'>
+        <img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div> -->
+      <div *ngIf='array.id==reply'>
+        <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
+        <div fxLayoutAlign='space-between end'>
+          <button class="btn" mat-button (click)='sendAns(array.id)'>Reply</button>
+          <button class="btn" mat-button (click)='reply=""'>close</button>
         </div>
-        <div class="msg" *ngIf='array.isApproved==true'[innerHtml]=array.message>
+      </div>
+      <mat-divider></mat-divider>
+
+
+
+      <div *ngFor='let ans of combineArray'>
+        <div style="margin:50px" *ngIf='ans.parentId==array.id'>
+          <div fxLayout='row'>
+            <div>
+              <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                mat-icon-button class="accountButton">
+              </button>
+
+              <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                mat-icon-button class="accountButton">
+              </button>
+            </div>
+            <div fxLayout.xs='column' fxLayout='row'>
+              <div fxLayout='row' fxLayout='column'>
+                <div fxLayout='row'>
+                  <div style="width:80px">{{ans.user.firstName}}</div>
+                  <div>{{ans.createdDate | date:'medium' }}</div>
+                </div>
+
+              </div>
+              <div fxLayout='row'>
+                <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=ans.id'></div>
+                <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(ans.id)'>{{ans.like.length}}Likes</div>
+                <app-rating [array]='ans' ></app-rating>
+              </div>
+            </div>
+          </div>
+          <div class="msg" *ngIf='ans.isApproved==true' [innerHtml]=ans.message>_</div>
+          <!-- <div fxLayoutAlign='end' *ngIf='flag==true' (click)='showAnsHide()' (click)='childindex=array.id'>
+              <img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div> -->
+          <div *ngIf='ans.id==reply'>
+            <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
+            <div fxLayoutAlign='space-between end'>
+              <button class="btn" mat-button (click)='sendAns(ans.id)'>Reply</button>
+              <button class="btn" mat-button (click)='reply=""'>close</button>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+
+
+
+
+
+          <div *ngFor='let child of combineArray'>
+            <div style="margin:50px" *ngIf="child.parentId==ans.id">
+              <div fxLayout='row'>
+                <div>
+                  <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                    mat-icon-button class="accountButton">
+                  </button>
+
+                  <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                    mat-icon-button class="accountButton">
+                  </button>
+                </div>
+                <div fxLayout.xs='column' fxLayout='row'>
+                  <div fxLayout='row' fxLayout='column'>
+                    <div fxLayout='row'>
+                      <div style="width:80px">{{child.user.firstName}}</div>
+                      <div>{{child.createdDate | date:'medium' }}</div>
+                    </div>
+
+                  </div>
+                  <div fxLayout='row' >
+                    <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=child.id'></div>
+                    <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(child.id)'>{{child.like.length}}Likes</div>
+                    <app-rating [array]='ans'></app-rating>
+                  </div>
+                </div>
+              </div>
+              <div class="msg" *ngIf='child.isApproved==true' [innerHtml]=child.message></div>
+              <mat-divider></mat-divider>
+
+            </div>
+
+          </div> 
+
 
         </div>
-       
-  </div>
-  <div *ngIf='flag3==true'>
-      <div   [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
-      <button *ngIf="flag1==false" class="btn" mat-button (click)='sendAns(array.id)'>Reply</button>
-  </div>
- 
-</div>
-<div *ngIf='hide==true' (click)='showHideReply()'   fxLayoutAlign='end' (click)='index=""' ><img src="../../../assets/images/baseline-keyboard_arrow_up-24px.svg">Hide reply</div>
 
-</div>
+      </div>
+      <!-- <div *ngIf='flag==false' (click)='showAnsHide()' fxLayoutAlign='end' (click)='childindex=""' (click)='reply=""'><img
+        src="../../../assets/images/baseline-keyboard_arrow_up-24px.svg">Hide reply</div> -->
+      <!-- 
+      
+    </div>
+
+
+
+
+     <mat-divider></mat-divider> -->
+    </div>
+   
+  </div>
+  <div *ngIf='hide==true' (click)='showHideReply()' fxLayoutAlign='end' (click)='index="" && childindex=""' (click)='reply=""'><img
+    src="../../../assets/images/baseline-keyboard_arrow_up-24px.svg">Hide reply</div>

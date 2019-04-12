@@ -1,0 +1,25 @@
+<div>
+<mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
+  <div style="font-size:17px;color: white" >Advance Pack Details</div>
+  <div style="font-size:12px;color: white" fxLayoutAlign="space-between center" >$ {{data.cart.price}} per month</div>
+</mat-toolbar>
+<div *ngIf='data.cart.name=="advance"'>
+<mat-tab-group style="margin:15px">
+    <mat-tab label="First">Ability to add title, description</mat-tab>
+    <mat-tab label="Second"> Ability to add images, labels </mat-tab>
+    <mat-tab label="Third"> Ability to add checklists, colors </mat-tab>
+  </mat-tab-group>
+</div>
+<div *ngIf='data.cart.name=="basic"'>
+    <mat-tab-group style="margin:15px">
+        <mat-tab label="First">Ability to add title</mat-tab>
+        <mat-tab label="Second"> Ability to add description </mat-tab>
+        <mat-tab label="Third"> </mat-tab>
+      </mat-tab-group>
+</div> 
+<div fxLayoutAlign='space-between end' style="margin-left:15px;margin-right:15px"> 
+  <button class="remove" mat-button [mat-dialog-close]='' (click)='remove()'>Remove</button>
+  <button class="proceed" mat-button [mat-dialog-close]='' (click)='proceed()'>Proceed to checkout</button>
+</div>
+<br>
+</div>

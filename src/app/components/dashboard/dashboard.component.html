@@ -37,12 +37,14 @@
     <button mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings">
       <mat-icon class="settings">settings</mat-icon>
     </button>
+      <!-- -----------------------------------------cart ---------------------------------------------------------- -->
+      <button  mat-icon-button matTooltip="cart" (click)='openCart()'>
+        <img src="../../../assets/images/baseline-shopping_cart-24px.svg">
+      </button>
   </div>
   <div>
-    <!-- -----------------------------------------image cropping---------------------------------------------------------- -->
-    <button fxHide.xs fxHide.sm mat-icon-button matTooltip="Google Apps">
-      <mat-icon class="mat-18">apps</mat-icon>
-    </button>
+  
+    <!-- ---------------------------------------------------imagecrop--------------------------------------------- -->
     <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
      mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
       
@@ -51,7 +53,7 @@
     mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
      
    </button>
-    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" class="menu" style="width:300px">
+    <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" class="menu" >
       <div fxLayout='row'>
           <div fxFlex='32'>  
               <button  (click) = "$event.stopPropagation()"
@@ -61,14 +63,14 @@
           <div mat-raised-button class="change">change</div>
           </button>
           
-          <input (click) = "$event.stopPropagation()" fxHide class="image" type="file" (change)="fileUpload($event)" #imageSelectFile>
+          <input  fxHide class="image" type="file" (change)="fileUpload($event)" #imageSelectFile>
           
           </div>
         <div fxLayout='column' fxFlex='60'>
         <div>{{name}}</div>
         <div>{{email}}</div>
       </div>
-      </div>
+      </div><br>
       <mat-divider></mat-divider>
       <!-- -------------------------------------------------signout--------------------------------------------- -->
       <div fxLayoutAlign='end end'>

@@ -18,4 +18,10 @@ export class QuestionService {
   reply(id,data){
     return this.http.postJSON('questionAndAnswerNotes/reply/'+id,data)
   }
+  like(data,id){
+    return this.http.postJSON('questionAndAnswerNotes/like/'+id,data)
+  }
+  rate(id, data){
+    return this.http.postJSON('questionAndAnswerNotes/rate/'+id,data)
+  }
 }

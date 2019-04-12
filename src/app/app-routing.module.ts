@@ -18,16 +18,23 @@ import { AuthGuard } from './service/authguard/auth.guard';
 import { ColaboratorComponent } from './components/colaborator/colaborator.component';
 import { ImagecropComponent } from './components/imagecrop/imagecrop.component'
 import { AskQuestionComponent } from './components/ask-question/ask-question.component'
+import { PackageServiceComponent } from './components/package-service/package-service.component';
+import {CartDetailsDialogComponent} from './components/cart-details-dialog/cart-details-dialog.component'
+import { CartComponent } from './components/cart/cart.component'
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'package',
     pathMatch: 'full'
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+      path:'package',
+      component:PackageServiceComponent
   },
   {
     path: 'dashboard',
@@ -41,6 +48,7 @@ const routes: Routes = [
       { path:'labels',component:EditLabelComponent },
       { path:'reminders', component:RemainderComponent},
       { path:'askquestion', component:AskQuestionComponent},
+      { path: 'cart', component:CartComponent }
     ]
   },
   { path: 'updatenote', component: UpdatenoteComponent },
@@ -48,6 +56,7 @@ const routes: Routes = [
   { path:'labeldialog', component:LabeldialogComponent },
   { path:'colaborator', component:ColaboratorComponent},
   { path:'imagecroper', component:ImagecropComponent},
+  { path: 'cart', component:CartDetailsDialogComponent },
   
   
   {

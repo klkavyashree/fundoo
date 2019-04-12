@@ -5,6 +5,7 @@ import { ColaboratorComponent } from '../../components/colaborator/colaborator.c
 import { NoteService } from '../../service/noteservice/note.service';
 import { DataService } from '../../service/dataservice/data.service'
 import { EventEmitter } from '@angular/core';
+import { Router } from '@angular/router'
 export interface DialogData {
   array: [];
   cardid: any;
@@ -51,7 +52,7 @@ export class DisplayComponentComponent implements OnInit {
   
 
   
-  constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService) { }
+  constructor(public dialog: MatDialog, private note: NoteService, private dataService: DataService, public router : Router) { }
 
   ngOnInit() {
   this.dataService.MessageView.subscribe(response=>{
@@ -299,6 +300,15 @@ export class DisplayComponentComponent implements OnInit {
       this.card[ind]=$event
     }
   }
+
+navigate(card){
+localStorage.setItem('noteId',card.id)
+this.router.navigate(['dashboard/askquestion'])
+}
+
+
+
+
   // opendialog(array){
   //   const dialogRef = this.dialog.open(ColaboratorComponent, {
   //     data: {array},

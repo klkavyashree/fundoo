@@ -39,6 +39,11 @@ import { ImagecropComponent } from './components/imagecrop/imagecrop.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { AskQuestionComponent } from './components/ask-question/ask-question.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { BarRatingModule } from "ngx-bar-rating";
+import { RatingComponent } from './components/rating/rating.component';
+import { PackageServiceComponent } from './components/package-service/package-service.component';
+import { CartDetailsDialogComponent } from './components/cart-details-dialog/cart-details-dialog.component';
+import { CartComponent } from './components/cart/cart.component';
 // import * as $ from "jquery";
 
 @NgModule({
@@ -66,6 +71,10 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ColaboratorComponent,
     ImagecropComponent,
     AskQuestionComponent,
+    RatingComponent,
+    PackageServiceComponent,
+    CartDetailsDialogComponent,
+    CartComponent,
     
     
  
@@ -83,6 +92,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     HttpClientModule,
     NgxEditorModule,
     ImageCropperModule,
+    BarRatingModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
    

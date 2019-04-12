@@ -81,12 +81,17 @@ grid_list(){
           width: '600px'
         });
         dialogRef.afterClosed().subscribe(result => {
-          this.data.currentImage.subscribe(response=>this.profilePic=response)
-          if(this.profilePic==true){
+          this.data.currentImage.subscribe(response=>{
+            
+          }
+          )
+        
+          
+          // if(this.profilePic==true){
             this.imageprofile=localStorage.getItem('imageurl')
             this.img=environment.profileUrl+this.imageprofile;
             
-          }
+          // }
 
         })
       } catch (err) {
@@ -164,6 +169,10 @@ grid_list(){
   }
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  openCart(){
+    this.router.navigate(['dashboard/cart'])
   }
   
 }

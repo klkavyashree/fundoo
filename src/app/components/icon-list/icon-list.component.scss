@@ -11,10 +11,9 @@
 //     width: 100px;
 // }
 
-//  ::ng-deep .cdk-overlay-pane{
-//      max-width: 30%;
-//  }
-
+ ::ng-deep .mat-menu-panel{
+    width: 200px
+ }
 .white{
     background-color: rgb(224, 224, 224);
     margin-left: 8px;

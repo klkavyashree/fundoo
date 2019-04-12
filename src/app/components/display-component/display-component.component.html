@@ -59,36 +59,38 @@
       <div *ngFor='let item of array.reminder'>
         <mat-chip-list>
           <div *ngIf='(todaydate|date:shortDate)==(item|date:shortdate)'>
-            <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Today{{item|date:'shortTime'}}
+            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Today{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortdate)'>
-            <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Tom{{item|date:'shortTime'}}
+            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Tom{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
-            <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'short'}}
+            <mat-chip style="padding-right:7px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'short'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
         </mat-chip-list>
       </div> 
-      <!-- ------------------------------------------------collaborators------------------------------------------------- -->
-     <div *ngFor='let colab of array.collaborators'>
-       <img src="../../../assets/images/round-account_circle-24px.svg" matTooltip={{colab.email}}>
-     </div>
-     
       <!-- -----------------------------------------------Labels----------------------------------------------------- -->
       <div *ngFor='let labels of array.noteLabels'>
           <mat-chip-list selected>
-            <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px" class="btn">{{labels.label}}
+            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px" class="btn">{{labels.label}}
               <mat-icon matChipRemove (click)="removeLabel(array,labels)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
       </div>
-    </div><br>
+    </div>
+       <!-- ------------------------------------------------collaborators------------------------------------------------- -->
+       <div  fxLayout='row' fxLayout='row wrap'>
+     <div *ngFor='let colab of array.collaborators'>
+        <img src="../../../assets/images/round-account_circle-24px.svg" matTooltip={{colab.email}}>
+      </div>
+    </div>
+   
     <!-- ----------------------------------------------------labels end------------------------------------------- -->
    
     <div fxFlex='100' *ngIf="cond=='trash'">
@@ -106,9 +108,9 @@
         (emitCardCollaborator)='cardCollaborator($event)' (emitReminder)='getReminder($event)'>
       </app-icon-list>
     </div>
-    <div *ngIf="array.questionAndAnswerNotes.length>0">
+    <div *ngIf="array.questionAndAnswerNotes.length>0" (click)='navigate(array)'>
       <mat-divider></mat-divider>
-      <div class="text">Question Asked</div>
+      <div class="text"  >Question Asked</div>
       <div *ngIf="array.questionAndAnswerNotes.length>0" [innerHtml]='array.questionAndAnswerNotes[0].message' ></div>
     </div>
    

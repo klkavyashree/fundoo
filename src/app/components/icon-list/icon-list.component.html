@@ -118,7 +118,7 @@
   <button mat-icon-button matTooltip="add color" [matMenuTriggerFor]="menu5">
     <img id="img" src="../../../assets/images/color.svg" />
   </button>
-  <mat-menu #menu5="matMenu" [overlapTrigger]="false">
+  <mat-menu  #menu5="matMenu" [overlapTrigger]="false">
     <ng-template matMenuContent>
       <div class="buttons">
         <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
