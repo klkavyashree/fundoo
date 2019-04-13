@@ -31,4 +31,4 @@
    <h3>Notes in the Recycle Bin are deleted after 7 days</h3>
      <button fxFlexOffset="5" class="btn" fxLayoutAlign='center center'  mat-button (click)="emptybin()">Empty Bin</button>
      </div>
-   <app-display-component fxLayout='column' fxLayoutGap='2%'  fxLayout="row wrap" [card]=deletedcards [cond]='trash'></app-display-component>
+   <app-display-component fxLayout='column' fxLayoutGap='2%' class="display" fxLayout="row wrap" [card]=deletedcards [cond]='trash'></app-display-component>

@@ -1,0 +1,13 @@
+.display{
+    margin-left:150px ;
+}
+@media screen and (max-width:499px){
+    .display{
+        margin-left: 50px
+    }
+}
+@media screen and (max-width:399px){
+    .display{
+        margin-left: 20px
+    }
+}

@@ -57,7 +57,7 @@
         <div fxLayout='row'>
           <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=questionArray.id'></div>
           <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(questionArray.id)'>{{questionArray.like.length}}Likes</div>
-          <app-rating   [array]='questionArray' [rates]='rate'></app-rating>
+          <app-rating style="margin-left:10px"  [array]='questionArray' [rates]='rate'></app-rating>
         </div>
       </div>
     </div>
@@ -102,7 +102,7 @@
           <div fxLayout='row'>
             <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=array.id'></div>
             <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(array.id)'>{{array.like.length}}Likes</div>
-            <app-rating [array]='array' ></app-rating>
+            <app-rating style="margin-left:10px" [array]='array' ></app-rating>
             
           </div>
         </div>
@@ -144,7 +144,7 @@
               <div fxLayout='row'>
                 <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=ans.id'></div>
                 <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(ans.id)'>{{ans.like.length}}Likes</div>
-                <app-rating [array]='ans' ></app-rating>
+                <app-rating style="margin-left:10px" [array]='ans' ></app-rating>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@
                   <div fxLayout='row' >
                     <div style="margin: 5px"><img src='../../../assets/images/baseline-reply-24px.svg' (click)='reply=child.id'></div>
                     <div style="margin: 5px"> <img src="../../../assets/images/baseline-thumb_up-24px.svg" (click)='like(child.id)'>{{child.like.length}}Likes</div>
-                    <app-rating [array]='ans'></app-rating>
+                    <app-rating style="margin-left:10px" [array]='ans'></app-rating>
                   </div>
                 </div>
               </div>

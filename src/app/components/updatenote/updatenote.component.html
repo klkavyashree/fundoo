@@ -39,8 +39,9 @@
           </div>
       </div>
       <mat-divider></mat-divider>
-      <div  fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List"
-          (keydown)='enter($event,list)'></div>
+      <div  *ngIf="data.cond != 'trash'" fxLayout='row'><img src='../../../assets/images/add_mark.svg'><input matInput [(ngModel)]="list" placeholder="List"
+          (keydown)='enter($event,list)' ></div>
+          <div *ngIf="data.cond=='trash'" fxLayout='row' (click)='openSnackBar()' ><img src='../../../assets/images/add_mark.svg'><input placeholder="List"> </div>
       <mat-divider></mat-divider>
       <div *ngFor='let list of deletedLists'>
           <div fxLayoutAlign='space-between center'>
@@ -104,8 +105,8 @@
       <div fxFlex='100' *ngIf="data.cond!='trash'" fxLayout='row' fxLayoutAlign='space-between end'>
         <app-icon-list (showtick)="addList($event)" [update]='Update' [card]='data.array'  (showtickUpdate)=showCheckBox($event) [type]='data.type' >
         </app-icon-list>
-        <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial >close</button>
       </div >
+      <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial >close</button>
      
     </div>
   </div>

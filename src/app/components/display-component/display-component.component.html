@@ -1,13 +1,15 @@
-<div *ngFor="let array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='column' class="main">
-  <mat-card fxLayout="column" [ngClass]="{'matcard':displaymode===true,  'notecard':displaymode===false}" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>
+<div *ngFor="let array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='column'
+  class="main">
+  <mat-card fxLayout="column" [ngClass]="{'matcard':displaymode===true,  'notecard':displaymode===false}" fxFlex="90"
+    fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>
     <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center">
       <div fxLayout="column" fxFlex='100'>
 
-        <div fxLayout='row' fxLayoutAlign="space-between start" fxFlex='100' >
-          <div fxFlex='85' fxLayout='row wrap' (click)="openDialog(array,cond,array.id,type)" >
+        <div fxLayout='row' fxLayoutAlign="space-between start" fxFlex='100'>
+          <div fxFlex='85' fxLayout='row wrap' (click)="openDialog(array,cond,array.id,type)">
             <!-- <mat-card-title  matTextareaAutosize>{{array.title}}
             </mat-card-title> -->
-            <div  [innerHtml]="array.title"  class="title" ></div>
+            <div [innerHtml]="array.title" class="title"></div>
           </div>
           <div *ngIf="cond!='trash'" class="pin" fxFlex='15'>
             <button mat-icon-button color="basic">
@@ -24,11 +26,11 @@
           </div>
         </div>
         <div>
-          <div fxFlex='90' fxLayout='center center' (click)="openDialog(array,cond,array.id,type)"   >
+          <div fxFlex='90' fxLayout='center center' (click)="openDialog(array,cond,array.id,type)">
             <!-- <mat-card-title  matTextareaAutosize fxLayout="row wrap">{{array.description}}</mat-card-title> -->
             <!-- <textarea class="description" [innerHtml]='array.description'></textarea > -->
-              <div class="description" [innerHtml]='array.description'></div >
-                <!-- <div class="description">{{array.description}}</div> -->
+            <div class="description" [innerHtml]='array.description'></div>
+            <!-- <div class="description">{{array.description}}</div> -->
           </div>
         </div>
       </div>
@@ -53,66 +55,66 @@
         </div>
       </div>
     </div>
-  
+
     <!-- ------------------------------------------Reminder--------------------------------------------------->
-    <div fxLayout='row' fxLayout='row wrap'>
+    <div fxLayout='row' fxLayout='row wrap' style="min-height:30px">
       <div *ngFor='let item of array.reminder'>
         <mat-chip-list>
           <div *ngIf='(todaydate|date:shortDate)==(item|date:shortdate)'>
-            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Today{{item|date:'shortTime'}}
+            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;font-size: 0.7em">Today{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortdate)'>
-            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Tom{{item|date:'shortTime'}}
+            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;font-size: 0.7em">Tom{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
-            <mat-chip style="padding-right:7px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'short'}}
+            <mat-chip style="padding-right:7px;padding-left:0px;padding-top: 0px;padding-bottom: 0px ;font-size: 0.7em">{{item|date:'short'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
         </mat-chip-list>
-      </div> 
+      </div>
       <!-- -----------------------------------------------Labels----------------------------------------------------- -->
       <div *ngFor='let labels of array.noteLabels'>
-          <mat-chip-list selected>
-            <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px" class="btn">{{labels.label}}
-              <mat-icon matChipRemove (click)="removeLabel(array,labels)">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
+        <mat-chip-list selected>
+          <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;font-size: 0.8em" class="btn">{{labels.label}}
+            <mat-icon matChipRemove (click)="removeLabel(array,labels)">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
       </div>
-    </div>
-       <!-- ------------------------------------------------collaborators------------------------------------------------- -->
-       <div  fxLayout='row' fxLayout='row wrap'>
-     <div *ngFor='let colab of array.collaborators'>
+
+      <!-- ------------------------------------------------collaborators------------------------------------------------- -->
+      <div *ngFor='let colab of array.collaborators'>
         <img src="../../../assets/images/round-account_circle-24px.svg" matTooltip={{colab.email}}>
       </div>
     </div>
-   
+
     <!-- ----------------------------------------------------labels end------------------------------------------- -->
-   
-    <div fxFlex='100' *ngIf="cond=='trash'">
-      <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
-        <img id="img" src="../../../assets/images/more_vert.svg" />
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)=deleteForever(array,cond)>Delete Forever</button>
-        <button mat-menu-item (click)='restore(array)'>Restore</button>
-      </mat-menu>
-    </div>
-    <div fxFlex='100' *ngIf="cond!='trash'">
-      <app-icon-list class="icon" [card]=array (archivedCard)="archive($event)" [message]='messages' (sendLabel)='addlabel($event)' [more]=display
-        (unarchiveCard)='unarchived($event)' (deletecard)="delete($event)"  [type]=type (showtickUpdate)='showTickBox($event)'
-        (emitCardCollaborator)='cardCollaborator($event)' (emitReminder)='getReminder($event)'>
-      </app-icon-list>
-    </div>
+    
+      <div fxFlex='100' *ngIf="cond=='trash'">
+        <button mat-icon-button [matMenuTriggerFor]="menu" colour="basic" matTooltip="more">
+          <img id="img" src="../../../assets/images/more_vert.svg" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)=deleteForever(array,cond)>Delete Forever</button>
+          <button mat-menu-item (click)='restore(array)'>Restore</button>
+        </mat-menu>
+      </div>
+      <div fxFlex='100' *ngIf="cond!='trash'">
+        <app-icon-list class="icon" [card]=array (archivedCard)="archive($event)" [message]='messages' (sendLabel)='addlabel($event)'
+          [more]=display (unarchiveCard)='unarchived($event)' (deletecard)="delete($event)" [type]=type
+          (showtickUpdate)='showTickBox($event)' (emitCardCollaborator)='cardCollaborator($event)' (emitReminder)='getReminder($event)'>
+        </app-icon-list>
+      </div>
+    <!-- ------------------------------------------------question------------------------------------------------------------------------------ -->
     <div *ngIf="array.questionAndAnswerNotes.length>0" (click)='navigate(array)'>
       <mat-divider></mat-divider>
-      <div class="text"  >Question Asked</div>
-      <div *ngIf="array.questionAndAnswerNotes.length>0" [innerHtml]='array.questionAndAnswerNotes[0].message' ></div>
+      <div class="text">Question Asked</div>
+      <div *ngIf="array.questionAndAnswerNotes.length>0" [innerHtml]='array.questionAndAnswerNotes[0].message'></div>
     </div>
-   
+
   </mat-card>
 </div>

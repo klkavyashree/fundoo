@@ -14,11 +14,25 @@ export class CartDetailsDialogComponent implements OnInit {
 
   ngOnInit() {
   }
+  /**
+   * navigate to pakage page
+   */
   remove(){
+    try{
       this.router.navigate(['package'])
+    }catch(err){
+      console.log(err)
+    }
   }
+  /**
+   * navigate to the registration page
+   */
   proceed(){
+    try{
     this.router.navigate(['register'])
+    }catch(err){
+      console.log(err)
+    }
   }
 
 }
