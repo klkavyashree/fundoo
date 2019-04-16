@@ -19,7 +19,7 @@
 </div> 
 <div fxLayoutAlign='space-between end' style="margin-left:15px;margin-right:15px"> 
   <button class="remove" mat-button [mat-dialog-close]='' (click)='remove()'>Remove</button>
-  <button class="proceed" mat-button [mat-dialog-close]='' (click)='proceed()'>Proceed to checkout</button>
+  <button class="proceed" mat-button [mat-dialog-close]='' (click)='proceed(data.cart.name)'>Proceed to checkout</button>
 </div>
 <br>
 </div>

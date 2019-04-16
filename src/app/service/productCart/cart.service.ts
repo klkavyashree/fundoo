@@ -10,6 +10,6 @@ export class CartService {
     return this.http.postJSON('productcarts/addToCart',data)
   }
   getUserService(){
-    return this.http.getHttp('user/service')
+    return this.http.getService('user/service')
   }
 }

@@ -71,7 +71,7 @@
       <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
       <div fxLayoutAlign='space-between end'>
         <button class="btn" mat-button (click)='sendAns(questionArray.id)'>Reply</button>
-        <button (click)='reply=""' class="btn" mat-button>close</button>
+        <button (click)='reply=""' (click)='questions=""' class="btn" mat-button>close</button>
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -108,13 +108,12 @@
         </div>
       </div>
       <div class="msg" *ngIf='array.isApproved==true' [innerHtml]=array.message> </div>
-      <!-- <div fxLayoutAlign='end' *ngIf='flag==true' (click)='showAnsHide()' (click)='childindex=array.id'>
-        <img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div> -->
+     
       <div *ngIf='array.id==reply'>
         <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
         <div fxLayoutAlign='space-between end'>
           <button class="btn" mat-button (click)='sendAns(array.id)'>Reply</button>
-          <button class="btn" mat-button (click)='reply=""'>close</button>
+          <button class="btn" mat-button (click)='reply=""' (click)='questions=""' >close</button>
         </div>
       </div>
       <mat-divider></mat-divider>
@@ -149,13 +148,12 @@
             </div>
           </div>
           <div class="msg" *ngIf='ans.isApproved==true' [innerHtml]=ans.message>_</div>
-          <!-- <div fxLayoutAlign='end' *ngIf='flag==true' (click)='showAnsHide()' (click)='childindex=array.id'>
-              <img src="../../../assets/images/baseline-keyboard_arrow_down-24px.svg">View reply</div> -->
+        
           <div *ngIf='ans.id==reply'>
             <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
             <div fxLayoutAlign='space-between end'>
               <button class="btn" mat-button (click)='sendAns(ans.id)'>Reply</button>
-              <button class="btn" mat-button (click)='reply=""'>close</button>
+              <button class="btn" mat-button (click)='reply=""' (click)='questions=""' >close</button>
             </div>
           </div>
           <mat-divider></mat-divider>
@@ -202,16 +200,7 @@
         </div>
 
       </div>
-      <!-- <div *ngIf='flag==false' (click)='showAnsHide()' fxLayoutAlign='end' (click)='childindex=""' (click)='reply=""'><img
-        src="../../../assets/images/baseline-keyboard_arrow_up-24px.svg">Hide reply</div> -->
-      <!-- 
-      
-    </div>
-
-
-
-
-     <mat-divider></mat-divider> -->
+     
     </div>
    
   </div>

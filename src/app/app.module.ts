@@ -44,7 +44,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { PackageServiceComponent } from './components/package-service/package-service.component';
 import { CartDetailsDialogComponent } from './components/cart-details-dialog/cart-details-dialog.component';
 import { CartComponent } from './components/cart/cart.component';
-// import * as $ from "jquery";
+
 
 @NgModule({
   declarations: [

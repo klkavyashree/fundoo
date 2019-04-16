@@ -7,8 +7,7 @@
 
         <div fxLayout='row' fxLayoutAlign="space-between start" fxFlex='100'>
           <div fxFlex='85' fxLayout='row wrap' (click)="openDialog(array,cond,array.id,type)">
-            <!-- <mat-card-title  matTextareaAutosize>{{array.title}}
-            </mat-card-title> -->
+         
             <div [innerHtml]="array.title" class="title"></div>
           </div>
           <div *ngIf="cond!='trash'" class="pin" fxFlex='15'>
@@ -27,10 +26,9 @@
         </div>
         <div>
           <div fxFlex='90' fxLayout='center center' (click)="openDialog(array,cond,array.id,type)">
-            <!-- <mat-card-title  matTextareaAutosize fxLayout="row wrap">{{array.description}}</mat-card-title> -->
-            <!-- <textarea class="description" [innerHtml]='array.description'></textarea > -->
+         
             <div class="description" [innerHtml]='array.description'></div>
-            <!-- <div class="description">{{array.description}}</div> -->
+          
           </div>
         </div>
       </div>

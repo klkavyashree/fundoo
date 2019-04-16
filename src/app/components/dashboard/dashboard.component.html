@@ -4,7 +4,8 @@
     <button mat-icon-button (click)="sidenav.toggle()" matTooltip="Main Menu">
       <mat-icon class="mat-18">menu</mat-icon>
     </button>
-    <img class="fundooIcon" src="../../../assets/images/keep_48dp.png">
+    <div  *ngIf='flag2==false'>
+    <img class="fundooIcon" src="../../../assets/images/keep_48dp.png"></div>
 
     <div class="dashboardTitle">{{headerName}}</div>
 
@@ -12,12 +13,10 @@
 <!-- -----------------------------------------------search bar----------------------------------------------------------- -->
   <div class="searchToolBar">
     <button mat-icon-button>
-        <!-- hide at below above 600 -->
-      <!-- <mat-icon fxHide.md fxHide.sm class="mat-18" (click)='SearchBar()'>search</mat-icon> -->
-      <mat-icon  class="mat-18">search</mat-icon><!-- hide at below 600-->
+      <mat-icon  class="mat-18" (click)='SearchBar()'>search</mat-icon><!-- hide at below 600-->
     </button>
-    <!-- <input *ngIf='flag2==true' [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()'
-      class="searchInputBar" type="text" placeholder="search"> -->
+    <input *ngIf='flag2==true' [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()'
+      class="searchInputBar" type="text" placeholder="search" fxShow.xs fxHide >
     <input fxHide.xs [(ngModel)]="Search" (keyup)='lookfor()' [style.fontSize.px]="16" (click)='goSearch()' class="searchInputBar"
       type="text" placeholder="search">
   </div>
@@ -33,18 +32,15 @@
     <button (click)='grid_list()'fxHide.xs mat-icon-button matTooltip="grid view" *ngIf='flag3==false' >
       <mat-icon >grid_view</mat-icon>
     </button>
-    <!-- ----------------------------------------------settings--------------------------------------------- -->
-    <button mat-icon-button class="settings" [matMenuTriggerFor]="settingsForHeader" matTooltip="Settings">
-      <mat-icon class="settings">settings</mat-icon>
-    </button>
+   
       <!-- -----------------------------------------cart ---------------------------------------------------------- -->
-      <button  mat-icon-button matTooltip="cart" (click)='openCart()'>
+      <button *ngIf='flag2==false' mat-icon-button matTooltip="cart" (click)='openCart()'>
         <img src="../../../assets/images/baseline-shopping_cart-24px.svg">
       </button>
   </div>
-  <div>
-  
-    <!-- ---------------------------------------------------imagecrop--------------------------------------------- -->
+   <!-- ---------------------------------------------------imagecrop--------------------------------------------- -->
+  <div  *ngIf='flag2==false' >
+   
     <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
      mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
       
@@ -79,16 +75,6 @@
     </mat-menu>
   </div>
 </mat-toolbar>
-
-<mat-menu #settingsForHeader="matMenu">
-
-  <button mat-menu-item (click)="settings()">Settings</button>
-  <button mat-menu-item (click)="sendFeedback()">Send FeedBack</button>
-  <button mat-menu-item (click)="help()">Help</button>
-  <button mat-menu-item (click)="appDownload()">App Download</button>
-  <button mat-menu-item (click)="keyboardShortcuts()">Keyboard Shortcut</button>
-
-</mat-menu>
 
 <!-- ----------------------------------------------mat-nav--------------------------------------------- -->
 <mat-divider></mat-divider>

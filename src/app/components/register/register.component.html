@@ -1,91 +1,145 @@
-<div class="main" fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
-    <mat-card class="matcard" fxFlex="40" fxFlex.xs='80'>
-        <div class="fundoo" fxLayout="row" fxLayoutAlign="start">
-            <h1>
-                <span class="F">F</span>
-                <span class="u">u</span>
-                <span class="n">n</span>
-                <span class="d">d</span>
-                <span class="o">o</span>
-                <span class="o1">o</span>
-            </h1>
-        </div>
-        <h4 class="line" fxLayoutAlign="start">Create your Fundoo account</h4>
-        <form [formGroup]="registerForm">
-            <div class="name"  fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='3%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
-                <div class="fname" [ngClass]="{'has-error':registerForm.get('firstName').errors && (registerForm.get('firstName').touched || registerForm.get('firstName').dirty)}">
-                    <mat-form-field appearance="outline">
-                        <mat-label>First name</mat-label>
-                        <input matInput formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
-                    </mat-form-field>
-                    <span *ngIf="registerForm.get('firstName').errors && (registerForm.get('firstName').touched || registerForm.get('firstName').dirty)"
-                        class="help-block">
-                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                    </span>
-                </div>
-                <div class="lname" [ngClass]="{'has-error':registerForm.get('lastName').errors && (registerForm.get('lastName').touched || registerForm.get('lastName').dirty)}">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Last name</mat-label>
-                        <input matInput formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                    </mat-form-field>
-                    <div *ngIf="registerForm.get('lastName').errors && (registerForm.get('lastName').touched || registerForm.get('lastName').dirty)"
-                        class="help-block">
-                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                    </div>
-                </div>
-            </div>
-            <div class="email" [ngClass]="{'has-error':registerForm.get('email').errors && (registerForm.get('email').touched || registerForm.get('email').dirty)}">
-                <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                </mat-form-field>
-                <div *ngIf="registerForm.get('email').errors && (registerForm.get('email').touched || registerForm.get('email').dirty)"
-                    class="help-block">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                </div>
-            </div>
-            <div class="pwd" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap='0%' fxLayout.xs="column" fxLayoutAlign.xs=" none">
-                <div class="password" [ngClass]="{'has-error':registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)}">
-                    <mat-form-field appearance="outline" >
-                        <mat-label>Password</mat-label>
-                        <input matInput formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                            [type]="hide ? 'password' : 'text'" />
-                        <!-- <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon> -->
-                    </mat-form-field>
-                    <div *ngIf="registerForm.get('password').errors && (registerForm.get('password').touched || registerForm.get('password').dirty)"
-                        class="help-block">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
-                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                    </div>
-                </div>
-                <div class="confirmpassword" [ngClass]="{'has-error':registerForm.get('confirmpassword').errors && (registerForm.get('confirmpassword').touched || registerForm.get('confirmpassword').dirty)}">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput formControlName="confirmpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }"
-                            [type]="hide ? 'password' : 'text'" />
-                        <!-- <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon> -->
-                    </mat-form-field>
-                    <div *ngIf="registerForm.get('confirmpassword').errors && (registerForm.get('confirmpassword').touched || registerForm.get('confirmpassword').dirty)"
-                        class="help-block">
-                        <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
-                        <div *ngIf="f.confirmpassword.errors.minlength">Password must be at least 6 characters</div>
-                        
-                        <mat-error class="err">{{message}}</mat-error><!-- <div *ngIf="f.confirmpassword.pristine || f.coinfirmpassword.errors?.Matchpassword">Password does not match</div> -->
-                    </div>
-                    <mat-error class="err">{{message}}</mat-error>
-                </div>
-                <div class="iocn" fxLayoutAlign="end start">
-                <mat-icon matSuffix (click)="hide=!hide" fxLayoutAlign="end centre">{{hide ? 'visibility':'visibility-off'}}</mat-icon>
-                </div>
-            </div><br><br>
+<div class="mainForm" fxLayoutAlign="center center" fxFlex="100">
+    <mat-card class="mainDiv" fxFlex="88" fxFlex.xs='100'>
+
+        <mat-card-header>
             <div>
-                <span><button class="btn" mat-button (click)="register()" fxLayoutAlign="center">next</button></span>
-                <span><button class="reg" mat-button (click)="login()" fxLayoutAlign="start">sign in instead</button></span>
+                <mat-error>{{message1}}</mat-error>
+            </div>
+            <div fxFlex='100' fxLayoutAlign='start'>
+                <h1>
+                    <span class="F">F</span>
+                    <span class="u">u</span>
+                    <span class="n">n</span>
+                    <span class="d">d</span>
+                    <span class="o">o</span>
+                    <span class="o1">o</span>
+                </h1>
+            </div>
+        </mat-card-header>
+
+        <form class="inputForm">
+
+            <mat-form-field appearance="outline" class="firstName" color="accent">
+                <mat-label>First name</mat-label>
+                <input matInput placeholder="First name" [formControl]="firstname" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="lastName" color="accent">
+                <mat-label>Last name</mat-label>
+                <input matInput placeholder="Last name" [formControl]="lastname" required>
+
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="gmail" color="accent">
+                <mat-label>username</mat-label>
+                <input matInput placeholder="user name" [formControl]="username" required>
+                <p matSuffix>@gmail.com</p>
+                <mat-hint>You can use letters and numbers</mat-hint>
+
+            </mat-form-field>
+            <div class="password">
+                <mat-form-field appearance="outline" class="pass" color="accent">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [formControl]="password"
+                        minlength="8" maxlength="15">
+                    <mat-error *ngIf="password.hasError('required')">mandatory</mat-error>
+
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="confirm" color="accent">
+                    <mat-label>Confirm</mat-label>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [formControl]="confirm"
+                        minlength="8" maxlength="15">
+                    <mat-error *ngIf="password.hasError('required')">mandatory</mat-error>
+
+                </mat-form-field>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <br>
 
             </div>
-
+            <!-- -------------------------------------------------service cart display------------------------------------------------------------ -->
+            <div *ngIf='service=="advance"' fxLayoutAlign='center center' fxLayoutAlign.xs='start center'>
+                <div fxLayout='row'>
+                    <div class="advance">
+                        <div class="rate">
+                            <div style="margin-left:20px;margin-top: 10px">
+                              <font size="5">Price : ${{advance.price}} per month </font>
+                            </div>
+                
+                            <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
+                            <div>
+                              <ul>
+                                <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
+                                <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+                
+                              </ul>
+                            </div>
+                          </div>
+                          <div  fxLayoutAlign='center end' style="margin-bottom:-25px">SELECTED</div>
+                    </div>
+                    <div class='basic' style="margin-left:30px">
+                        <div class="rate1" >
+                            <div style="margin-left:20px;margin-top: 10px">
+                              <font size="5">Price : ${{basic.price}} per month</font>
+                            </div>
+                
+                            <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
+                            <div>
+                              <ul>
+                                <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
+                                <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
+                                  
+                              </ul>
+                            </div>
+                          </div>
+                          <!-- <div  fxLayoutAlign='center end' >Add To Cart</div> -->
+                    </div>
+                </div>
+            </div>
+            <div *ngIf='service=="basic"' fxLayoutAlig.xs='start center' fxLayoutAlign='center center'>
+                <div fxLayout='row'>
+                    <div class="basic">
+                        <div class="rate">
+                            <div style="margin-left:20px;margin-top: 10px">
+                              <font size="5">Price : ${{advance.price}} per month </font>
+                            </div>
+                
+                            <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
+                            <div>
+                              <ul>
+                                <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
+                                <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+                
+                              </ul>
+                            </div>
+                          </div>
+                          <div  fxLayoutAlign='center end'  style="margin-bottom:-25px">Add To Cart</div>
+                    </div>
+                    <div class='advance' style="margin-left:30px">
+                        <div class="rate1" >
+                            <div style="margin-left:20px;margin-top: 10px">
+                              <font size="5">Price : ${{basic.price}} per month</font>
+                            </div>
+                
+                            <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
+                            <div>
+                              <ul>
+                                <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
+                                <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
+                                  
+                              </ul>
+                            </div>
+                          </div>
+                          <div fxLayoutAlign='center end' >SELECTED</div>
+                    </div>
+                </div>
+            </div>
+            <!-- -------------------------------------------------btn display------------------------------------------------------------ -->
+            <br><br><br><br>
+            <div class="button" fxLayoutAlign='space-between center' fxLayout='row'>
+                <button mat-button class="primary" style="background-color:white;color:rgb(13, 56, 87)" (click)="login()">SignIn</button>
+                <button mat-raised-button class="primary" (click)="register()">Register</button>
+            </div>
+            <div>
+                <mat-error>{{message}}</mat-error>
+            </div>
         </form>
-
     </mat-card>
 </div>

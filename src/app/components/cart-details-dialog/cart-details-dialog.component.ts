@@ -27,8 +27,9 @@ export class CartDetailsDialogComponent implements OnInit {
   /**
    * navigate to the registration page
    */
-  proceed(){
+  proceed(service){
     try{
+      localStorage.setItem('service',service)
     this.router.navigate(['register'])
     }catch(err){
       console.log(err)

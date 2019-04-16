@@ -22,6 +22,7 @@ imagecroped:any;
    
   }
   private token=localStorage.getItem('token')
+  
   imageCropped($event){
     this.imagecroped=$event.file;
     console.log(this.imagecroped,"img crop")

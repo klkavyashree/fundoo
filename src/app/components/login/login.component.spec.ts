@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 
+
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -22,4 +23,12 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('Form should be valid'),async(()=>{
+    expect (component.model.email.toEqual('kavyakl@gmail.com'));
+    expect (component.model.password.toEqual('123456'));
+  })
+  it('Invalid Form'),async(()=>{
+expect (component.model.email.toEqual(''));
+expect (component.model.password.toEqual(''));
+  })
 });

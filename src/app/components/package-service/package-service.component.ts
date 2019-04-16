@@ -21,10 +21,10 @@ basic:any;
   }
 getUserService(){
   this.cart.getUserService().subscribe(data=>{
-    console.log(data)
-    if(data['data']['data'].length>0){}
-    this.advance=data['data']['data'][0]
-    this.basic=data['data']['data'][1]
+    if(data['data']['data'].length>0){
+      this.advance=data['data']['data'][0]
+      this.basic=data['data']['data'][1]
+    }
   })
 }
 

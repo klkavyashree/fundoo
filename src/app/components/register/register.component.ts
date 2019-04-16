@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators,FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/userService/user.service'
-
-
+import {MatSnackBar} from '@angular/material';
+import { CartService } from '../../service/productCart/cart.service';
 
 @Component({
   selector: 'app-register',
@@ -11,66 +11,87 @@ import { UserService } from '../../service/userService/user.service'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  message = '';
+  selected: '';
   hide = true;
   model: any;
-  response: any;
-  message = '';
+  responce: any;
+  message1='';
+  advance:any;
+  basic:any;
+  service=''
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  firstname = new FormControl('', [Validators.required]);
+  lastname = new FormControl('', [Validators.required])
+  username = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
+  confirm = new FormControl('', [Validators.required]);
+  
+
+  constructor(private userService: UserService, private router: Router,  private snackBar: MatSnackBar,public cart:CartService) { }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
-    }
-    );
+    this.getUserService()
+   this.service= localStorage.getItem('service')
+   console.log(this.service,"service")
   }
-  get f() { return this.registerForm.controls; }
+ 
+  getUserService(){
+    this.cart.getUserService().subscribe(data=>{
+      if(data['data']['data'].length>0){
+        this.advance=data['data']['data'][0]
+        this.basic=data['data']['data'][1]
+      }
+    })
+  }
 /**
  * function is used to register the user
  */
   register() {
+ 
+
     try {
       this.model = {
-        "firstName": this.registerForm.get('firstName').value,
-        "lastName": this.registerForm.get('lastName').value,
-        // "imageUrl":"",
-        "service": "advance",
-        // "createdDate": "",
-        // "modifiedDate": "",
-        "email": this.registerForm.get('email').value,
-        "password": this.registerForm.get('password').value,
-        "confirmpassword": this.registerForm.get('confirmpassword').value,
+        "firstName": this.firstname.value,
+        "lastName": this.lastname.value,
+        "phoneNumber": '',
+        "imageUrl": '',
+        "service": this.service,
+        "email": this.username.value,
+        "confirm": this.confirm.value,
+        "cardId": '',
+        "password": this.password.value,
       }
 
-      // stop here if form is invalid
-      if (this.registerForm.invalid ) {
+      if (this.firstname.value == '' || this.lastname.value == '' || this.username.value == '' || this.password.value == '' || this.confirm.value == '' || this.service == '') {
+        this.message = "Fields are missing";
+        
         return;
       }
-      else if(this.registerForm.get("password").value!=this.registerForm.get("confirmpassword").value){
-        this.message="passwords should match"
-         console.log(this.message)
-   }
-
       else {
-        this.userService.register(this.model).subscribe(data => {
-          this.response = data;
-          console.log(data)
-          this.message = this.response.message
-          this.router.navigate(['login']);
-        }, err => {
-          alert('something wrong happen')
-        })
 
+        this.userService.register(this.model).subscribe(data => {
+
+          this.responce=data;
+           this.message1=this.responce.message;
+          console.log(data);
+          this.router.navigate(['login']);
+        },
+          err => {
+            try{
+              this.snackBar.open('UnSuccessful registration',"close", {
+                duration: 3000
+              });
+            }catch(err){
+              console.log(err)
+            }
+          })
       }
     }
     catch (err) {
-      console.log("")
+      this.message="Something bad happened"
     }
+     
   }
   login(){
     try{

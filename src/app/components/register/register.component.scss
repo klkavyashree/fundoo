@@ -20,69 +20,88 @@
 .o1{
     color:$mixblue
 }
-p{
-    color:$black;
-    font-weight: 650;
-    font-family: 'Times New Roman', Times, serif;
+
+
+.mainForm{
+    display: flex;
+    flex-direction: column;
+    // border:2px ridge;
+    // border-radius: 20px;
+    padding: 5%;
+    width: fit-content;
+  margin-left: 10%;
 }
-.btn
-{
-    background: rgb(37, 66, 161);
-    color:$white;
-    width: 20%;
-    float: right;  
-     
+@media screen and (max-width:599px){
+    .mainForm{
+        margin-left: 0px;
+    }
 }
-.reg
-{
-    background: white;
-    color: rgb(37, 66, 161);
-    width: 35%;
-    float: left; 
-     
+.button{
+    .primary{
+        background-color: #3399ff;
+        color: white;
+        font-style: italic;
+    }
 }
-.help-block{
-    font-size: 0.8em;
-    color: red;
-    // text-align: center;
+.fundoo{
+    display:inline-block;
 }
-.main{
-    height: 100vh;
+
+.inputForm{
+    align-self: center;
+   
+    
+.firstName{
+    width: 40%;
+    margin-right: 2%;
 }
-.err{
-    font-size: 0.8em;
-    color: red;
+.lastName{
+    width: 40%;
 }
-.fname mat-form-field{
-    width:98%;
+.gmail{
+    width: 82%;
 }
-.lname mat-form-field{
-    width: 98%;
+.pass{
+    margin-right: 2%;
 }
-.password mat-form-field{
-    width: 90%;
+.confirm{
+    margin-right: 3%;
 }
-.confirmpassword mat-form-field{
-    width: 90%
 }
-.email mat-form-field{
-    width:87%;
+.advance{
+    width:200px; 
+    background-color: white;
+    box-shadow: 25px 40px orange;
+    border-style: groove;
+    border-radius: 2%;
+    
 }
-// @media screen and (max-width:599px){
-//     #password mat-form-field{
-//         width: 70%
-//         }
+.basic{
+    width: 200px;
+    background-color: white;
+    border-style: groove;
+    border-radius: 2%;
+    box-shadow: 25px 40px gray;
+
+}
+
+@media screen and (max-width:700px){
+    .advance{
+        width: 170px;
+    }
+    .basic{
+        width: 170px
+    }
   
-//     #email mat-form-field{
-//             width: 10%
-//          }
-//     #confirmpassword mat-form-field{
-//             width: 70%
-//             }
-//     #fname mat-form-field{
-//                 width: 70%
-//                 }
-//                 #lname mat-form-field{
-//                     width: 70%
-//                     }
-//   }
+
+}
+@media screen and (max-width:400px){
+    .advance{
+        width: 130px;
+    }
+    .basic{
+        width: 130px
+    }
+  
+
+}

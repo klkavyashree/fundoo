@@ -62,7 +62,6 @@ export class HttpserviceService {
   }
   
   getHttp(url){
-    console.log(url,"url")
     const httpTocken={
     headers:new HttpHeaders({
     'content-Type':'application/json',
@@ -70,6 +69,15 @@ export class HttpserviceService {
     })
     }
     return this.http.get(this.baseUrl+url,httpTocken);
+    }
+
+    getService(url){
+      const httpTocken={
+        headers:new HttpHeaders({
+        'content-Type':'application/json',
+        })
+        }
+        return this.http.get(this.baseUrl+url,httpTocken);
     }
 
     postImage(url,body){
