@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   mobileQuery: MediaQueryList;
   message: any;
   Search: string;
-  labelList: any;
+  labelList=[];
   flag=true
   name=''
   email=''
@@ -36,6 +36,15 @@ export class DashboardComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.data.currentLabel.subscribe(data=>{
+      this.labelList.splice(0,0,data)
+    })
+
+
+    this.data.labelDelete.subscribe(data=>{
+      this.deleteLabel(data)
+    })
   }
 
   ngOnInit() {
@@ -140,6 +149,7 @@ grid_list(){
           console.log('The dialog was closed');
           console.log('result when dialog close', result);
           var userId=localStorage.getItem('userid')
+            if(result != undefined){
           this.notes.postlabels(
             {
               "label": result,
@@ -150,6 +160,7 @@ grid_list(){
             ), err => {
               console.log(err)
             }
+          }
         })
       } catch (err) {
         console.log('error occurs ')
@@ -163,6 +174,15 @@ grid_list(){
       this.labelList = this.labelList.reverse();
       console.log(data, 'resp getlabel')
     })
+  }
+
+  deleteLabel(data){
+    console.log(data,"delete label data")
+    console.log(this.labelList)
+   let ind=this.labelList.findIndex(x=>x.id===data.id)
+      console.log(ind)
+      this.labelList.splice(ind,1)
+    
   }
   sendLabel(label){
       this.data.sendLabel(label);

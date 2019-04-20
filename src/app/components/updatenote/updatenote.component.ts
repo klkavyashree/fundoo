@@ -10,6 +10,7 @@ import { NoteService } from '../../service/noteservice/note.service'
   styleUrls: ['./updatenote.component.scss']
 })
 export class UpdatenoteComponent implements OnInit {
+messages='display';
 Update='update'
 flag1=true
 show=true;

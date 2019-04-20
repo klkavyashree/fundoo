@@ -47,8 +47,8 @@
     </button>
     <button *ngIf='imageNew != ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
     mat-icon-button class="accountButton" [matMenuTriggerFor]="accountMenu" matTooltip="Google Account">
-     
    </button>
+   
     <mat-menu #accountMenu="matMenu" [overlapTrigger]="false" class="menu" >
       <div fxLayout='row'>
           <div fxFlex='32'>  

@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit {
   service: string='';
   advance:any;
   basic:any;
+  cartid:any;
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private snackbar: MatSnackBar, public cart:CartService) { }
 
   ngOnInit() {
     this.getUserService()
     this.service = localStorage.getItem('service')
-    console.log(this.service,"login")
     this.loginForm = this.formBuilder.group({//creating instance of formbuilder class
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -47,7 +47,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.model = {
       "email": this.loginForm.get('email').value,
-      "password": this.loginForm.get('password').value
+      "password": this.loginForm.get('password').value,
+      "cartId":localStorage.getItem('cartid')
+
     }
 
     // stop here if form is invalid
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         this.userService.login(this.model).subscribe(data => {
-          console.log("data", data);
+          console.log(data, "resp in login");
           this.response = data;
           localStorage.setItem('token', this.response.id);
           localStorage.setItem('userid', this.response.userId)

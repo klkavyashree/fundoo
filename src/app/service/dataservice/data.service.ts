@@ -18,6 +18,13 @@ export class DataService {
   private viewMsg = new Subject<boolean>();
   MessageView = this.viewMsg.asObservable();
 
+  private addlabel = new Subject();
+  currentLabel = this.addlabel.asObservable();
+
+  private deleteLabel = new Subject();
+  labelDelete = this.deleteLabel.asObservable();
+
+
   constructor() { }
   changeMessage(message: string) {
     console.log(message, "message")
@@ -34,6 +41,12 @@ export class DataService {
   }
   changeView(message:boolean){
     this.viewMsg.next(message)
+  }
+  labeltoAdd(message:any){
+    this.addlabel.next(message)
+  }
+  labeltoDelete(message:any){
+    this.deleteLabel.next(message)
   }
 
 }

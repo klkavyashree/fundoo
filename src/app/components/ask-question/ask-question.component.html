@@ -79,7 +79,7 @@
 
   <div *ngFor='let array of combineArray'>
     <!-- ---------------------------------------------------------------answer div-------------------------------------------------------------------------- -->
-    <div *ngIf='array.parentId==index'>
+    <div *ngIf='array.parentId==index && array.isApproved==true  '>
       <div fxLayout='row'>
 
         <div>
@@ -94,7 +94,7 @@
         <div fxLayout.xs='column' fxLayout='row'>
           <div fxLayout='row' fxLayout='column'>
             <div fxLayout='row'>
-              <div style="width:80px">{{array.user.firstName}}</div>
+              <div style="width:80px">{{array.user.firstName+' '+array.user.lastName}}</div>
               <div>{{array.createdDate | date:'medium' }}</div>
             </div>
 
@@ -107,7 +107,7 @@
           </div>
         </div>
       </div>
-      <div class="msg" *ngIf='array.isApproved==true' [innerHtml]=array.message> </div>
+      <div class="msg" [innerHtml]=array.message> </div>
      
       <div *ngIf='array.id==reply'>
         <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
@@ -121,7 +121,7 @@
 
 
       <div *ngFor='let ans of combineArray'>
-        <div style="margin:50px" *ngIf='ans.parentId==array.id'>
+        <div style="margin:50px" *ngIf='ans.parentId==array.id && ans.isApproved==true '>
           <div fxLayout='row'>
             <div>
               <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
@@ -135,7 +135,7 @@
             <div fxLayout.xs='column' fxLayout='row'>
               <div fxLayout='row' fxLayout='column'>
                 <div fxLayout='row'>
-                  <div style="width:80px">{{ans.user.firstName}}</div>
+                  <div style="width:80px">{{ans.user.firstName+' '+ans.user.lastName}}</div>
                   <div>{{ans.createdDate | date:'medium' }}</div>
                 </div>
 
@@ -147,7 +147,7 @@
               </div>
             </div>
           </div>
-          <div class="msg" *ngIf='ans.isApproved==true' [innerHtml]=ans.message>_</div>
+          <div class="msg" [innerHtml]=ans.message>_</div>
         
           <div *ngIf='ans.id==reply'>
             <div [froalaEditor] [(froalaModel)]='questions' (click)='replyBtn()'></div><br>
@@ -163,7 +163,7 @@
 
 
           <div *ngFor='let child of combineArray'>
-            <div style="margin:50px" *ngIf="child.parentId==ans.id">
+            <div style="margin:50px" *ngIf="child.parentId==ans.id && child.isApproved==true ">
               <div fxLayout='row'>
                 <div>
                   <button *ngIf='imageNew == ""' mat-mini-fab [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
@@ -177,7 +177,7 @@
                 <div fxLayout.xs='column' fxLayout='row'>
                   <div fxLayout='row' fxLayout='column'>
                     <div fxLayout='row'>
-                      <div style="width:80px">{{child.user.firstName}}</div>
+                      <div style="width:80px">{{child.user.firstName+' '+child.user.lastName}}</div>
                       <div>{{child.createdDate | date:'medium' }}</div>
                     </div>
 
@@ -189,7 +189,7 @@
                   </div>
                 </div>
               </div>
-              <div class="msg" *ngIf='child.isApproved==true' [innerHtml]=child.message></div>
+              <div class="msg"  [innerHtml]=child.message></div>
               <mat-divider></mat-divider>
 
             </div>

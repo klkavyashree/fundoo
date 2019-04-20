@@ -103,7 +103,7 @@
         </mat-menu>
       </div>
       <div fxFlex='100' *ngIf="data.cond!='trash'" fxLayout='row' fxLayoutAlign='space-between end'>
-        <app-icon-list (showtick)="addList($event)" [update]='Update' [card]='data.array'  (showtickUpdate)=showCheckBox($event) [type]='data.type' >
+        <app-icon-list [message]='messages' (showtick)="addList($event)" [update]='Update' [card]='data.array'  (showtickUpdate)=showCheckBox($event) [type]='data.type' >
         </app-icon-list>
       </div >
       <button fxLayoutAlign='end end' mat-button [mat-dialog-close]="data" cdkFocusInitial >close</button>

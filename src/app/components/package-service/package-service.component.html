@@ -5,7 +5,7 @@
 
 
   <div fxLayout='row' fxLayoutAlign='center center' fxLayout.xs='column'>
-    <div style="margin-left:50px" class="advance" (click)='opendialog(advance)'>
+    <div style="margin-left:50px" class="advance" (click)='opendialog(advance)' (click)='addToCart(advance.id)'>
       <div fxLayout='column' class="relative">
         <div class="absolute">
           <div class="rate">
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div style="margin-left:50px" class="basic" (click)='opendialog(basic)'>
+    <div style="margin-left:50px" class="basic" (click)='opendialog(basic)' (click)='addToCart(basic.id)'>
       <div fxLayout='column' class="relative">
         <div class="absolute">
           <div class="rate">

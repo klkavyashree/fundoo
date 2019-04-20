@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../service/productCart/cart.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-cart',
@@ -8,36 +9,51 @@ import { CartService } from '../../service/productCart/cart.service';
 })
 export class CartComponent implements OnInit {
 service:string='';
-advance:any;
-basic:any;
 selected:any;
-cond:string='signin'
+noCart:any;
+cond:string='signin';
+address:string='';
+cartid:any;
 
-  constructor(public cart:CartService) { }
+  constructor(public cart:CartService, public snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    this.service=localStorage.getItem('service');
-    this.getUserService()
-    
-  }
-  getUserService(){
-    this.cart.getUserService().subscribe(data=>{
-      if(data['data']['data'].length>0){
-        this.advance=data['data']['data'][0]
-        this.basic=data['data']['data'][1]
-     
-        if(this.service=='advance'){
-            this.selected=this.advance
-        }
-        else{
-            this.selected=this.basic
-        }
-        console.log(this.selected,"selected")
-      }
    
-    })
+    this.cartid=localStorage.getItem('cartid')
+   
+    this.getMyCart()
+  }
   
+getMyCart(){
+  this.cart.getMyCart().subscribe(data=>{
+    console.log(data,"mycartdetails")
+    if(data['data'].length>0){
+     this.selected= data['data'][0]['product'];
+     this.cartid=data['data'][0].id
+     console.log(this.cartid,"selected")
+    }
+    else{
+      this.noCart=data['data']
+      console.log(this.noCart,"cart")
+    }
+  })
+}
+
+
+
+placeOrder(){
+  if(this.address==''){
+    this.snackbar.open('address should not be empty',"close", {
+      duration: 3000
+    });
+  }
+  else{
+    this.cart.placeOrder( {"cartId":this.cartid,"address":this.address}).subscribe(data=>{
+      console.log(data,"placeoder")
+      this.cond='complete'
+    }) 
   }
 
-
+	
+}
 }

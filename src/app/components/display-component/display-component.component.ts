@@ -309,14 +309,5 @@ this.router.navigate(['dashboard/askquestion'])
 
 
 
-  // opendialog(array){
-  //   const dialogRef = this.dialog.open(ColaboratorComponent, {
-  //     data: {array},
-  //     width: '600px'
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     console.log('result when dialog close', result)
-  //   });
-  // }
+ 
 }

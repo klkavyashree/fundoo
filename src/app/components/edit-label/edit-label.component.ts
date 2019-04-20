@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../../service/noteservice/note.service'
 import { DataService } from '../../service/dataservice/data.service'
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-edit-label',

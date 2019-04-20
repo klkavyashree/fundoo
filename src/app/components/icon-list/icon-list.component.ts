@@ -3,9 +3,9 @@ import { DataService } from '../../service/dataservice/data.service'
 import { NoteService } from '../../service/noteservice/note.service'
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ColaboratorComponent } from '../../components/colaborator/colaborator.component'
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 
 
 
@@ -56,7 +56,7 @@ export class IconListComponent implements OnInit, OnDestroy {
   data: any;
   flag4 = false;
   date: Date
-  setTime: number=null;
+  setTime: number = null;
   picker: any;
   /**
    * taking the colors as two dimensional array
@@ -77,7 +77,8 @@ export class IconListComponent implements OnInit, OnDestroy {
   { 'color': '#E0E0E0', 'name': 'gray' }
 
   ]]
-  constructor(private dataService: DataService, private note: NoteService, public dialog: MatDialog, private router:Router ) { }
+  constructor(private dataService: DataService, private note: NoteService, public dialog: MatDialog, private router: Router,
+    public snackbar: MatSnackBar) { }
   ngOnInit() {
     this.getLabels()
   }
@@ -149,7 +150,7 @@ export class IconListComponent implements OnInit, OnDestroy {
    */
   cardDelete(card) {
     try {
-      console.log(card.isDeleted=true)
+      console.log(card.isDeleted = true)
       this.deletecard.emit(card)
     }
     catch (err) {
@@ -184,11 +185,11 @@ export class IconListComponent implements OnInit, OnDestroy {
 
   }
   cardArchive(card) {
-    console.log(card.isArchived=true,"in archive icon")
+    console.log(card.isArchived = true, "in archive icon")
     this.archivedCard.emit(card)
   }
   notArchive(card) {
-   card.isArchived=false; 
+    card.isArchived = false;
     this.unarchiveCard.emit(card)
   }
 
@@ -209,20 +210,25 @@ export class IconListComponent implements OnInit, OnDestroy {
   }
   addLabeltocard(card, label) {
     if (card != undefined) {
-      console.log("enter....")
-      console.log(card)
-      console.log(label)
-      this.note.addLabeltoNote(card.id, label.id).subscribe(data => {
-        console.log(card, "card")
-        card = card['noteLabels'].push(label)
-        console.log(card, "card in addlabeltocard")
-      }), err => {
-        console.log(err)
+      let ind = card.noteLabels.findIndex(x => x.id === label.id)
+      if (ind == -1) {
+        this.note.addLabeltoNote(card.id, label.id).subscribe(data => {
+          card = card['noteLabels'].push(label)
+        }), err => {
+          console.log(err)
+        }
+      }
+      else {
+        this.snackbar.open("Label is already exist", "close", {
+          duration: 1500
+        })
       }
     }
     else {
       this.emitLabelToNote.emit(label)
     }
+
+
   }
   /**
    * 
@@ -260,14 +266,14 @@ export class IconListComponent implements OnInit, OnDestroy {
   remainderToday(card) {
     try {
       if (card == undefined) {
-        var reminder=new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 20, 0, 0, 0)
+        var reminder = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 20, 0, 0, 0)
         this.emitReminderNote.emit(reminder)
       }
       else {
-      this.data = {
-        "noteIdList": [card.id],
-        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 20, 0, 0, 0)
-      }
+        this.data = {
+          "noteIdList": [card.id],
+          "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate(), 20, 0, 0, 0)
+        }
         if (card.reminder != undefined) {
           card.reminder = [];
           card.reminder.push(this.data.reminder)
@@ -288,24 +294,25 @@ export class IconListComponent implements OnInit, OnDestroy {
    */
   remainderTom(card) {
     try {
-      if(card==undefined){
-        var reminder=new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+      if (card == undefined) {
+        var reminder = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
         this.emitReminderNote.emit(reminder)
       }
-      else{
-      this.data = {
-        "noteIdList": [card.id],
-        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+      else {
+        this.data = {
+          "noteIdList": [card.id],
+          "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 1), 8, 0, 0, 0)
+        }
+        if (card.reminder != undefined) {
+          card.reminder = [];
+          card.reminder.push(this.data.reminder)
+        }
+        this.note.addRemainder(this.data).subscribe(data => {
+          console.log(data)
+          this.emitReminder.emit(card)
+        }), err => console.log(err)
       }
-      if (card.reminder != undefined) {
-        card.reminder = [];
-        card.reminder.push(this.data.reminder)
-      }
-      this.note.addRemainder(this.data).subscribe(data => {
-        console.log(data)
-        this.emitReminder.emit(card)
-      }), err => console.log(err)
-    } }catch (err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -315,25 +322,26 @@ export class IconListComponent implements OnInit, OnDestroy {
    */
   remaindWeek(card) {
     try {
-      if(card==undefined){
-        var reminder=new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
+      if (card == undefined) {
+        var reminder = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
         this.emitReminderNote.emit(reminder)
       }
-      else{
-      this.data = {
-        "noteIdList": [card.id],
-        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
+      else {
+        this.data = {
+          "noteIdList": [card.id],
+          "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), (this.currentDate.getDate() + 7), 8, 0, 0, 0)
+        }
+
+        if (card.reminder != undefined) {
+          card.reminder = [];
+          card.reminder.push(this.data.reminder)
+        }
+        this.note.addRemainder(this.data).subscribe(data => {
+          console.log(data)
+          this.emitReminder.emit(card)
+        }), err => console.log(err)
       }
-      
-      if (card.reminder != undefined) {
-        card.reminder = [];
-        card.reminder.push(this.data.reminder)
-      }
-      this.note.addRemainder(this.data).subscribe(data => {
-        console.log(data)
-        this.emitReminder.emit(card)
-      }), err => console.log(err)
-    } }catch (err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -345,29 +353,29 @@ export class IconListComponent implements OnInit, OnDestroy {
   }
   Reminder(card) {
     this.date.setHours(this.setTime)
-    if(card==undefined){
+    if (card == undefined) {
       var reminder = this.date
       this.emitReminderNote.emit(reminder)
     }
-    else{
-    var model = {
-      "noteIdList": [card.id],
-      "reminder": this.date
+    else {
+      var model = {
+        "noteIdList": [card.id],
+        "reminder": this.date
+      }
+
+      if (card.reminder != undefined) {
+        card.reminder = [];
+        card.reminder.push(model.reminder)
+      }
+      console.log(model)
+      this.note.addRemainder(model).subscribe(data => {
+        this.setTime = null
+        console.log(data)
+        this.emitReminder.emit(card)
+      }, err => {
+        console.log(err)
+      })
     }
-    
-    if (card.reminder != undefined) {
-      card.reminder = [];
-      card.reminder.push(model.reminder)
-    }
-    console.log(model)
-    this.note.addRemainder(model).subscribe(data => {
-      this.setTime = null
-      console.log(data)
-      this.emitReminder.emit(card)
-    }, err => {
-      console.log(err)
-    })
-  }
   }
   /**
    * function will hide4 the checkboxes in the checklist
@@ -406,9 +414,9 @@ export class IconListComponent implements OnInit, OnDestroy {
       console.log('error occurs ')
     }
   }
-  question(note){
-    localStorage.setItem('noteId',note.id)
-      this.router.navigate(['dashboard/askquestion'])
+  question(note) {
+    localStorage.setItem('noteId', note.id)
+    this.router.navigate(['dashboard/askquestion'])
   }
   ngOnDestroy() {
     this.destroy$.next(true);

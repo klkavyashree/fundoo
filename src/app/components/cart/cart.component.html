@@ -1,13 +1,21 @@
-<div class="main" fxFlex='100'>
+<div fxFlex=100 *ngIf='noCart != undefined' fxLayoutAlign='center center'>
+  <div class="empty"><b>Your Order is Completed</b></div>
+  </div>
+
+<div class="main" fxFlex='100' *ngIf='noCart == undefined'>
   <div fxLayoutAlign='center start'>
     <font size='6' color='brown'>Fundoo Cart</font>
   </div>
   <div>
   <div>
     <div fxFlex='100' style="margin-left:15px;margin-right: 15px" fxFlex.xs='100'>
-      <div> <img src="../../../assets/images/baseline-shopping_cart-24px.svg"></div>
+      <div *ngIf='cond=="signin"' > <img src="../../../assets/images/baseline-shopping_cart-24px.svg"></div>
+      <div *ngIf='cond=="review"'  style="margin-left:48%"> <img src="../../../assets/images/baseline-shopping_cart-24px.svg"></div>
+      <div *ngIf='cond=="complete"'  style="margin-left:98%"> <img src="../../../assets/images/baseline-shopping_cart-24px.svg"></div>
       <div style="margin-top:-14px">
-        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+        <mat-progress-bar *ngIf='cond=="signin"' mode="determinate" value="0"></mat-progress-bar>
+        <mat-progress-bar *ngIf='cond=="review"' mode="determinate" value="50"></mat-progress-bar>
+        <mat-progress-bar *ngIf='cond=="complete"' mode="determinate" value="100"></mat-progress-bar>
       </div>
     </div>
   </div>
@@ -40,18 +48,21 @@
       </div>
 
       <div style="margin-top:25px" fxLayout='column'>
-        <div>price </div>
+        <div><b>price</b></div>
         <div>$ {{selected.price}}</div>
       </div>
       <div style="margin:25px" fxLayout='column'>
-        <div>Validity</div>
+        <div><b>Validity</b></div>
         <div>per month</div>
       </div>
     </div>
-    <div style="margin-top:25px" fxLayoutAlign.xs='center center'>
-      <div class="card" fxLayoutAlign='center center' fxLayout='column'>
+    <div style="margin-top:25px" fxLayoutAlign.xs='center center' >
+      <div class="card" fxLayoutAlign='center center' fxLayout='column' *ngIf='cond != "complete"'>
         <div>Subtotal(1 item) : $ {{selected.price}} </div>
-          <button style="background-color:rgb(134, 134, 189)"  (click)='cond="review"'   >Proceed to Checkout</button>
+          <button  *ngIf='cond=="signin"' style="background-color:rgb(134, 134, 189)" mat-botton (click)='cond="review"' >Proceed to Checkout</button>
+          <button   *ngIf='cond=="review"' style="background-color:rgb(134, 134, 189)"  (click)='placeOrder()' >Place your order</button>
+     
+          
           <div></div>
       </div>
     </div>
@@ -59,5 +70,6 @@
   <div></div><br>
 
   <mat-divider></mat-divider>
-  <div fxLayoutAlign='end end' style="margin-right:30px">Subtotal(1 item) : $ {{selected.price}} </div><br>
+  <div  *ngIf='cond=="signin"' fxLayoutAlign='end end' style="margin-right:35px"><b>Subtotal(1 item) : $ {{selected.price}}</b></div><br>
+  <div *ngIf='cond=="review"'><textarea  cols="30" rows="5" placeholder="Enter Your Address Here" [(ngModel)]='address'></textarea></div>
 </div>

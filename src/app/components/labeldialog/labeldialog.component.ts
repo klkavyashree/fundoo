@@ -1,7 +1,8 @@
 import { Component, OnInit,Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { DialogData } from '../../components/dashboard/dashboard.component';
-import { NoteService } from '../../service/noteservice/note.service'
+import { NoteService } from '../../service/noteservice/note.service';
+import { DataService } from '../../service/dataservice/data.service'
 
 @Component({
   selector: 'app-labeldialog',
@@ -15,7 +16,7 @@ labelList:any;
 model:any;
 label:string;
   constructor(public dialogRef: MatDialogRef<LabeldialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public note:NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public note:NoteService, public dataService:DataService ) { }
 
   ngOnInit() {
 this.getLabelIdList()
@@ -53,6 +54,7 @@ addLabel(label){
   }).subscribe(data=>{
     console.log("response",data)
   this.labelList.splice(0,0,data)
+  this.dataService.labeltoAdd(data)
 this.label=''},
     err=>{
       console.log(err)
@@ -88,7 +90,9 @@ call(event: any,label) {
     try{
     this.note.deleteLabel(array.id).subscribe(data=>{
       console.log(data,'response when delete label')
+      this.dataService.labeltoDelete(array)
       let ind=this.labelList.indexOf(array)
+      console.log(ind)
       this.labelList.splice(ind,1);
     },
       err=>console.log(err,"err delete"))

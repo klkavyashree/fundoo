@@ -22,6 +22,16 @@ export class HttpserviceService {
     }
     return this.http.post(url, body, httpOptions)
   }
+  postService(url: string, body: any): any {
+    url=this.baseUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.post(url, body, httpOptions)
+  }
+
 
   encode(data) {
     const formBody = [];

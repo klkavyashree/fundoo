@@ -50,7 +50,9 @@ export class NoteComponent implements OnInit {
     console.log(this.colaborator, "colaborator..... in note")
     try {
       this.flag = !this.flag;
-      if (this.noteTitle || this.noteContent) {
+
+
+      if (this.noteTitle.value != '' || this.noteContent.value !='') {
         this.model = {
           title: this.noteTitle.value,
           description: this.noteContent.value,

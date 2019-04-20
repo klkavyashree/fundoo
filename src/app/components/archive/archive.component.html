@@ -1,18 +1,2 @@
-<!-- <div *ngFor="let array of archivedCard" fxLayout="row wrap">
-  <mat-card fxLayout="column" class="matcard" fxFlex="90" fxFlexOffset.xl="10" fxFlex.xs='100'  [style.backgroundColor]='array.color'>
-    <div fxFlex="55" fxFlexOffset.xl="20" fxFlex.xs='97' fxLayout='row' fxLayoutAlign="start center" (click)="openDialog(array)">
-  
-  
-      <div fxLayout="column"> 
-        <div><mat-card-title >{{array.title}} </mat-card-title></div>
-       <div> <mat-card-subtitle >{{array.description}}</mat-card-subtitle></div>
-      </div>
-    </div>
-    <div fxFlex='100'>
-      <app-icon-list [card]=array (deletecard)="delete($event)" [doarchive]=false (unarchiveCard)='unarchive($event)'> </app-icon-list>
 
-    </div>
-  
-  </mat-card>
-  </div> -->
   <app-display-component (deletecard)="delete($event)" class="display" [card]="archived" [type]='archive' fxLayout='column' fxLayout="row wrap"  ></app-display-component>
