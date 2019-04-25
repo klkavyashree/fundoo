@@ -30,7 +30,7 @@ archive="archive"
             this.archived.push(this.archivedCard[index])
           }
         } 
-        this.archived=this.archived.reverse();     
+        this.archived.reverse();     
     },
     err=>{
           console.log("error occur while getting cards ",err)

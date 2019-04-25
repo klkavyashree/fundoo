@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdatenoteComponent } from '../../components/updatenote/updatenote.component';
-import { ColaboratorComponent } from '../../components/colaborator/colaborator.component'
 import { NoteService } from '../../service/noteservice/note.service';
 import { DataService } from '../../service/dataservice/data.service'
 import { EventEmitter } from '@angular/core';
@@ -227,9 +226,9 @@ export class DisplayComponentComponent implements OnInit {
         console.log(data)
         let ind = array.noteLabels.indexOf(label)
         array.noteLabels.splice(ind, 1);
-      }), err => {
+      }, err => {
         console.log(err, "err")
-      }
+      })
     }
     catch (err) {
       console.log(err)
@@ -240,7 +239,7 @@ export class DisplayComponentComponent implements OnInit {
    * @param array array contains the details of the card
    * @param rem 
    */
-  removeReminder(array, rem) {
+  removeReminder(array) {
     try {
       this.note.removeRemainder({ "noteIdList": [array.id] }).subscribe(data => {
         console.log(data)

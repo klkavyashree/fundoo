@@ -59,7 +59,7 @@
             </div>
             <!-- -------------------------------------------------service cart display------------------------------------------------------------ -->
             <div *ngIf='service=="advance"' fxLayoutAlign='center center' fxLayoutAlign.xs='start center'>
-                <div fxLayout='row'>
+                <div fxLayout='row' *ngIf='advance != undefined'>
                     <div class="advance">
                         <div class="rate">
                             <div style="margin-left:20px;margin-top: 10px">
@@ -75,7 +75,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div fxLayoutAlign='center end' style="margin-bottom:-25px">SELECTED</div>
+                        <div fxLayoutAlign='center end' >SELECTED</div>
                     </div>
                     <div class='basic' style="margin-left:30px">
                         <div class="rate1">
@@ -91,16 +91,16 @@
 
                                 </ul>
                             </div>
-                        </div>
-                        <!-- <div  fxLayoutAlign='center end' >Add To Cart</div> -->
+                        </div><br><br>
+                        <div  fxLayoutAlign='center end' >Add To Cart</div>
                     </div>
                 </div>
             </div>
             <div *ngIf='service=="basic"' fxLayoutAlig.xs='start center' fxLayoutAlign='center center'>
-                <div fxLayout='row'>
+                <div fxLayout='row' *ngIf='advance != undefined'>
                     <div class="basic">
                         <div class="rate">
-                            <div style="margin-left:20px;margin-top: 10px">
+                            <div style="margin-left:20px;margin-top: 10px" >
                                 <font size="5">Price : ${{advance.price}} per month </font>
                             </div>
 
@@ -113,7 +113,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div fxLayoutAlign='center end' style="margin-bottom:-25px">Add To Cart</div>
+                        <div fxLayoutAlign='center end' >Add To Cart</div>
                     </div>
                     <div class='advance' style="margin-left:30px">
                         <div class="rate1">
@@ -129,7 +129,7 @@
 
                                 </ul>
                             </div>
-                        </div>
+                        </div><br><br>
                         <div fxLayoutAlign='center end'>SELECTED</div>
                     </div>
                 </div>

@@ -58,17 +58,17 @@
     <div fxLayout='row' fxLayout='row wrap' style="min-height:30px">
       <div *ngFor='let item of array.reminder'>
         <mat-chip-list>
-          <div *ngIf='(todaydate|date:shortDate)==(item|date:shortdate)'>
+          <div *ngIf='(todaydate|date:shortDate)==(item|date:shortDate)'>
             <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;font-size: 0.7em">Today{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
-          <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortdate)'>
+          <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortDate)'>
             <mat-chip style="padding-right:7px;padding-left:7px;padding-top: 0px;padding-bottom: 0px;font-size: 0.7em">Tom{{item|date:'shortTime'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>
           </div>
-          <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
+          <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortDate) && (todaydate|date:shortDate)!==(item|date:shortDate)'>
             <mat-chip style="padding-right:7px;padding-left:0px;padding-top: 0px;padding-bottom: 0px ;font-size: 0.7em">{{item|date:'short'}}
               <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
             </mat-chip>

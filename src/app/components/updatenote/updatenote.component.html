@@ -1,4 +1,4 @@
-<div [style.backgroundColor]=data.array.color fxFlex='100' class="main">
+<div *ngIf='data.array != undefined' [style.backgroundColor]=data.array.color fxFlex='100' class="main">
   <div>
     <div fxFlex='100' fxLayoutAlign='space-between start' fxLayout='row' class="Border">
       <div *ngIf="data.cond!='trash'"><textarea class='textarea' [(ngModel)]="data.array.title" contenteditable="true" placeholder="add title here"></textarea></div>
@@ -60,17 +60,17 @@
         <mat-chip-list>
           <div *ngIf='(todaydate|date:shortDate)==(item|date:shortdate)'>
             <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Today{{item|date:'shortTime'}}
-              <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
+              <mat-icon matChipRemove (click)="removeReminder(data.array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)==(item|date:shortdate)'>
             <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px">Tom{{item|date:'shortTime'}}
-              <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
+              <mat-icon matChipRemove (click)="removeReminder(data.array,item)">close</mat-icon>
             </mat-chip>
           </div>
           <div *ngIf='(tomorrow|date:shortDate)!==(item|date:shortdate) && (todaydate|date:shortDate)!==(item|date:shortdate)'>
             <mat-chip style="padding-right:0px;padding-left:0px;padding-top: 0px;padding-bottom: 0px">{{item|date:'short'}}
-              <mat-icon matChipRemove (click)="removeReminder(array,item)">close</mat-icon>
+              <mat-icon matChipRemove (click)="removeReminder(data.array,item)">close</mat-icon>
             </mat-chip>
           </div>
         </mat-chip-list>
@@ -80,7 +80,7 @@
     <div *ngFor='let labels of data.array.noteLabels'>
         <mat-chip-list selected>
             <mat-chip style="padding-right:0px;padding-left:7px;padding-top: 0px;padding-bottom: 0px" class="btn">{{labels.label}}
-              <mat-icon matChipRemove (click)="removeLabel(array,labels)">cancel</mat-icon>
+              <mat-icon matChipRemove (click)="removeLabel(data.array,labels)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
       </div>

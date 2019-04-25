@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionService } from '../../service/questionservice/question.service'
 import { Router } from '@angular/router'
 import { environment } from '../../../environments/environment'
-import { log } from 'util';
+
 @Component({
   selector: 'app-ask-question',
   templateUrl: './ask-question.component.html',
@@ -137,7 +137,7 @@ export class AskQuestionComponent implements OnInit {
     this.question.like({ "like": true }, id).subscribe(data => {
 
       console.log(data)
-      this.questionArray.like.length = data['data']['details'].count
+      this.questionArray.like.length =this.questionArray.like.length+1;
       console.log(this.questionArray.like.length, "likes")
     })
   }catch(err){

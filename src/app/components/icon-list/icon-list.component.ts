@@ -168,7 +168,7 @@ export class IconListComponent implements OnInit, OnDestroy {
         "noteIdList": [card.id]
       }).subscribe(data => {
         this.cardArchive(card)
-      }), err => console.log(err)
+      }, err => {console.log(err)})
     }
     else {
       this.emitArchiveEvent.emit(true)
@@ -180,7 +180,7 @@ export class IconListComponent implements OnInit, OnDestroy {
       "noteIdList": [card.id]
     }).subscribe(data => {
       this.notArchive(card)
-    }), err => console.log(err)
+    }, err => {console.log(err)})
 
 
   }
@@ -199,9 +199,9 @@ export class IconListComponent implements OnInit, OnDestroy {
   getLabels() {
     this.note.getLabelList().subscribe(data => {
       this.labelList = data['data']['details'];
-    }), err => {
+    }, err => {
       console.log(err, "in getlabel")
-    }
+    })
   }
   doSomething($event: any) {
     this.flag3 = !this.flag3
@@ -213,10 +213,10 @@ export class IconListComponent implements OnInit, OnDestroy {
       let ind = card.noteLabels.findIndex(x => x.id === label.id)
       if (ind == -1) {
         this.note.addLabeltoNote(card.id, label.id).subscribe(data => {
-          card = card['noteLabels'].push(label)
-        }), err => {
+           card['noteLabels'].push(label)
+        }, err => {
           console.log(err)
-        }
+        })
       }
       else {
         this.snackbar.open("Label is already exist", "close", {
@@ -281,8 +281,8 @@ export class IconListComponent implements OnInit, OnDestroy {
 
         this.note.addRemainder(this.data).subscribe(data => {
           console.log(data, "data")
-          this.emitReminder.emit(card)
-        }), err => console.log(err)
+          // this.emitReminder.emit(card)
+        }, err => {console.log(err)})
       }
     } catch (err) {
       console.log(err)
@@ -309,8 +309,8 @@ export class IconListComponent implements OnInit, OnDestroy {
         }
         this.note.addRemainder(this.data).subscribe(data => {
           console.log(data)
-          this.emitReminder.emit(card)
-        }), err => console.log(err)
+          // this.emitReminder.emit(card)
+        }, err =>{ console.log(err)})
       }
     } catch (err) {
       console.log(err)
@@ -338,8 +338,8 @@ export class IconListComponent implements OnInit, OnDestroy {
         }
         this.note.addRemainder(this.data).subscribe(data => {
           console.log(data)
-          this.emitReminder.emit(card)
-        }), err => console.log(err)
+          // this.emitReminder.emit(card)
+        }, err => {console.log(err)})
       }
     } catch (err) {
       console.log(err)
@@ -371,7 +371,7 @@ export class IconListComponent implements OnInit, OnDestroy {
       this.note.addRemainder(model).subscribe(data => {
         this.setTime = null
         console.log(data)
-        this.emitReminder.emit(card)
+        // this.emitReminder.emit(card)
       }, err => {
         console.log(err)
       })

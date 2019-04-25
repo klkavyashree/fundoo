@@ -166,4 +166,29 @@ doUnPin(card){
      
 }
 
+removeReminder(array) {
+  try {
+    this.noteService.removeRemainder({ "noteIdList": [array.id] }).subscribe(data => {
+      console.log(data)
+      array.reminder.splice(0, 1)
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+removeLabel(array, label) {
+  try {
+    this.noteService.removeLabel(array.id, label.id).subscribe(data => {
+      console.log(data)
+      let ind = array.noteLabels.indexOf(label)
+      array.noteLabels.splice(ind, 1);
+    }), err => {
+      console.log(err, "err")
+    }
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
 }

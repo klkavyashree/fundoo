@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { HttpserviceService } from '../../service/httpservice.service';
-import { environment } from '../../../environments/environment'
+import { MatSnackBar } from '@angular/material';
+import { Duration } from 'ngx-bootstrap/chronos/duration/constructor';
+
 
 
 @Component({
@@ -19,7 +21,7 @@ export class ResetpasswordComponent implements OnInit {
     localStorage:any;
     token:any;
 
-  constructor(private formBuilder: FormBuilder,private httpService: HttpserviceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,private httpService: HttpserviceService, private route:ActivatedRoute,private router:Router,public snackbar:MatSnackBar ) { }
 
   ngOnInit() {
     this.resetpasswordForm = this.formBuilder.group({
@@ -27,10 +29,13 @@ export class ResetpasswordComponent implements OnInit {
       confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
   });
   }
-  
+  public access_token=this.route.snapshot.params.id;
   get f() { return this.resetpasswordForm.controls; }
 
   onSubmit() {
+
+localStorage.setItem('access_token',this.access_token)
+
     if (this.resetpasswordForm.invalid) {
         return;
     }
@@ -43,12 +48,13 @@ export class ResetpasswordComponent implements OnInit {
        newPassword:this.resetpasswordForm.get('password').value
       }
       console.log(this.model,'model')
-      this.httpService.encodedPostForm('user/reset-password',this.model).subscribe(data =>{
+      this.httpService.postPassword(this.model,this.access_token).subscribe(data =>{
         console.log('data ',data)
         this.router.navigate(['login']);
       },
       err =>{
-        alert('something wrong happen');
+        this.snackbar.open("error occur","close",
+        {duration:1500})
         console.log(err)
       })
     }

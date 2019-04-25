@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,26 +11,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {  MatInputModule} from '@angular/material';
-import { MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { RouterTestingModule } from '@angular/router/testing';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ],
-      imports:[
+      declarations: [DashboardComponent],
+      imports: [
         FlexLayoutModule,
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        FroalaEditorModule,FroalaViewModule,
+        FroalaEditorModule, FroalaViewModule,
         BarRatingModule,
         BrowserModule,
         ReactiveFormsModule,
@@ -42,10 +45,13 @@ describe('DashboardComponent', () => {
         MatSnackBarModule,
         MatInputModule,
         MatMenuModule,
-        MatDividerModule
+        MatDividerModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatDialogModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

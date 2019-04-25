@@ -98,6 +98,15 @@ export class HttpserviceService {
       };
       return this.http.post(this.baseUrl+url,body,http)
     }
+    postPassword(input,token){
+      const httpTocken={
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      })
+    }
+    return this.http.post(this.baseUrl+'user/reset-password',this.encode(input),httpTocken)
+  }
 }
 
 

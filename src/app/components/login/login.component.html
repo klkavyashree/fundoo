@@ -1,152 +1,149 @@
-<div fxLayoutAlign='center center'>
+<div fxLayoutAlign='center center' class="login">
 
 
-<div   fxLayoutAlign="center center" fxFlex="80" [ngClass]="{'mains':service ==='advance', 'mains':service==='basic' ,'main':service == null }">
-  <mat-card class='matcard' fxFlex="50" fxFlex.xs='100'>
-    <div class="fundoo" fxLayout="row" fxLayoutAlign="center center">
-      <h1>
-        <span class="F">F</span>
-        <span class="u">u</span>
-        <span class="n">n</span>
-        <span class="d">d</span>
-        <span class="o">o</span>
-        <span class="o1">o</span>
-      </h1>
-    </div>
-    <div>
-      <h2 fxLayoutAlign="center center">Sign in</h2>
-      <h4 fxLayoutAlign="center center"> with your Fundoo Account</h4>
-      <div class="msg">{{message}}</div>
-    </div>
-    <form [formGroup]="loginForm">
-      <div class="email" fxLayout="row" fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)}">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        </mat-form-field>
+  <div fxLayoutAlign="center center" fxLayout='row' fxLayout.lt-lg='column' fxFlex="80" [ngClass]="{'mains':service ==='advance', 'mains':service==='basic' ,'main':service == null }">
+    <mat-card class='matcard' fxFlex="50" fxFlex.xs='100'>
+      <div class="fundoo" fxLayout="row" fxLayoutAlign="center center">
+        <h1>
+          <span class="F">F</span>
+          <span class="u">u</span>
+          <span class="n">n</span>
+          <span class="d">d</span>
+          <span class="o">o</span>
+          <span class="o1">o</span>
+        </h1>
       </div>
-      <span class="help-block" *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)"
-        fxLayoutAlign="center center">
-        <span *ngIf="f.email.errors.required">Email is required</span>
-        <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
-      </span>
-
-      <div class="password" fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)}">
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-            [type]="hide ? 'password' : 'text'">
-          <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon>
-        </mat-form-field>
+      <div>
+        <h2 fxLayoutAlign="center center">Sign in</h2>
+        <h4 fxLayoutAlign="center center"> with your Fundoo Account</h4>
+        <div class="msg">{{message}}</div>
       </div>
-      <span class="help-block" *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)"
-        fxLayoutAlign="center center">
-        <span *ngIf="f.password.errors.required">Password is required</span><br>
-        <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span>
-
-      </span>
-
-      <div fxLayout='row' fxLayoutAlign='space-between center'>
-        <div fxLayout='column'>
-          <button mat-button style="margin-left:15px" (click)="forgotpassword()" class="forgot" fxLayoutAlign="center">Forgot
-            Password</button>
-          <button mat-button style="margin-left:10px" (click)="register()" class="reg" fxLayoutAlign="center">create
-            account</button>
+      <form [formGroup]="loginForm">
+        <div class="email" fxLayout="row" fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)}">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+          </mat-form-field>
         </div>
-        <button class="btn btn-primary" mat-button (click)="login()" fxLayoutAlign="center">next</button>
-      </div>
-    </form>
+        <span class="help-block" *ngIf="loginForm.get('email').errors && (loginForm.get('email').touched || loginForm.get('email').dirty)"
+          fxLayoutAlign="center center">
+          <span *ngIf="f.email.errors.required">Email is required</span>
+          <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
+        </span>
 
-  </mat-card>
+        <div class="password" fxLayoutAlign="center center" [ngClass]="{'has-error':loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)}">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+              [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide=!hide">{{hide ? 'visibility':'visibility-off'}}</mat-icon>
+          </mat-form-field>
+        </div>
+        <span class="help-block" *ngIf="loginForm.get('password').errors && (loginForm.get('password').touched || loginForm.get('password').dirty)"
+          fxLayoutAlign="center center">
+          <span *ngIf="f.password.errors.required">Password is required</span><br>
+          <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span>
+
+        </span>
+
+        <div fxLayout='row' fxLayoutAlign='space-between center'>
+          <div fxLayout='column'>
+            <button mat-button style="margin-left:15px" (click)="forgotpassword()" class="forgot" fxLayoutAlign="center">Forgot
+              Password</button>
+            <button mat-button style="margin-left:10px" (click)="register()" class="reg" fxLayoutAlign="center">create
+              account</button>
+          </div>
+          <button class="btn btn-primary" mat-button (click)="login()" fxLayoutAlign="center">next</button>
+        </div>
+      </form>
+
+    </mat-card>
 
 
-  <div *ngIf='service=="advance"' fxFlex='100' fxLayoutAlign="center center" style="background-color:rgb(207, 207, 207)" fxLayout='column'>
-    <br><br><br>
-    <div fxLayout='center start'>Service</div><br><br><br><br>
-    <div fxLayoutAlign='center center'>
-      <div fxLayout='row'>
-        <div class="advance">
-          <div class="rate">
-            <div style="margin-left:20px;margin-top: 10px">
-              <font size="5">Price : ${{advance.price}} per month </font>
+    <div *ngIf='service=="advance"' class="service" fxFlex='100' fxLayoutAlign="center center" style="background-color:rgb(207, 207, 207)"
+      fxLayout='column'> 
+      <div fxLayoutAlign=' start start' class="header" >Service</div>   
+          <div fxLayout='row' fxLayoutAlign='start center'>
+            <div class="advance" *ngIf='advance != undefined'>
+              <div class="rate">
+                <div style="margin-left:20px;margin-top: 10px">
+                  <font size="5">Price : ${{advance.price}} per month </font>
+                </div>
+                <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
+                <div>
+                  <ul>
+                    <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
+                    <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div fxLayoutAlign='center end'>SELECTED</div>
             </div>
+            <div class='basic' style="margin-left:30px" *ngIf='basic != undefined'>
+              <div class="rate1">
+                <div style="margin-left:20px;margin-top: 10px">
+                  <font size="5">Price : ${{basic.price}} per month</font>
+                </div>
 
-            <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
-            <div>
-              <ul>
-                <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
-                <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+                <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
+                <div>
+                  <ul>
+                    <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
+                    <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
 
-              </ul>
+                  </ul>
+                </div>
+              </div><br><br>
+              <div fxLayoutAlign='center end'>Add To Cart</div>
+            </div>
+          
+      
+          </div>
+    </div>
+
+    <div *ngIf='service=="basic"' class="service" fxFlex='100' fxLayoutAlign="center start" style="background-color:rgb(207, 207, 207)"
+      fxLayout='column'>
+      <div fxLayout='start center' *ngIf='advance != undefined'>Service
+        <div fxLayoutAlign='center center'>
+          <div fxLayout='row'>
+            <div class="basic">
+              <div class="rate">
+                <div style="margin-left:20px;margin-top: 10px">
+                  <font size="5">Price : ${{advance.price}} per month </font>
+                </div>
+
+                <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
+                <div>
+                  <ul>
+                    <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
+                    <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
+
+                  </ul>
+                </div>
+              </div>
+              <div fxLayoutAlign='center end'>Add To Cart</div>
+            </div>
+            <div class='advance' style="margin-left:30px">
+              <div class="rate1">
+                <div style="margin-left:20px;margin-top: 10px">
+                  <font size="5">Price : ${{basic.price}} per month</font>
+                </div>
+
+                <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
+                <div>
+                  <ul>
+                    <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
+                    <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
+
+                  </ul>
+                </div>
+              </div><br><br>
+              <div fxLayoutAlign='center end'>SELECTED</div>
             </div>
           </div>
-          <div fxLayoutAlign='center end' style="margin-bottom:-25px">SELECTED</div>
         </div>
-        <div class='basic' style="margin-left:30px">
-          <div class="rate1">
-            <div style="margin-left:20px;margin-top: 10px">
-              <font size="5">Price : ${{basic.price}} per month</font>
-            </div>
 
-            <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
-            <div>
-              <ul>
-                <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
-                <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
-
-              </ul>
-            </div>
-          </div>
-          <div fxLayoutAlign='center end'>Add To Cart</div>
-        </div>
       </div>
     </div>
-
-    <br><br><br><br><br>
   </div>
-
-  <div *ngIf='service=="basic"' fxFlex='100' fxLayoutAlign="center center" style="background-color:rgb(207, 207, 207)" fxLayout='column'>
-      <br><br><br>
-    <div fxLayout='center start'>Service</div><br><br><br><br>
-    <div fxLayoutAlign='center center'>
-      <div fxLayout='row'>
-        <div class="basic">
-          <div class="rate">
-            <div style="margin-left:20px;margin-top: 10px">
-              <font size="5">Price : ${{advance.price}} per month </font>
-            </div>
-
-            <div style="margin-left:20px;color: blue;font-size: 15px">{{advance.name}}</div>
-            <div>
-              <ul>
-                <li style="margin-top:10px; opacity: 0.7">$ {{advance.price}}/month</li>
-                <li style="margin-top:10px;opacity: 0.7">{{advance.description}}</li>
-
-              </ul>
-            </div>
-          </div>
-          <div fxLayoutAlign='center end' style="margin-bottom:-25px">Add To Cart</div>
-        </div>
-        <div class='advance' style="margin-left:30px">
-          <div class="rate1">
-            <div style="margin-left:20px;margin-top: 10px">
-              <font size="5">Price : ${{basic.price}} per month</font>
-            </div>
-
-            <div style="margin-left:20px;color: blue;font-size: 15px">{{basic.name}}</div>
-            <div>
-              <ul>
-                <li style="margin-top:10px; opacity: 0.7">$ {{basic.price}}/month</li>
-                <li style="margin-top:10px;opacity: 0.7">{{basic.description}}</li>
-
-              </ul>
-            </div>
-          </div>
-          <div fxLayoutAlign='center end'>SELECTED</div>
-        </div>
-      </div>
-    </div>
-    <br><br><br><br><br>
-  </div>
-</div>
 </div>

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.getUserService()
     this.service = localStorage.getItem('service')
+    console.log(this.service,"service...........")
     this.loginForm = this.formBuilder.group({//creating instance of formbuilder class
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: ['', [Validators.required, Validators.minLength(6)]]

@@ -111,6 +111,7 @@ grid_list(){
   signout() {
     localStorage.clear();
     this.router.navigate(['login']);
+
   }
   note() {
     this.router.navigate(['dashboard/note']);
@@ -157,9 +158,8 @@ grid_list(){
               "userId": userId
             }).subscribe(data =>
               this.labelList.splice(0, 0, data)
-            ), err => {
-              console.log(err)
-            }
+            , err => {console.log(err)});
+            
           }
         })
       } catch (err) {
@@ -171,7 +171,7 @@ grid_list(){
   getLabels() {
     this.notes.getLabelList().subscribe(data => {
       this.labelList = data['data']['details'];
-      this.labelList = this.labelList.reverse();
+      this.labelList.reverse();
       console.log(data, 'resp getlabel')
     })
   }

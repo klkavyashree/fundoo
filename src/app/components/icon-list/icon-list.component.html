@@ -120,7 +120,7 @@
   </button>
   <mat-menu  #menu5="matMenu" [overlapTrigger]="false">
     <ng-template matMenuContent>
-      <div class="buttons">
+      <div class="buttons" >
         <div fxLayout=row fxLayoutGap=10px style="margin-top:5px" *ngFor='let colors of colorArray'>
           <div *ngFor='let color of colors'>
             <button class="colors" [ngStyle]="{'background-color': color.color }" (click)='colorsEdit(color.color,card)'

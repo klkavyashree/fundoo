@@ -1,4 +1,4 @@
-<div>
+<div *ngIf='data.cart != undefined' >
 <mat-toolbar class="toolbar" fxLayoutAlign="space-between center">
   <div style="font-size:17px;color: white" >Advance Pack Details</div>
   <div style="font-size:12px;color: white" fxLayoutAlign="space-between center" >$ {{data.cart.price}} per month</div>

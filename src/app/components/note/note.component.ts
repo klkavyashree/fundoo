@@ -78,7 +78,8 @@ export class NoteComponent implements OnInit {
           }
           this.colaborator = [];
           this.label = [];
-          this.isPined = false;
+          this.flag1 = true;
+          this.isPined = false
           this.checklistOpen=[];
           this.list=''
         },
@@ -167,7 +168,7 @@ export class NoteComponent implements OnInit {
     }
   }
   getLabel(event) {
-    this.id.push(event.id)
+    this.id.push(event.id) 
     this.label.push(event.label)
   }
 
