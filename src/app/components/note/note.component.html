@@ -53,15 +53,7 @@
       </div>
     </div>
     <!-- --------------------------------------------------checklist-------------------------------- -->
-    <!-- <div>
-      <div *ngIf='show==true'>
-        <div *ngFor='let list of checklistOpen'>
-          <div fxLayout='row' *ngIf='!list.isDeleted'>
-            <input matInput [(ngModel)]=list.itemName>
-          </div>
-        </div>
-      </div>
-    </div> -->
+   
     <div *ngIf='show==false'>
       <div *ngFor='let list of checklistOpen'>
         <div *ngIf='list.status=="open"'>

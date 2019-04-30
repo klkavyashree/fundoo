@@ -16,9 +16,11 @@ import { MatIconModule} from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../../service/userService/user.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
+ 
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async(() => {
@@ -40,9 +42,11 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatInputModule
-      ]
+      ],providers:[UserService]
+
     })
     .compileComponents();
+    
   }));
 
   beforeEach(() => {
@@ -54,6 +58,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('Form should be valid'),async(()=>{
     expect (component.model.email.toEqual('kavyakl@gmail.com'));
     expect (component.model.password.toEqual('123456'));

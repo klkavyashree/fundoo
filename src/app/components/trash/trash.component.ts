@@ -20,7 +20,7 @@ trash='trash'
     this.note.getTrashNotes().subscribe(data=>{
       console.log(data,'getdeleted cards')
         this.deletedcards = data['data']['data'];  
-        this.deletedcards=this.deletedcards.reverse();    
+        this.deletedcards.reverse();    
     },
     err=>{
           console.log("error occur while getting cards ",err)
@@ -44,7 +44,7 @@ trash='trash'
       console.log(data,"response when restore");
       let index=this.deletedcards.indexOf(array)
       this.deletedcards.splice(index,1);
-    }),err=>console.log(err)
+    },err=>console.log(err))
   }
   
 }

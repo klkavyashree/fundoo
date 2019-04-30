@@ -24,9 +24,12 @@ import { SearchPipe } from '../../pipe/search.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
+import { NoteService } from '../../service/noteservice/note.service';
 describe('NoteComponent', () => {
   let component: NoteComponent;
+  let service : NoteService;
   let fixture: ComponentFixture<NoteComponent>;
+  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -53,4 +56,32 @@ describe('NoteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+it('should get note with the note details',()=>{
+  const response=[
+    {
+      collaberator:[],
+      collaborators:[],
+      color:"#ffffff",
+      createdDate:'2019-04-26T10:44:30.064Z',
+      description:'hgfvghd',
+      id:'67676767678678678678',
+      imageUrl:'client/images/1555567665085img',
+      isArchived:false,
+      isDeleted:false,
+      isPined:false,
+      label:[],
+      labelIdList:[],
+      linkUrl:"",
+      modifiedDate:"2019-04-26T10:44:30.064Z",
+      noteCheckLists:[],
+      noteLabels:[],
+      questionAndAnswerNotes:[],
+      reminder:[],
+      title:"ghghghgh",
+      user:{}
+    }
+  ]
+})
+
 });

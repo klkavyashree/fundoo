@@ -79,9 +79,9 @@ tomorrow=new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this
                 this.deletedLists.push(this.checkLists[i])
         }
       }
-    }),err=>{
+    },err=>{
       console.log(err)
-    }
+    })
   }
   
  /**
@@ -182,9 +182,9 @@ removeLabel(array, label) {
       console.log(data)
       let ind = array.noteLabels.indexOf(label)
       array.noteLabels.splice(ind, 1);
-    }), err => {
+    }, err => {
       console.log(err, "err")
-    }
+    })
   }
   catch (err) {
     console.log(err)

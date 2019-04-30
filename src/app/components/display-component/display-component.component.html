@@ -1,4 +1,4 @@
-<div *ngFor="let array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='column'
+<div *ngFor="let  array of card | search:Search" fxLayout="row wrap" fxLayoutAlign='center center' fxLayout.xs='column'
   class="main">
   <mat-card fxLayout="column" [ngClass]="{'matcard':displaymode===true,  'notecard':displaymode===false}" fxFlex="90"
     fxFlexOffset.xl="10" fxFlex.xs='100' [style.backgroundColor]='array.color'>

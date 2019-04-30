@@ -33,8 +33,8 @@ export class MainNoteComponent implements OnInit {
         console.log('data typeeeee', typeof data['data']['data'])
         console.log(data, 'getall cards')
         this.card = data['data']['data'];
-        this.card = this.card.reverse();
-        console.log(this.card)
+        this.card.reverse();
+        console.log(this.card,"main note response")
         for (let index = 0; index < this.card.length; index++) {
           if (this.card[index].isDeleted == false && this.card[index].isArchived == false && this.card[index].isPined == false) {
             this.unpinned.push(this.card[index])

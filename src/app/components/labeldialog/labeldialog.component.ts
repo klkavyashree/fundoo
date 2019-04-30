@@ -112,8 +112,9 @@ call(event: any,label) {
       "userId": array.userId
     }
     this.note.updateLabel(array.id,this.model).subscribe(data=>{
-      console.log(data,'update resp'),
-      this.getLabelIdList()},
+      console.log(data,'update resp')
+      // this.getLabelIdList()
+    },
       err=>{
         console.log(err)
       })
