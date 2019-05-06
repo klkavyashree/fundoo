@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,27 +11,28 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {  MatInputModule} from '@angular/material';
-import { MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import {MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../service/userService/user.service';
+import { constants } from 'perf_hooks';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
- 
+  let service: UserService
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports:[
+      declarations: [LoginComponent],
+      imports: [
         FlexLayoutModule,
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        FroalaEditorModule,FroalaViewModule,
+        FroalaEditorModule, FroalaViewModule,
         BarRatingModule,
         BrowserModule,
         ReactiveFormsModule,
@@ -42,11 +43,11 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatInputModule
-      ],providers:[UserService]
+      ], providers: [UserService]
 
     })
-    .compileComponents();
-    
+      .compileComponents();
+    service = TestBed.get(UserService);
   }));
 
   beforeEach(() => {
@@ -59,12 +60,35 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Form should be valid'),async(()=>{
-    expect (component.model.email.toEqual('kavyakl@gmail.com'));
-    expect (component.model.password.toEqual('123456'));
+  it('Form should be valid'), async(() => {
+    expect(component.model.email.toEqual('kavyakl@gmail.com'));
+    expect(component.model.password.toEqual('123456'));
   })
-  it('Invalid Form'),async(()=>{
-expect (component.model.email.toEqual(''));
-expect (component.model.password.toEqual(''));
+  it('Invalid Form'), async(() => {
+    expect(component.model.email.toEqual(''));
+    expect(component.model.password.toEqual(''));
+  })
+  it('should call login'), async(() => {
+    const res = {
+      created: "2019-04-30T10:59:18.523Z",
+      email: "manushree@gmail.com",
+      firstName: "manu",
+      id: "iiFgO8MQVwX9S1ny5xwDCRg8uIoLiUV2TR4op94sZCIaAbPDbIPzENLQOLNkxgve",
+      imageUrl: "images/1555399203112blob",
+      lastName: "shree",
+      role: "user",
+      ttl: 1209600,
+      userId: "5c9cb6faea53620040e865ed"
+    }
+    const model = {
+      "email": "manushree@gmail.com",
+      "password":"123456",
+      "cartId":"66767677777778889"
+
+    }
+    expect(service.login(model)).toEqual(res)
+    console.log(service.login(model)),"hhhhhhhhh";
+    
+
   })
 });

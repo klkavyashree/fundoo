@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 describe('ArchiveComponent', () => {
   let component: ArchiveComponent;
   let fixture: ComponentFixture<ArchiveComponent>;
@@ -37,7 +38,8 @@ describe('ArchiveComponent', () => {
         FormsModule,
         HttpClientModule,
         RouterModule,
-        RouterTestingModule 
+        RouterTestingModule,
+        OwlDateTimeModule, OwlNativeDateTimeModule
       ]
     })
     .compileComponents();

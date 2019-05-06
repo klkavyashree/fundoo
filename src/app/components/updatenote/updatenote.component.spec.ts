@@ -27,6 +27,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material
 import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CommonModule } from '@angular/common';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 
 
 describe('UpdatenoteComponent', () => {
@@ -39,8 +40,8 @@ describe('UpdatenoteComponent', () => {
       imports: [
         FlexLayoutModule, FormsModule, BrowserAnimationsModule, HttpClientModule, FroalaEditorModule, FroalaViewModule, BarRatingModule,
         BrowserModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, RouterModule,
-        MatMenuModule, MatSnackBarModule, RouterTestingModule, MatDividerModule, MatChipsModule, MatTooltipModule,
-        MatListModule, MatCheckboxModule, MatDialogModule, MatDatepickerModule, CommonModule
+        MatMenuModule, MatSnackBarModule, RouterTestingModule, MatDividerModule, MatChipsModule, MatTooltipModule, OwlDateTimeModule, OwlNativeDateTimeModule
+        ,MatListModule, MatCheckboxModule, MatDialogModule, MatDatepickerModule, CommonModule
       ],
       providers: [{ provide: MatDialogRef, useValue: {} }
         , { provide: MAT_DIALOG_DATA, useValue: [] }]

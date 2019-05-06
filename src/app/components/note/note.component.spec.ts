@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
 import { NoteService } from '../../service/noteservice/note.service';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 describe('NoteComponent', () => {
   let component: NoteComponent;
   let service : NoteService;
@@ -42,9 +43,11 @@ describe('NoteComponent', () => {
         BrowserModule, ReactiveFormsModule, MatFormFieldModule, MatCardModule, MatInputModule, MatIconModule, RouterModule,
         MatMenuModule, MatSnackBarModule, RouterTestingModule, MatDividerModule,
         MatIconModule, FlexLayoutModule, MatMenuModule, FormsModule, BrowserModule, HttpClientModule, MatDatepickerModule,
-        MatChipsModule, MatTooltipModule, MatListModule, MatCheckboxModule]
+        MatChipsModule, MatTooltipModule, MatListModule, MatCheckboxModule, OwlDateTimeModule, OwlNativeDateTimeModule],
+        providers:[NoteService]
     })
     .compileComponents();
+    service = TestBed.get(NoteService);
   }));
 
   beforeEach(() => {
@@ -58,7 +61,7 @@ describe('NoteComponent', () => {
   });
 
 it('should get note with the note details',()=>{
-  const response=[
+  const response=
     {
       collaberator:[],
       collaborators:[],
@@ -79,9 +82,34 @@ it('should get note with the note details',()=>{
       questionAndAnswerNotes:[],
       reminder:[],
       title:"ghghghgh",
-      user:{}
+      user:{
+        addresses: [],
+        createdDate: '2019-03-28T11:58:50.184Z',
+        email: 'manushree@gmail.com',
+        emailVerified: true,
+        firstName: "manu",
+        id: "5c9cb6faea53620040e865ed",
+        imageUrl: "",
+        lastName: "shree",
+        modifiedDate: "2019-03-28T11:58:50.184Z",
+        role: "user",
+        service: "advance",
+        username: "manushree@gmail.com"
+      }
     }
-  ]
+    const model=
+      {
+        title: "ghghghgh",
+          description: 'hgfvghd',
+          labelIdList: [],
+          checklist: [],
+          isPined:false ,
+          isArchived: false,
+          color: "#ffffff",
+          reminder: [],
+          collaberators: [],
+      }
+      expect(service.addNote(model)).toEqual(response)
 })
 
 });

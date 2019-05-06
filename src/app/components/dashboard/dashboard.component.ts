@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   flag3=true;
   profilePic:boolean;
   imageprofile:string;
+  headerName='Fundoo'
   private _mobileQueryListener: () => void;
 
   constructor(private data: DataService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router,

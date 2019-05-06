@@ -32,7 +32,7 @@
     <div *ngIf='show==true'>
       <div *ngFor='let list of unDeletedList'>
           <div fxLayoutAlign='space-between center'>
-            <mat-checkbox (click)="update(list,'close')"><input matInput [(ngModel)]=list.itemName></mat-checkbox>
+            <mat-checkbox (click)="update(list,'close')"><input  style="border-style: none;" matInput [(ngModel)]=list.itemName></mat-checkbox>
             <div (click)='delete(list,"open")'>
               <img src='../../../assets/images/wrong_mark.svg'>
             </div>

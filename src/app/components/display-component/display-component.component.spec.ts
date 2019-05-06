@@ -24,6 +24,7 @@ import { SearchPipe } from '../../pipe/search.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 describe('DisplayComponentComponent', () => {
   let component: DisplayComponentComponent;
   let fixture: ComponentFixture<DisplayComponentComponent>;
@@ -40,7 +41,7 @@ describe('DisplayComponentComponent', () => {
         BrowserModule, ReactiveFormsModule, MatFormFieldModule, MatCardModule, MatInputModule, MatIconModule, RouterModule,
         MatMenuModule, MatSnackBarModule, RouterTestingModule, MatDividerModule,
         MatIconModule, FlexLayoutModule, MatMenuModule, FormsModule, BrowserModule, HttpClientModule, MatDatepickerModule,
-        MatChipsModule, MatTooltipModule, MatListModule, MatCheckboxModule
+        MatChipsModule, MatTooltipModule, MatListModule, MatCheckboxModule, OwlDateTimeModule, OwlNativeDateTimeModule
       ]
     })
       .compileComponents();

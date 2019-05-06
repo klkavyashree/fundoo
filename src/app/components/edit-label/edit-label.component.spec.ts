@@ -14,6 +14,7 @@ import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 
 describe('EditLabelComponent', () => {
   let component: EditLabelComponent;
@@ -23,7 +24,8 @@ describe('EditLabelComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ EditLabelComponent,DisplayComponentComponent,IconListComponent,SearchPipe,LabelsearchPipe ],
       imports:[ MatMenuModule,MatIconModule,MatChipsModule,MatDividerModule,MatCardModule,MatTooltipModule,MatListModule,
-        MatFormFieldModule,MatDatepickerModule,FormsModule,MatCheckboxModule,HttpClientModule,RouterModule,RouterTestingModule ]
+        MatFormFieldModule,MatDatepickerModule,FormsModule,MatCheckboxModule,HttpClientModule,RouterModule,RouterTestingModule,
+        OwlDateTimeModule, OwlNativeDateTimeModule ]
     })
     .compileComponents();
   }));

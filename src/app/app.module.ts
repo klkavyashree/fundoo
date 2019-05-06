@@ -44,7 +44,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { PackageServiceComponent } from './components/package-service/package-service.component';
 import { CartDetailsDialogComponent } from './components/cart-details-dialog/cart-details-dialog.component';
 import { CartComponent } from './components/cart/cart.component';
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -75,7 +75,7 @@ import { CartComponent } from './components/cart/cart.component';
     PackageServiceComponent,
     CartDetailsDialogComponent,
     CartComponent,
-    
+   
     
  
     
@@ -95,6 +95,7 @@ import { CartComponent } from './components/cart/cart.component';
     BarRatingModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
+    OwlDateTimeModule, OwlNativeDateTimeModule
    
     
    

@@ -58,6 +58,7 @@ export class IconListComponent implements OnInit, OnDestroy {
   date: Date
   setTime: number = null;
   picker: any;
+  dateTime:Date;
   /**
    * taking the colors as two dimensional array
    */
@@ -345,14 +346,13 @@ export class IconListComponent implements OnInit, OnDestroy {
       console.log(err)
     }
   }
-
-
-  time(time) {
-    this.setTime = time;
-    console.log(this.setTime, "time")
+  save(event){
+    console.log(event,"reminderrrrrrrrrrrrrrrrrrrrrrrrrr")
+    this.date=event
   }
+
+ 
   Reminder(card) {
-    this.date.setHours(this.setTime)
     if (card == undefined) {
       var reminder = this.date
       this.emitReminderNote.emit(reminder)
@@ -369,7 +369,7 @@ export class IconListComponent implements OnInit, OnDestroy {
       }
       console.log(model)
       this.note.addRemainder(model).subscribe(data => {
-        this.setTime = null
+        this.dateTime = null
         console.log(data)
         // this.emitReminder.emit(card)
       }, err => {

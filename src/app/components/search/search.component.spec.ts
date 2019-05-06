@@ -16,6 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LabelsearchPipe } from '../../pipe/label/labelsearch.pipe';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -33,7 +34,7 @@ describe('SearchComponent', () => {
         HttpClientModule,
         FroalaEditorModule, FroalaViewModule,BarRatingModule,
         BrowserModule,ReactiveFormsModule, MatFormFieldModule,MatInputModule,RouterModule
-        ,MatSnackBarModule,RouterTestingModule,MatListModule,MatCheckboxModule,MatDatepickerModule
+        ,MatSnackBarModule,RouterTestingModule,MatListModule,MatCheckboxModule,MatDatepickerModule, OwlDateTimeModule, OwlNativeDateTimeModule
       ]
     })
     .compileComponents();

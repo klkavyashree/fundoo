@@ -36,12 +36,12 @@
         <img src='../../../assets/images/addnote.svg'>
       </button>
     </div>
-    <div fxFlex='85' fxLayout='row'>
-      <input matInput [(ngModel)]='colaborator' (click)='revFlag()' (keyup)='searchForList(colaborator)' placeholder="enter email here"
+    <div fxFlex='85'>
+      <input matInput [(ngModel)]='colaborator' style="border-style: none;" (click)='revFlag()' (keyup)='searchForList(colaborator)' placeholder="enter email here"
         [matMenuTriggerFor]='menu'>
-
+      </div>
       <img *ngIf='flag==false' src='../../../assets/images/right_mark.svg' (click)='addColaborator(data.card.id)'>
-    </div>
+  
   </div>
   
   <mat-menu #menu="matMenu">
@@ -99,7 +99,7 @@
       </button>
     </div>
     <div fxFlex='85' fxLayout='row'>
-      <input matInput [(ngModel)]='colaborator' (click)='revFlag()' (keyup)='searchForList(colaborator)' placeholder="enter email here"
+      <input matInput [(ngModel)]='colaborator'  style="border-style: none;" (click)='revFlag()' (keyup)='searchForList(colaborator)' placeholder="enter email here"
         [matMenuTriggerFor]='menu'>
 
       <img *ngIf='flag==false' src='../../../assets/images/right_mark.svg' (click)='addColaboratortoNote()'>

@@ -22,7 +22,7 @@ export class MainNoteComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCards()
-    console.log(localStorage.getItem('token'))
+    // console.log(localStorage.getItem('token'))
   }
   /**
     *this function will get all the cards list

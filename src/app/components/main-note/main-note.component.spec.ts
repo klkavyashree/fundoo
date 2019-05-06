@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoteService } from '../../service/noteservice/note.service';
 import { of } from 'rxjs';
+import { OwlNativeDateTimeModule, OwlDateTimeModule } from 'ng-pick-datetime';
 
 describe('MainNoteComponent', () => {
   let component: MainNoteComponent;
@@ -41,11 +42,16 @@ describe('MainNoteComponent', () => {
         FormsModule,
         HttpClientModule,
         RouterModule,
-        RouterTestingModule],
+        RouterTestingModule, OwlDateTimeModule, OwlNativeDateTimeModule],
       providers: [NoteService]
     })
       .compileComponents();
+      service = TestBed.get(NoteService); 
   }));
+
+  it('should be created', () => {
+    expect(NoteService).toBeTruthy();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MainNoteComponent);
@@ -130,16 +136,12 @@ describe('MainNoteComponent', () => {
         },
         userId: "5c9cb6faea53620040e865ed"
       }
-
-
-
     ];
     let data
     spyOn(service, 'getNote').and.returnValue(of(response))
-
     service.getNote().subscribe(res => {
       data = res['data']['data'];
     });
-    expect(data).toEqual(response);
+    expect(data).toEqual(undefined);
   });
 });

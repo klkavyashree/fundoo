@@ -43,59 +43,8 @@
                   </div>
 
                   <mat-list-item (click)='$event.stopPropagation()'> 
-                    <mat-form-field class="example-full-width">
-                      <input matInput [matDatepicker]="picker" [(ngModel)]='date' placeholder="Choose a date"  >
-                      <mat-datepicker-toggle matSuffix [for]="picker" >
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                      </mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                  </mat-list-item>
-
-                  <button mat-menu-item [matMenuTriggerFor]="menu9" (click)='$event.stopPropagation()'>Pick Time </button>
-                  <mat-menu #menu9="matMenu">
-                    <button mat-menu-item (click)='time(8)' (click)='$event.stopPropagation()'>
-                      <span>Morning  8:00AM</span>
-                    </button> 
-                    <button mat-menu-item (click)='time(13)' (click)='$event.stopPropagation()'>
-                      <span>Afternoon 1:00PM </span>
-                    </button>
-                    <button mat-menu-item (click)='time(18)' (click)='$event.stopPropagation()'>
-                      <span>Evening 6:00PM</span>
-                    </button>
-                    <button mat-menu-item (click)='time(20)' (click)='$event.stopPropagation()'>
-                      <span>Night 8:00PM</span>
-                    </button>
-                    <button mat-menu-item (click)='$event.stopPropagation()'>
-                        <span>Custom</span>
-                      <input matInput [(ngModel)]='setTime' placeholder=" enter time" >
-                    
-                    </button>
-                  </mat-menu>
-                  <mat-list-item>
-                    <button mat-menu-item [matMenuTriggerFor]="menu10">Does not repeat</button>
-                    <mat-menu #menu10="matMenu">
-                      <button mat-menu-item>
-                        <span>Does not repeat</span>
-                      </button>
-
-                      <button mat-menu-item>
-                        <span>Daily</span>
-                      </button>
-                      <button mat-menu-item>
-                        <span>weekly</span>
-                      </button>
-                      <button mat-menu-item>
-                        <span>monthly</span>
-                      </button>
-                      <button mat-menu-item>
-                        <span>yearly</span>
-                      </button>
-                      <button mat-menu-item>
-                        <span>Custom</span>
-                      </button>
-                    </mat-menu>
-                     
+                      <input [owlDateTime]="dt1"  [(ngModel)]="dateTime" (ngModelChange)="save($event)"  [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                      <owl-date-time #dt1></owl-date-time>
                   </mat-list-item>
                   <div  fxLayoutAlign="end end">
                   <button mat-button (click)='Reminder(card)' [ngStyle]="{'background-color':'gray'}">save</button>
