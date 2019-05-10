@@ -253,7 +253,7 @@ export class DisplayComponentComponent implements OnInit {
     this.show = $event
   }
 
-  addCheckList(list){
+  addCheckList(list,array){
     try{
       var model={
         "isDeleted": false,
@@ -271,7 +271,7 @@ export class DisplayComponentComponent implements OnInit {
   /**
    * @param itemname will get itm name to remove that item from checklist
   //  */
-  removeCheckList(list){
+  removeCheckList(list,array){
     try{
       var model={
         "isDeleted": false,

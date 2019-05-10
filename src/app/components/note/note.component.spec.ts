@@ -60,8 +60,8 @@ describe('NoteComponent', () => {
     expect(component).toBeTruthy();
   });
 
-it('should get note with the note details',()=>{
-  const response=
+xit('should add note',()=>{
+  const response=[
     {
       collaberator:[],
       collaborators:[],
@@ -96,7 +96,7 @@ it('should get note with the note details',()=>{
         service: "advance",
         username: "manushree@gmail.com"
       }
-    }
+    }]
     const model=
       {
         title: "ghghghgh",
@@ -109,7 +109,8 @@ it('should get note with the note details',()=>{
           reminder: [],
           collaberators: [],
       }
-      expect(service.addNote(model)).toEqual(response)
+      service.addNote(model).subscribe(res=>
+        expect(res).toEqual(response))
 })
 
 });

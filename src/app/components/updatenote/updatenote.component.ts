@@ -68,7 +68,7 @@ tomorrow=new Date(this.todaydate.getFullYear(), this.todaydate.getMonth(), (this
   }
   }
   getCheckList(noteid){
-    this.noteService.getCheckList(noteid).subscribe((data: any) => {
+    this.noteService.getCheckList(noteid).subscribe((data:any) => {
       this.checkLists=data;
       console.log(this.checkLists,"checklists getttttttttttttttttttt")
       for(let i=0;i<this.checkLists.length;i++){

@@ -140,8 +140,11 @@ describe('MainNoteComponent', () => {
     let data
     spyOn(service, 'getNote').and.returnValue(of(response))
     service.getNote().subscribe(res => {
-      data = res['data']['data'];
+      console.log(res,"res");
+      
+      data = res;
+      console.log(data,"data")
     });
-    expect(data).toEqual(undefined);
+    expect(data).toEqual(response);
   });
 });

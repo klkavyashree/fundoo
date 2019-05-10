@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../service/userService/user.service';
-import { constants } from 'perf_hooks';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -60,16 +60,18 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Form should be valid'), async(() => {
-    expect(component.model.email.toEqual('kavyakl@gmail.com'));
-    expect(component.model.password.toEqual('123456'));
-  })
-  it('Invalid Form'), async(() => {
+  it('Form should be valid', async(() => {
+   component.loginForm.controls['email'].setValue['kavyakl@gmail.com'];
+   component.loginForm.controls['password'].setValue['123456']
+   expect(component.loginForm.valid).toBeTruthy();
+  }));
+  it('Invalid Form', async(() => {
     expect(component.model.email.toEqual(''));
     expect(component.model.password.toEqual(''));
-  })
-  it('should call login'), async(() => {
-    const res = {
+    expect(component.loginForm.valid).toBeFalsy();
+  }));
+  it('should call login', () => {
+    const res = [{
       created: "2019-04-30T10:59:18.523Z",
       email: "manushree@gmail.com",
       firstName: "manu",
@@ -79,16 +81,26 @@ describe('LoginComponent', () => {
       role: "user",
       ttl: 1209600,
       userId: "5c9cb6faea53620040e865ed"
-    }
+    }]
     const model = {
       "email": "manushree@gmail.com",
       "password":"123456",
       "cartId":"66767677777778889"
 
     }
-    expect(service.login(model)).toEqual(res)
-    console.log(service.login(model)),"hhhhhhhhh";
-    
 
+    let data
+    spyOn(service, 'login').and.returnValue(of(res))
+    service.login(model).subscribe(responce => {
+      console.log(responce,"res");
+      
+      data = responce;
+      console.log(data,"login");
+      
+      localStorage.setItem('token', data.id);
+      console.log(data,"data")
+    });
+    expect(data).toEqual(res)
+    console.log(service.login(model))
   })
 });

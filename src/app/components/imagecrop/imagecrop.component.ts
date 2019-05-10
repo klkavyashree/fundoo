@@ -33,6 +33,8 @@ imagecroped:any;
   setprofile(){
     const uploadData=new FormData();
     uploadData.append('file',this.imagecroped);
+    console.log(uploadData,"form data");
+    
     this.user.uploadImg(uploadData).subscribe(data=>{
       console.log(data,"resp when setting img")
       localStorage.setItem('imageurl',data['status'].imageUrl);

@@ -44,12 +44,12 @@
     <div *ngIf='show==true'>
       <div *ngFor='let list of array.noteCheckLists'>
         <div *ngIf="list.status=='open' && list.status!='close' && !list.isDeleted" fxLayout='center center'>
-          <img src="../../../assets/images/empty_box.svg" (click)='removeCheckList(list)'>{{list.itemName}}
+          <img src="../../../assets/images/empty_box.svg" (click)='removeCheckList(list,array.noteCheckLists)'>{{list.itemName}}
         </div>
       </div>
       <div *ngFor='let list of array.noteCheckLists'>
         <div *ngIf="list.status=='close' && !list.isDeleted" fxLayout='center center'>
-          <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list)'><del>{{list.itemName}}</del>
+          <img src="../../../assets/images/right_box.svg" (click)='addCheckList(list,array.noteCheckLists)'><del>{{list.itemName}}</del>
         </div>
       </div>
     </div>
